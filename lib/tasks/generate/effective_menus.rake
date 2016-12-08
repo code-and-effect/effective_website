@@ -14,13 +14,15 @@ class EffectiveMenusGenerator
       item Effective::Page.find_by_title('About')
       item Effective::Page.find_by_title('Contact')
 
-      dropdown 'Members Only', roles_mask: 1 do  # Must have the member role
+      dropdown 'Members Only', roles: :member do  # Must have the member role
         item Effective::Page.find_by_title('Member Information')
       end
 
+      item 'Style Guide', '/style_guide'
+
       dropdown 'Account', signed_in: true do
-        item 'Admin', '/admin', roles_mask: 2  # Must have the admin role
         item 'Settings', :user_settings_path
+        item 'Site Admin', '/admin', roles: :admin # Must have the admin role
         divider
         item 'Sign Out', :destroy_user_session_path
       end
