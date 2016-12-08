@@ -1,0 +1,13 @@
+.row
+  .col-sm-4.col-sm-offset-2
+    = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+      = f.error_notification
+      = f.full_error :unlock_token
+
+      .form-inputs
+        = f.input :email, required: true, autofocus: true
+
+      .form-actions
+        = f.button :submit, 'Resend unlock instructions', class: 'btn btn-primary', data: { disable_with: 'Resending...' }
+
+    = render 'devise/shared/links'

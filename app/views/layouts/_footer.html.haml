@@ -1,0 +1,31 @@
+#footer.container
+  .row
+    .col-xs-6.col-sm-3
+      = effective_region :footer_left do
+        %h4 Links
+      = render_menu('footer menu', class: 'footer-menu')
+
+    .col-xs-6.col-sm-4
+      = effective_region :footer_center do
+        %h4 Contact
+        %p Effective Website
+        %p Code and Effect, Inc
+        %p= "#204 8540-109 ST"
+        %p Edmonton, Alberta, Canada
+        %p T6G 1E6
+        %p 780-907-6396
+        %p= mail_to 'info@codeandeffect.com'
+
+    .hidden-xs.col-sm-5
+      = effective_region :footer_right do
+        %h4 Twitter
+        %p Tweets could appear here
+
+      /%a.twitter-timeline{href: 'https://twitter.com/Alberta_L_A_/lists/site-feed', data: {'widget-id': '717087150202757121', chrome: 'noheader nofooter noborders transparent', 'link-color': '#A1C957'}}
+      /= javascript_include_tag '//platform.twitter.com/widgets.js'
+
+  .row
+    .col-xs-12.text-center
+      = effective_region :footer_bottom do
+        %p All funds listed in pretend Canadian Dollars.
+      %p &copy; Copyright #{Time.zone.now.year}

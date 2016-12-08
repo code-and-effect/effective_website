@@ -1,0 +1,4 @@
+= simple_form_for [:admin, @user] do |f|
+  = render partial: 'users/form', locals: { form: f }
+
+  = f.button :submit, 'Save', class: 'btn btn-primary', data: { disable_with: 'Saving...' }

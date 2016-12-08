@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  host: localhost
+  database: effective_website
+  username: matt
+
+test:
+  adapter: postgresql
+  host: localhost
+  database: effective_website_test
+  username: matt

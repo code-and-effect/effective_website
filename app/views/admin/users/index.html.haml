@@ -1,0 +1,5 @@
+%h1= @page_title
+
+%p.text-right= link_to 'View Roles', effective_roles.admin_roles_path, class: 'btn btn-primary'
+
+= render_datatable(@datatable)

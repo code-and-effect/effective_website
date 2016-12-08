@@ -1,0 +1,32 @@
+.alert-wrap {
+  width: 100%;
+}
+
+.alert {
+  @include border-radius(0);
+  margin: 0;
+  padding: 14px;
+  height: 40px;
+  line-height: 1;
+  border: none;
+  font-size: 12px;
+}
+
+.alert-notice {
+  @extend .alert-success;
+  color: $teal-x-dark;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+  color: $off-white;
+  background: $error-red;
+}
+
+.alert-dismissable .close,
+.alert-dismissible .close {
+  top: -5px;
+  right: 5px;
+  opacity: 1;
+  text-shadow: none;
+}

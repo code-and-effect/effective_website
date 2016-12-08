@@ -1,0 +1,28 @@
+%nav.navbar.navbar-default
+  .container
+    .navbar-header
+      = link_to(image_tag('logo-admin.png', alt: 'Admin Logo'), '/', class: 'navbar-brand')
+      %button.navbar-toggle.collapsed{data: {toggle: 'collapse', target: '.navbar-collapse', 'aria-expanded': false}}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        - if can? :manage, Effective::Log
+          %li= link_to 'Logs', effective_logging.admin_logs_path
+
+        - if can? :manage, Effective::Menu
+          %li= link_to 'Menus', effective_pages.admin_menus_path
+
+        - if can? :manage, Effective::Order
+          %li= link_to 'Orders', effective_orders.admin_orders_path
+
+        - if can? :manage, Effective::Page
+          %li= link_to 'Pages', effective_pages.admin_pages_path
+
+        - if can? :manage, Effective::Post
+          %li= link_to 'Posts', effective_posts.admin_posts_path
+
+        - if can? :manage, User
+          %li= link_to 'Users', admin_users_path
+

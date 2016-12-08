@@ -1,0 +1,25 @@
+$teal-light: #B0C1B6;
+$teal-medium: #89A292;
+$teal-dark: #37494C; // Used to be #556E73, buuuuut - Dana
+$teal-x-dark: #37494C;
+
+$green-bright: #A1C957;
+$green-dark: #55893F;
+$green-pale: #A4C098;
+
+$error-red: #B62E39;
+
+$off-white: #FBFAF9;
+
+// Put your variables (colours, sizes, etc.) in here
+$body-font-color: $teal-x-dark;
+$body-line-height: 24px;
+$link-color: $green-bright;
+$link-hover-color: $green-dark;
+
+// Breakpoint vars
+// Breakpoints are used in the @respond-to() mixin.
+// ex: @respond-to($break-sm) { ... }
+$break-sm: 768px;
+$break-md: 992px;
+$break-lg: 1200px;

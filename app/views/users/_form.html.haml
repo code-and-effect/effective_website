@@ -1,0 +1,18 @@
+= form.input :email, as: :effective_email
+= form.input :password, hint: 'leave blank to keep existing password', input_html: { autocomplete: 'off' }
+= form.input :password_confirmation, hint: 'leave blank to keep existing password'
+
+.row
+  .col-xs-6= form.input :first_name
+  .col-xs-6= form.input :last_name
+
+= form.input :files, as: :asset_box
+
+.row
+  .col-sm-6
+    %h3 Billing Address
+    = effective_address_fields(form, :billing_address)
+
+  .col-sm-6
+    %h3 Shipping Address
+    = effective_address_fields(form, :shipping_address)

@@ -1,0 +1,14 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+@import 'effective_assets';
+@import 'effective_ckeditor';
+@import 'effective_datatables';
+@import 'effective_form_inputs';
+@import 'effective_orders';
+
+@import 'base/*';
+@import 'layout/*';
+@import 'modules/*';

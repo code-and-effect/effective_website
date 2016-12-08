@@ -1,0 +1,18 @@
+.row
+  .col-sm-4.col-sm-offset-2
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .form-inputs
+        = f.input :email, required: true, autofocus: true
+
+        - if resource.respond_to?(:first_name)
+          = f.input :first_name
+        - if resource.respond_to?(:last_name)
+          = f.input :last_name
+
+        = f.input :password, required: true
+        = f.input :password_confirmation, required: true
+
+      .form-actions
+        = f.button :submit, 'Sign Up', class: 'btn btn-primary', data: { disable_with: 'Saving...' }
+
+    = render 'devise/shared/links'

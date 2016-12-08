@@ -1,0 +1,31 @@
+@mixin body-font-stack {
+  font-family: 'Open Sans', sans-serif;
+}
+
+@mixin header-font-stack {
+  font-family: 'Fjalla One', sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+body,
+html {
+  @include body-font-stack;
+  // font-size: 14px;
+  // color: $body-font-color;
+  // line-height: $body-line-height;
+
+  // @include respond-to($break-sm) {
+  //   font-size: 16px;
+  // }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+//  @include header-font-stack;
+//  color: $teal-dark;
+}
