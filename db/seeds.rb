@@ -10,13 +10,43 @@
 puts "== Creating admin user ======================"
 
 user = User.new(
-  email: 'admin@agilestyle.com',
-  first_name: 'Agile',
-  last_name: 'Style',
+  email: 'admin@codeandeffect.com',
+  first_name: 'Admin',
+  last_name: 'User',
   password: 'be_effective',
   password_confirmation: 'be_effective'
 )
-user.roles = [:admin] if user.respond_to?(:roles)
+user.roles = :admin
+user.save!
+
+user = User.new(
+  email: 'admin@agilestyle.com',
+  first_name: 'Admin',
+  last_name: 'User',
+  password: 'be_effective',
+  password_confirmation: 'be_effective',
+  roles: :admin
+)
+user.save!
+
+user = User.new(
+  email: 'member@codeandeffect.com',
+  first_name: 'Member',
+  last_name: 'User',
+  password: 'be_effective',
+  password_confirmation: 'be_effective',
+  roles: :member
+)
+user.save!
+
+user = User.new(
+  email: 'guest@codeandeffect.com',
+  first_name: 'Guest',
+  last_name: 'User',
+  password: 'be_effective',
+  password_confirmation: 'be_effective',
+  roles: nil
+)
 user.save!
 
 # lib/tasks/generate
