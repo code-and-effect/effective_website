@@ -8,6 +8,9 @@
 /.env
 /.bundle
 
+# Any database dump files
+*.dump
+
 # Machine specific config.
 config/database.yml
 

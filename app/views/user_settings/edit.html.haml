@@ -2,4 +2,6 @@
 
 = simple_form_for @user, url: user_settings_path do |f|
   = render partial: 'users/form', locals: { form: f }
-  = f.button :submit, 'Update Account Settings', class: 'btn btn-primary', data: { disable_with: 'Saving...' }
+
+  .pull-right
+    %p= f.button :submit, 'Update Account Settings', class: 'btn btn-primary', data: { disable_with: 'Saving...' }

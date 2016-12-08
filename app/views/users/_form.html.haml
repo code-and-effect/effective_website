@@ -1,10 +1,16 @@
-= form.input :email, as: :effective_email
-= form.input :password, hint: 'leave blank to keep existing password', input_html: { autocomplete: 'off' }
-= form.input :password_confirmation, hint: 'leave blank to keep existing password'
-
 .row
-  .col-xs-6= form.input :first_name
-  .col-xs-6= form.input :last_name
+  .col-sm-6
+    = form.input :email, as: :effective_email
+    = form.input :password, hint: 'leave blank to keep existing password', input_html: { autocomplete: 'off' }
+    = form.input :password_confirmation, hint: 'leave blank to keep existing password'
+  .col-sm-6
+    - if defined?(admin) && admin
+      = form.input :roles, collection: EffectiveRoles.roles_collection(form.object, current_user), as: :check_boxes
+    - else
+      = effective_roles_summary(form.object)
+.row
+  .col-sm-6= form.input :first_name
+  .col-sm-6= form.input :last_name
 
 = form.input :files, as: :asset_box
 
