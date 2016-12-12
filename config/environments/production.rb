@@ -88,10 +88,10 @@ Rails.application.configure do
 
   # ExceptionNotification gem
   config.middleware.use ExceptionNotification::Rack,
+    # :ignore_cascade_pass => false, # send email for 404s
     :email => {
       :email_prefix => '[EW] ',
       :sender_address => %{"EW" <website@example.com>},
       :exception_recipients => %w{errors@agilestyle.com}
     }
-
 end
