@@ -23,6 +23,7 @@ gem 'effective_addresses'
 gem 'effective_assets'
 gem 'effective_ckeditor'
 gem 'effective_datatables'
+gem 'effective_developer', path: '~/Sites/effective_developer'
 gem 'effective_form_inputs'
 gem 'effective_logging'
 gem 'effective_orders'
@@ -32,9 +33,9 @@ gem 'effective_regions'
 gem 'effective_roles'
 gem 'effective_style_guide'
 
+
 group :development do
   gem 'dotenv-rails'
-  gem 'effective_developer'
   gem 'flamegraph'
   gem 'listen'
   gem 'memory_profiler'

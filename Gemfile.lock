@@ -1,3 +1,9 @@
+PATH
+  remote: ~/Sites/effective_developer
+  specs:
+    effective_developer (0.0.7)
+      rails (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -130,8 +136,6 @@ GEM
       rails (>= 3.2.0)
       sass-rails
       simple_form
-    effective_developer (0.0.7)
-      rails (>= 3.2.0)
     effective_form_inputs (1.0.0)
       rails (>= 3.2.0)
       simple_form (>= 3.1.0)
@@ -365,7 +369,7 @@ DEPENDENCIES
   effective_assets
   effective_ckeditor
   effective_datatables
-  effective_developer
+  effective_developer!
   effective_form_inputs
   effective_logging
   effective_orders
