@@ -12,6 +12,8 @@
         = f.input :password, required: true
         = f.input :password_confirmation, required: true
 
+        = render partial: 'devise/shared/user_fields', locals: { f: f }
+
       .form-actions
         = f.button :submit, 'Sign Up', class: 'btn btn-primary', data: { disable_with: 'Saving...' }
 

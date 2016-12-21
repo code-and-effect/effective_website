@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable
 
   acts_as_addressable :billing, :shipping
   acts_as_asset_box :files
@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   # structure do
   #   # Devise attributes
-  #   encrypted_password      :string, validates: [:presence]
+  #   encrypted_password      :string
   #   reset_password_token    :string
   #   reset_password_sent_at  :datetime
   #   remember_created_at     :datetime
@@ -16,6 +16,16 @@ class User < ApplicationRecord
   #   last_sign_in_at         :datetime
   #   current_sign_in_ip      :inet
   #   last_sign_in_ip         :inet
+
+  #   # Devise invitable attributes
+  #   invitation_token        :string
+  #   invitation_created_at   :datetime
+  #   invitation_sent_at      :datetime
+  #   invitation_accepted_at  :datetime
+  #   invitation_limit        :integer
+  #   invited_by_type         :string
+  #   invited_by_id           :integer
+  #   invitations_count       :integer
 
   #   email                   :string
   #   first_name              :string

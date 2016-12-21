@@ -18,6 +18,8 @@ class Ability
 
     can [:edit, :update], User, id: user.id
 
+    can [:create, :reinvite], Invitation
+
     if user.is?(:member)
     end
 

@@ -1,0 +1,5 @@
+= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put} ) do |f|
+  = f.input :invitation_token, as: :hidden
+  = render partial: 'devise/shared/user_fields', locals: { f: f, invitation: true }
+
+  = f.button :submit, 'Accept Invitation', class: 'btn btn-primary', data: { disable_with: 'Accepting...' }
