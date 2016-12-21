@@ -1,5 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
-  before_action :configure_accept_invitation_params, only: [:create, :update]
+  before_action :configure_accept_invitation_params, only: [:update]
   before_action :authenticate_user!, only: [:create]
 
   # We disable the default new action
@@ -8,18 +8,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def create
-    @invitation = Invitation.new(invitation_params)
-
-    authorize! :create, @invitation
-
-    if @invitation.save
-      @invitation.invite!
-      flash[:success] = "Successfully invited #{@invitation}"
-    else
-      flash[:danger] = "Unable to invite: #{@invitation.errors.full_messages.to_sentence}.  Please click resend invitation instead."
-    end
-
-    redirect_back(fallback_location: root_path)
+    raise CanCan::AccessDenied
   end
 
   def reinvite
@@ -38,10 +27,6 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   protected
-
-  def invitation_params
-    params.require(:invitation).permit(:email, :first_name, :last_name, roles: [])
-  end
 
   def configure_accept_invitation_params
     devise_parameter_sanitizer.permit(:accept_invitation, keys: [

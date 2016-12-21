@@ -1,11 +1,14 @@
+require 'csv'
+
 # This is a form object for the Invite User page
 
 class Invitation
   include ActiveModel::Model
 
-  attr_accessor :user_id, :email, :roles
+  attr_accessor :user_id, :email, :emails, :roles
+  attr_reader :invitations
 
-  validates :email, presence: true, unless: -> { reinvitation? }
+  validates :email, presence: true, unless: -> { reinvitation? || bulk? }
   validates :roles, presence: true, unless: -> { reinvitation? }
 
   validates :user_id, presence: true, if: -> { reinvitation? }
@@ -18,8 +21,34 @@ class Invitation
     self.errors.add(:user_id, 'unable to find user') unless user.present?
   end
 
+  validate(if: -> { bulk? }) do
+    @invitations = []
+    index = 0
+
+    begin
+      CSV.parse(emails) do |row|
+        unless row[0].kind_of?(String) && row[0].include?('@') && row[0].include?('.')
+          self.errors.add(:emails, "[Line #{index}] invalid line: #{row.join(',')}")
+          break
+        end
+
+        @invitations << {
+          email: row[0].strip,
+          first_name: row[1],
+          last_name: row[2]
+        }
+
+        index += 1
+      end
+    rescue => e
+      self.errors.add(:emails, "Error encountered on line #{index}: #{e.message}")
+    end
+  end
+
   def to_s
-    if invitation?
+    if invitations.present?
+      "#{invitations.length + (email.present? ? 1 : 0)} users"
+    elsif invitation?
       email
     elsif reinvitation?
       user.email
@@ -33,11 +62,19 @@ class Invitation
   end
 
   def save!
-    raise (errors.full_messages.to_sentence.presence || 'invalid') unless save
+    raise "invalid #{errors.keys.join(', ')}" unless save
   end
 
   def invite!
-    User.invite!(email: email, roles: roles)
+    if invitation?
+      User.invite!(email: email, roles: roles)
+    end
+
+    (invitations || []).each do |invitation|
+      User.invite!(invitation.merge(roles: roles))
+    end
+
+    true
   end
 
   def reinvite!
@@ -53,6 +90,10 @@ class Invitation
 
   def invitation?
     email.present?
+  end
+
+  def bulk?
+    emails.present?
   end
 
   def reinvitation?

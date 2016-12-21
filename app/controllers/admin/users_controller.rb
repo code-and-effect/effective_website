@@ -75,12 +75,7 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_to(admin_users_path)
   end
 
-  def invite
-    @page_title = 'Invite User'
-    authorize! :invite, User
-  end
-
-private
+  private
 
   def user_params
     if params[:user] && params[:user][:password].blank?

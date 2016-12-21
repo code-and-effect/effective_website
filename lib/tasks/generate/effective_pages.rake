@@ -35,7 +35,7 @@ class EffectivePagesGenerator
 
 end
 
-# bundle exec generate:effective_pages
+# bundle exec rake generate:effective_pages
 namespace :generate do
   task :effective_pages => :environment do
     puts "== Generating effective pages =="

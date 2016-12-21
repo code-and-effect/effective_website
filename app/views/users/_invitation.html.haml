@@ -3,9 +3,9 @@
   Changing a user's email address will invalidate any previously sent invitation emails.
 
 .row
-  .col-md-6
+  .col-sm-6
     = form.input :invitation_sent_at, as: :effective_static_control, value: form.object.invitation_sent_at.try(:strftime, '%Y-%m-%d %H:%M') || 'Not sent'
-  .col-md-6
+  .col-sm-6
     - if form.object.invitation_sent_at.present?
       = form.input :invitation_accepted_at,
         as: :effective_static_control,

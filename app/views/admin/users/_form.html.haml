@@ -2,7 +2,7 @@
   = render partial: 'users/form', locals: { form: f, admin: true }
 
   .row
-    .col-sm-6= render partial: 'admin/users/invitation', locals: { form: f }
+    .col-sm-6= render partial: 'users/invitation', locals: { form: f }
 
   %p.text-right
     = f.button :submit, 'Save', class: 'btn btn-primary', data: { disable_with: 'Saving...' }

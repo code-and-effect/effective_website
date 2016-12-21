@@ -41,7 +41,7 @@ class EffectiveMenusGenerator
 end
 
 
-# bundle exec generate:effective_menus
+# bundle exec rake generate:effective_menus
 namespace :generate do
   task :effective_menus => :environment do
     puts "== Generating effective menus =="

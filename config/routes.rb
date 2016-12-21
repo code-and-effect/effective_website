@@ -10,9 +10,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, except: [:show] do
-      get :invite, on: :collection
       get :unarchive, on: :member
     end
+
+    resources :invitations, only: [:new, :create]
 
     root to: 'pages#index'
   end

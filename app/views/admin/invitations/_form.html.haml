@@ -1,0 +1,21 @@
+%h2 Send invitation
+%p An email with instructions to active an account will be sent to the following:
+
+= simple_form_for([:admin, @invitation], method: :post) do |f|
+  = f.input :email, as: :effective_email, hint: 'Send an invitation to this email address'
+
+  = f.input :emails, label: 'Multiple Emails',
+    as: :text,
+    hint: 'Send an invitation to each email address. One per line. Copy & paste a .csv file matching the below format. First and last names will be assigned.'
+
+  .well
+    j.smith@example.com,John,Smith
+    %br
+    jane.doe@somewhere.com,Jane,Doe
+    %br
+    r.roe@placeholder.com,Richard,Roe
+
+  = f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
+
+  = f.button :submit, 'Send Invitation', class: 'btn btn-primary', data: { disable_with: 'Inviting...' }
+
