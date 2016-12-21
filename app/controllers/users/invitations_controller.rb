@@ -19,7 +19,7 @@ class Users::InvitationsController < Devise::InvitationsController
       flash[:danger] = "Unable to invite: #{@invitation.errors.full_messages.to_sentence}.  Please click resend invitation instead."
     end
 
-    redirect_to (request.referer.present? ? :back : root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   def reinvite
@@ -34,7 +34,7 @@ class Users::InvitationsController < Devise::InvitationsController
       flash[:danger] = "Unable to invite: #{@invitation.errors.full_messages.to_sentence}."
     end
 
-    redirect_to (request.referer.present? ? :back : root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   protected

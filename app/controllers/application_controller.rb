@@ -38,9 +38,9 @@ class ApplicationController < ActionController::Base
       when 'confirmations_new' then 'Resend Confirmation Instructions'
       when 'registrations_new', 'user_registrations_new' then 'Sign Up'
       when 'registrations_create', 'user_registrations_create' then 'Sign Up'
-      when 'invitations_edit' then 'Accept your Invitation'
-      when 'invitations_update' then 'Accept your Invitation'
-      when 'invitations_new' then 'Send an Invitation'
+      when 'users/invitations_edit' then 'Accept your Invitation'
+      when 'users/invitations_update' then 'Accept your Invitation'
+      when 'users/invitations_new' then 'Send an Invitation'
       when 'admin/invitations_new' then 'Invite a user'
       when 'admin/invitations_edit' then 'Accept invitation'
       end

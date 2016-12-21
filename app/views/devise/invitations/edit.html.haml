@@ -1,5 +1,19 @@
-= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put} ) do |f|
+%h1= @page_title
+
+%p Accept your invitation to create a user account on this website.
+
+= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f|
   = f.input :invitation_token, as: :hidden
-  = render partial: 'devise/shared/user_fields', locals: { f: f, invitation: true }
+
+  .row
+    .col-sm-6
+      = f.input :email, as: :effective_email
+      = f.input :password, required: true
+      = f.input :password_confirmation, required: true
+    .col-sm-6
+      = effective_roles_summary(f.object)
+  .row
+    .col-sm-6= f.input :first_name
+    .col-sm-6= f.input :last_name
 
   = f.button :submit, 'Accept Invitation', class: 'btn btn-primary', data: { disable_with: 'Accepting...' }

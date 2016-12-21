@@ -4,5 +4,7 @@
 = simple_form_for(Invitation.new, url: user_invitation_path, method: :post) do |f|
   = f.input :email, as: :effective_email, required: true
 
+  = f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
+
   = f.button :submit, 'Send Invitation', class: 'btn btn-primary', data: { disable_with: 'Inviting...' }
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { invitations: 'users/invitations'}
+  devise_for :users, controllers: { registrations: 'users/registrations', invitations: 'users/invitations' }
 
   devise_scope :user do
     post 'invitation/:id/reinvite', to: 'users/invitations#reinvite', as: :reinvite_user_invitation
