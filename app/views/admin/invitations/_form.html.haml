@@ -4,9 +4,10 @@
 = simple_form_for([:admin, @invitation], method: :post) do |f|
   = f.input :email, as: :effective_email, hint: 'Send an invitation to this email address'
 
-  = f.input :emails, label: 'Multiple Emails',
+  = f.input :emails, label: "Multiple Emails (#{link_to('strip whitespace', '#', 'data-strip-whitespace': true)})".html_safe,
     as: :text,
-    hint: 'Send an invitation to each email address. One per line. Copy & paste a .csv file matching the below format. First and last names will be assigned.'
+    value: f.object.emails.to_s.gsub('  ', ''),
+    hint: "Send an invitation to each email address. One per line, upto #{Invitation::EMAILS_LIMIT} total lines. Copy & paste a .csv file matching the below format. If present, first and last names will be assigned."
 
   .well
     j.smith@example.com,John,Smith

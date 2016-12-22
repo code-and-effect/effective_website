@@ -5,6 +5,8 @@ require 'csv'
 class Invitation
   include ActiveModel::Model
 
+  EMAILS_LIMIT = 20 # Or the server will probably time out.
+
   attr_accessor :user_id, :email, :emails, :roles
   attr_reader :invitations
 
@@ -28,7 +30,7 @@ class Invitation
     begin
       CSV.parse(emails) do |row|
         unless row[0].kind_of?(String) && row[0].include?('@') && row[0].include?('.')
-          self.errors.add(:emails, "[Line #{index}] invalid line: #{row.join(',')}")
+          self.errors.add(:emails, "[Line #{index+1}] invalid line: #{row.join(',')}")
           break
         end
 
@@ -40,8 +42,10 @@ class Invitation
 
         index += 1
       end
+
+      self.errors.add(:emails, "contains more than #{EMAILS_LIMIT} lines") if @invitations.length > EMAILS_LIMIT
     rescue => e
-      self.errors.add(:emails, "Error encountered on line #{index}: #{e.message}")
+      self.errors.add(:emails, "Error encountered on line #{index+1}: #{e.message}")
     end
   end
 
