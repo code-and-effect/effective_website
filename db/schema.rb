@@ -237,13 +237,6 @@ ActiveRecord::Schema.define(version: 20161221200928) do
     t.index ["stripe_subscription_id"], name: "index_subscriptions_on_stripe_subscription_id", using: :btree
   end
 
-  create_table "things", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
@@ -271,8 +264,6 @@ ActiveRecord::Schema.define(version: 20161221200928) do
     t.integer  "invitations_count",      default: 0
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-    t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
-    t.index ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 

@@ -7,7 +7,7 @@
 
   .row
     .col-sm-6
-      = f.input :email, as: :effective_email
+      = f.input :email, as: :effective_email, required: true
       = f.input :password, required: true
       = f.input :password_confirmation, required: true
     .col-sm-6
