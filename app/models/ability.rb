@@ -19,6 +19,7 @@ class Ability
     can [:edit, :update], User, id: user.id
 
     can [:create, :reinvite], Invitation
+    can :manage, Thing
 
     if user.is?(:member)
     end
@@ -45,6 +46,7 @@ class Ability
       can :admin, :effective_pages
       can :admin, :effective_posts
       can :admin, :effective_roles
+      can :manage, Thing
     end
 
   end

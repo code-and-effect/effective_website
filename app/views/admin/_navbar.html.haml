@@ -26,3 +26,6 @@
         - if can? :manage, User
           %li= link_to 'Users', admin_users_path
 
+        - if can? :manage, Thing
+          %li= link_to 'Things', admin_things_path
+
