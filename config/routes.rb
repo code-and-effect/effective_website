@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     end
 
     resources :invitations, only: [:new, :create]
+    resources :things
 
     root to: 'pages#index'
   end
 
   match 'test/exception', to: 'static_pages#exception', via: :get
+
+  resources :things
 
   root to: 'static_pages#home'
 end

@@ -1,0 +1,10 @@
+%h1= @page_title
+
+- if can?(:new, Thing)
+  %p.text-right= link_to 'New Thing', new_thing_path, class: 'btn btn-primary'
+
+- if @datatable.present?
+  = render_datatable_scopes(@datatable)
+  = render_datatable(@datatable)
+- else
+  %p There are no things.

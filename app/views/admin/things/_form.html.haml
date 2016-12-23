@@ -1,0 +1,8 @@
+= simple_form_for([:admin, thing]) do |f|
+  = f.input :name
+  = f.input :description
+
+  %p.text-right
+    = f.button :submit, 'Save', data: { disable_with: 'Saving...' }
+    = f.button :submit, 'Save and Continue', data: { disable_with: 'Saving...' }
+    = f.button :submit, 'Save and Add New', data: { disable_with: 'Saving...' }
