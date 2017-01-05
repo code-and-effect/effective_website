@@ -10,5 +10,6 @@
       = form.input :invitation_accepted_at,
         as: :effective_static_control,
         value: form.object.invitation_accepted_at.try(:strftime, '%Y-%m-%d %H:%M') || 'Not accepted'
+
 %p
   = link_to 'Resend invitation', reinvite_user_invitation_path(form.object), method: :post, 'data-confirm' => 'Resend invitation?'
