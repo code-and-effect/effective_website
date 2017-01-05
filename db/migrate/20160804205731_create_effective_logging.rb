@@ -1,4 +1,4 @@
-class CreateEffectiveLogging < ActiveRecord::Migration
+class CreateEffectiveLogging < ActiveRecord::Migration[4.2]
   def self.up
     create_table :logs do |t|
       t.integer       :parent_id
