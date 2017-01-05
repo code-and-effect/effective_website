@@ -35,17 +35,17 @@ gem 'effective_roles'
 gem 'effective_style_guide'
 
 group :development do
-  gem 'dotenv-rails'
   gem 'flamegraph'
   gem 'listen'
   gem 'memory_profiler'
   gem 'rack-mini-profiler'
   gem 'stackprof'
-  gem 'thin'
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry-byebug' # If you encounter readline issues: rvm pkg install readline
+  gem 'thin'
 end
 
 group :test do

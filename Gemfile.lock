@@ -16,8 +16,6 @@ PATH
       minitest-reporters
       rails
       rmagick
-      shoulda
-      shoulda-matchers
 
 GEM
   remote: https://rubygems.org/
@@ -380,12 +378,6 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sexp_processor (4.7.0)
-    shoulda (3.5.0)
-      shoulda-context (~> 1.0, >= 1.0.1)
-      shoulda-matchers (>= 1.4.1, < 3.0)
-    shoulda-context (1.2.2)
-    shoulda-matchers (2.8.0)
-      activesupport (>= 3.0.0)
     simple_form (3.3.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
