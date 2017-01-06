@@ -18,6 +18,7 @@ gem 'foreman'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'sucker_punch'
 gem 'turbolinks'
 
 gem 'effective_addresses'

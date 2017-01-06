@@ -104,11 +104,6 @@ GEM
     concurrent-ruby (1.0.4)
     daemons (1.2.4)
     database_cleaner (1.5.3)
-    delayed_job (4.1.2)
-      activesupport (>= 3.0, < 5.1)
-    delayed_job_active_record (4.1.1)
-      activerecord (>= 3.0, < 5.1)
-      delayed_job (>= 3.0, < 5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.2.0)
@@ -130,16 +125,16 @@ GEM
       coffee-rails
       haml-rails
       rails (>= 3.2.0)
-    effective_assets (1.8.0)
+    effective_assets (1.9.0)
       carrierwave-aws
       coffee-rails
-      delayed_job_active_record
       haml-rails
       jquery-fileupload-rails
       jquery-rails
       mini_magick
       rails (>= 3.2.0)
       sass-rails
+      sucker_punch
     effective_ckeditor (1.8.0)
       rails (>= 3.2.0)
       sass-rails
@@ -206,7 +201,7 @@ GEM
       haml-rails
       rails (>= 3.2.0)
       simple_form
-    effective_test_bot (0.6.1)
+    effective_test_bot (0.6.2)
       capybara
       capybara-screenshot
       capybara-slow_finder_errors
@@ -386,6 +381,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.10)
+    sucker_punch (2.0.2)
+      concurrent-ruby (~> 1.0.0)
     thin (1.7.0)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -456,6 +453,7 @@ DEPENDENCIES
   sass-rails
   simple_form
   stackprof
+  sucker_punch
   thin
   turbolinks
   uglifier
