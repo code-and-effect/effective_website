@@ -138,7 +138,7 @@ GEM
     effective_ckeditor (1.8.0)
       rails (>= 3.2.0)
       sass-rails
-    effective_datatables (2.7.0)
+    effective_datatables (2.8.0)
       coffee-rails
       haml-rails
       kaminari
