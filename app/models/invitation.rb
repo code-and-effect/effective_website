@@ -5,7 +5,7 @@ require 'csv'
 class Invitation
   include ActiveModel::Model
 
-  EMAILS_LIMIT = 20 # Or the server will probably time out.
+  EMAILS_LIMIT = 200 # The emails are sent via active job.  We should set a reasonable upper limit tho.
 
   attr_accessor :user_id, :email, :emails, :roles
   attr_reader :invitations
