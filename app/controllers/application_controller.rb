@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(user)
+    (user.present? && user.is?(:admin)) ? admin_root_path : root_path
+  end
+
   private
 
   def restrict_admin_routes
