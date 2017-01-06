@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     root to: 'pages#index'
   end
 
-  match 'test/exception', to: 'static_pages#exception', via: :get
+  match 'test/exception', to: 'test#exception', via: :get
+  match 'test/email', to: 'test#email', via: :get
 
   root to: 'static_pages#home'
 end

@@ -4,4 +4,8 @@
 
 class ApplicationMailerPreview < ActionMailer::Preview
 
+  def test_email
+    ApplicationMailer.test_email
+  end
+
 end

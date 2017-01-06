@@ -50,9 +50,9 @@ Capybara::Webkit.configure { |config| config.allow_unknown_urls }
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 # These three lines are needed as of minitest-reporters 1.1.2
-Rails.backtrace_cleaner.remove_silencers!
-Rails.backtrace_cleaner.add_silencer { |line| line =~ /minitest/ }
-Rails.backtrace_cleaner.add_silencer { |line| line =~ /effective_test_bot/ }
+# Rails.backtrace_cleaner.remove_silencers!
+# Rails.backtrace_cleaner.add_silencer { |line| line =~ /minitest/ }
+# Rails.backtrace_cleaner.add_silencer { |line| line =~ /effective_test_bot/ }
 
 ###############################################
 ### Effective Test Bot specific stuff below ###
@@ -88,15 +88,15 @@ end
 # They are unneeded with effective_test_bot.  On my machine. But I leave them here as a reference.
 # Try one or both if you are having issues passing rake test:bot:environment
 
-# class ActiveRecord::Base
-#   mattr_accessor :shared_connection
-#   @@shared_connection = nil
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
 
-#   def self.connection
-#     @@shared_connection || retrieve_connection
-#   end
-# end
-# ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 # ActiveRecord::ConnectionAdapters::ConnectionPool.class_eval do
 #   def current_connection_id

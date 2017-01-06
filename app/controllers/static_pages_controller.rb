@@ -5,7 +5,4 @@ class StaticPagesController < ApplicationController
     @page_title = 'Effective Website'
   end
 
-  def exception
-    raise 'this is an intentional exception'
-  end
 end
