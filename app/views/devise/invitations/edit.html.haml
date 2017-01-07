@@ -7,13 +7,8 @@
 
   .row
     .col-sm-6
-      = f.input :email, as: :effective_email, required: true
-      = f.input :password, required: true
-      = f.input :password_confirmation, required: true
+      = render 'users/sign_up_fields', f: f
     .col-sm-6
       = effective_roles_summary(f.object)
-  .row
-    .col-sm-6= f.input :first_name
-    .col-sm-6= f.input :last_name
 
   = f.button :submit, 'Accept Invitation', class: 'btn btn-primary', data: { disable_with: 'Accepting...' }

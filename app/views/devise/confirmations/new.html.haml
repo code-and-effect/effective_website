@@ -1,13 +1,11 @@
 .row
-  .col-sm-4.col-sm-offset-2
+  .col-sm-6.col-sm-offset-3
     = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
       = f.error_notification
       = f.full_error :confirmation_token
 
-      .form-inputs
-        = f.input :email, required: true, autofocus: true
+      = f.input :email, required: true, autofocus: true
 
-      .form-actions
-        = f.button :submit, 'Resend confirmation instructions', class: 'btn btn-primary', data: { disable_with: 'Sending...' }
+      = f.button :submit, 'Resend confirmation instructions', class: 'btn btn-primary', data: { disable_with: 'Sending...' }
 
     = render 'devise/shared/links'

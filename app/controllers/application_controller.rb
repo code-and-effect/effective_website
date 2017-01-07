@@ -7,14 +7,12 @@ class ApplicationController < ActionController::Base
   # CanCanCan & /admin authorization
   check_authorization
   skip_authorization_check if: :devise_controller?
-  before_action :restrict_admin_routes, if: -> { request.path.start_with?('/admin') }
+  before_action :restrict_admin_routes, if: -> { request.path.start_with?('/admin'.freeze) }
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       @page_title = 'Access Denied'
-      format.html {
-        render 'static_pages/access_denied', layout: 'application', status: 403, locals: { exception: exception }
-      }
+      format.html { render 'static_pages/access_denied', layout: 'application', status: 403, locals: { exception: exception } }
       format.any { render text: "Access Denied: #{exception.message}", status: 403 }
     end
   end
@@ -26,8 +24,7 @@ class ApplicationController < ActionController::Base
   private
 
   def restrict_admin_routes
-    authenticate_user!
-    authorize!(:access, :admin)
+    authenticate_user! and authorize!(:access, :admin)
   end
 
   def set_devise_page_title

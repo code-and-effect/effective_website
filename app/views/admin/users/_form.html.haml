@@ -1,9 +1,9 @@
 = simple_form_for [:admin, @user] do |f|
-  = render partial: 'users/form', locals: { form: f, admin: true }
+  = render 'users/form', f: f
 
   - if @user.persisted?
     .row
-      .col-sm-6= render partial: 'users/invitation', locals: { form: f }
+      .col-sm-6= render 'admin/users/invitation', f: f
 
   %p.text-right
     = f.button :submit, 'Save', class: 'btn btn-primary', data: { disable_with: 'Saving...' }
