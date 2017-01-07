@@ -1,12 +1,11 @@
 = f.input :email, as: :effective_email ,required: true, autofocus: true
 
-= f.input :password, required: true,
-  hint: ((f.object.persisted? && !f.object.invited_to_sign_up?) ? 'leave blank to keep existing password' : ''),
-  input_html: { autocomplete: 'off' }
-
-= f.input :password_confirmation, required: true,
-  hint: ((f.object.persisted? && !f.object.invited_to_sign_up?) ? 'leave blank to keep existing password' : ''),
-  input_html: { autocomplete: 'off' }
+- if f.object.persisted? && !f.object.invited_to_sign_up?
+  = f.input :password, required: false, hint: 'leave blank to keep existing password'
+  = f.input :password_confirmation, required: false, hint: 'leave blank to keep existing password'
+- else
+  = f.input :password, required: true
+  = f.input :password_confirmation, required: true
 
 .row
   .col-sm-6= f.input :first_name

@@ -31,8 +31,7 @@ class UserSettingsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:user).permit(
-      :email, :password, :password_confirmation, :first_name, :last_name,
+    params.require(:user).permit(*User.permitted_sign_up_params,
       EffectiveAssets.permitted_params,
       billing_address: EffectiveAddresses.permitted_params,
       shipping_address: EffectiveAddresses.permitted_params

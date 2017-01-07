@@ -83,8 +83,7 @@ class Admin::UsersController < Admin::ApplicationController
       params[:user].delete(:password_confirmation)
     end
 
-    params.require(:user).permit(
-      :email, :password, :password_confirmation, :first_name, :last_name,
+    params.require(:user).permit(*User.permitted_sign_up_params,
       EffectiveAssets.permitted_params,
       EffectiveRoles.permitted_params,
       billing_address: EffectiveAddresses.permitted_params,

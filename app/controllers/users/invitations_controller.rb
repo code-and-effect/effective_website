@@ -29,9 +29,7 @@ class Users::InvitationsController < Devise::InvitationsController
   protected
 
   def configure_accept_invitation_params
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [
-      :email, :password, :password_confirmation, :first_name, :last_name
-    ])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: User.permitted_sign_up_params)
   end
 
   def after_accept_path_for(resource)
