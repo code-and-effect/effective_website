@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::ApplicationController
     authorize! :index, User
 
     @page_title = 'Users'
-    @datatable = Effective::Datatables::Users.new
+    @datatable = UsersDatatable.new
   end
 
   def new
