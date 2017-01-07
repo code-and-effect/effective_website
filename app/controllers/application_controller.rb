@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(user)
-    (user.present? && user.is?(:admin)) ? admin_root_path : root_path
+    session[:user_return_to] || (user.is?(:admin) ? admin_root_path : root_path)
   end
 
   private
