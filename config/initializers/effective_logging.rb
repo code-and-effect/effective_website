@@ -27,12 +27,7 @@ EffectiveLogging.setup do |config|
   config.use_active_admin = true
 
   # Admin Screens Layout Settings
-  config.layout = {
-    logs: 'application',
-    trash: 'application',
-    admin_logs: 'admin',
-    admin_trash: 'admin'
-  }
+  config.layout = 'admin'   # All EffectiveLogging controllers will use this layout
 
   # All statuses defined here, as well as 'info', 'success', and 'error' (hardcoded) will be created as
   # EffectiveLogger.info('my message') macros
@@ -47,9 +42,5 @@ EffectiveLogging.setup do |config|
 
   # Log all successful user login attempts
   config.user_logins_enabled = true
-  config.user_logouts_enabled = false
-
-  # Enable the /trash, /admin/trash and /trash/:id/restore routes. Doesn't affect acts_as_trashable itself.
-  config.trash_enabled = true
 
 end
