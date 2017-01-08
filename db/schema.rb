@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221200928) do
+ActiveRecord::Schema.define(version: 20161221200929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,6 +235,21 @@ ActiveRecord::Schema.define(version: 20161221200928) do
     t.datetime "updated_at"
     t.index ["customer_id"], name: "index_subscriptions_on_customer_id", using: :btree
     t.index ["stripe_subscription_id"], name: "index_subscriptions_on_stripe_subscription_id", using: :btree
+  end
+
+  create_table "trash", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "trashed_type"
+    t.integer  "trashed_id"
+    t.string   "trashed_to_s"
+    t.string   "trashed_extra"
+    t.text     "details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["trashed_extra"], name: "index_trash_on_trashed_extra", using: :btree
+    t.index ["trashed_id"], name: "index_trash_on_trashed_id", using: :btree
+    t.index ["trashed_type", "trashed_id"], name: "index_trash_on_trashed_type_and_trashed_id", using: :btree
+    t.index ["user_id"], name: "index_trash_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

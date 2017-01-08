@@ -1,3 +1,13 @@
+PATH
+  remote: ~/Sites/effective_trash
+  specs:
+    effective_trash (0.1.0)
+      coffee-rails
+      devise
+      effective_datatables (>= 2.0.0)
+      haml-rails
+      rails (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -435,6 +445,7 @@ DEPENDENCIES
   effective_roles
   effective_style_guide
   effective_test_bot
+  effective_trash!
   exception_notification
   flamegraph
   font-awesome-sass
