@@ -21,13 +21,18 @@ EffectiveLogging.setup do |config|
   #
   # Or disable the check completely:
   # config.authorization_method = false
-  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
+  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) } # CanCanCan
 
   # Register Effective::Logs with ActiveAdmin if ActiveAdmin is present
   config.use_active_admin = true
 
   # Admin Screens Layout Settings
-  config.layout = 'admin'   # All EffectiveLogging controllers will use this layout
+  # config.layout = 'application'   # All EffectiveLogging controllers will use this layout
+
+  config.layout = {
+    logs: 'application',
+    admin_logs: 'admin',
+  }
 
   # All statuses defined here, as well as 'info', 'success', and 'error' (hardcoded) will be created as
   # EffectiveLogger.info('my message') macros
@@ -42,5 +47,5 @@ EffectiveLogging.setup do |config|
 
   # Log all successful user login attempts
   config.user_logins_enabled = true
-
+  config.user_logouts_enabled = false
 end

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  log_page_views
+
   before_action :set_devise_page_title, if: :devise_controller?
   before_action :set_meta_description
 
@@ -17,9 +19,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_in_path_for(user)
-    session[:user_return_to] || (user.is?(:admin) ? admin_root_path : root_path)
-  end
+  # def after_sign_in_path_for(user)
+  #   session[:user_return_to] || (user.is?(:admin) ? admin_root_path : root_path)
+  # end
 
   private
 
