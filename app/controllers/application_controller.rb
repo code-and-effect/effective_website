@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  log_page_views
-  before_action :set_effective_trash_current_user
-
+  # Meta and titles
   before_action :set_devise_page_title, if: :devise_controller?
   before_action :set_meta_description
 
@@ -11,6 +9,11 @@ class ApplicationController < ActionController::Base
   check_authorization
   skip_authorization_check if: :devise_controller?
   before_action :restrict_admin_routes, if: -> { request.path.start_with?('/admin'.freeze) }
+
+  # Logging, and trash
+  log_page_views
+  before_action :set_effective_logging_current_user
+  before_action :set_effective_trash_current_user
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
