@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20161221200928) do
     t.integer  "user_id"
     t.string   "associated_type"
     t.integer  "associated_id"
+    t.string   "associated_to_s"
     t.integer  "logs_count"
     t.string   "message"
     t.text     "details"

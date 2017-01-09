@@ -6,6 +6,7 @@ class CreateEffectiveLogging < ActiveRecord::Migration[4.2]
 
       t.string        :associated_type
       t.integer       :associated_id
+      t.string        :associated_to_s
 
       t.integer       :logs_count
 
