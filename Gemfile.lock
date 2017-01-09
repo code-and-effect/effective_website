@@ -216,7 +216,7 @@ GEM
       minitest-reporters
       rails
       rmagick
-    effective_trash (0.2.0)
+    effective_trash (0.2.1)
       coffee-rails
       devise
       effective_datatables (>= 2.0.0)

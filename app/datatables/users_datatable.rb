@@ -29,8 +29,6 @@ class UsersDatatable < Effective::Datatable
       (user.current_sign_in_at.presence || user.last_sign_in_at).try(:strftime, '%F %H:%M')
     end
 
-    table_column :archived, visible: false, filter: { selected: false }
-
     actions_column
   end
 

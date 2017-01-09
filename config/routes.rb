@@ -9,9 +9,7 @@ Rails.application.routes.draw do
   match '/settings', to: 'user_settings#update', via: [:patch, :put]
 
   namespace :admin do
-    resources :users, except: [:show] do
-      get :unarchive, on: :member
-    end
+    resources :users, except: [:show]
 
     resources :invitations, only: [:new, :create]
 

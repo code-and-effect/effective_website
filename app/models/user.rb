@@ -4,6 +4,7 @@ class User < ApplicationRecord
   acts_as_addressable :billing, :shipping
   acts_as_asset_box :files
   acts_as_role_restricted
+  acts_as_trashable
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
     [:email, :password, :password_confirmation, :first_name, :last_name]
@@ -35,7 +36,6 @@ class User < ApplicationRecord
   # last_name               :string
 
   # roles_mask              :integer
-  # archived                :boolean, default: false, validates: [:boolean]
 
   # timestamps
 
@@ -45,23 +45,6 @@ class User < ApplicationRecord
 
   def to_s
     email
-  end
-
-  def destroy
-    update_column(:archived, true) # This intentionally skips validation
-  end
-
-  def unarchive
-    update_column(:archived, false) # This intentionally skips validation
-  end
-
-  # Devise methods
-  def active_for_authentication?
-    super && archived != true
-  end
-
-  def inactive_message
-    archived ? 'This account has been archived. You will be unable to login. Please contact an administrator for assistance.' : super
   end
 
   def valid_password?(password)

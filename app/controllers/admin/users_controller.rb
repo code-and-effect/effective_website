@@ -65,16 +65,6 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_to admin_users_path
   end
 
-  def unarchive
-    @user = User.find(params[:id])
-    authorize! :unarchive, @user
-
-    @user.unarchive
-    flash[:success] = 'Successfully unarchived user'
-
-    redirect_to(admin_users_path)
-  end
-
   private
 
   def user_params
