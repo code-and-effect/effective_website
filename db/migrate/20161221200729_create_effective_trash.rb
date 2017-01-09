@@ -1,4 +1,4 @@
-class CreateEffectiveTrash < ActiveRecord::Migration
+class CreateEffectiveTrash < ActiveRecord::Migration[4.2]
   def self.up
     create_table :trash do |t|
       t.integer       :user_id
