@@ -34,8 +34,7 @@ gem 'effective_posts'
 gem 'effective_regions'
 gem 'effective_roles'
 gem 'effective_style_guide'
-
-gem 'effective_trash', path: '~/Sites/effective_trash'
+gem 'effective_trash'
 
 group :development do
   gem 'flamegraph'

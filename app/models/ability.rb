@@ -29,6 +29,7 @@ class Ability
     can [:index, :show], Effective::Post
     can :show, Effective::StyleGuide
     can :index, Effective::Datatables::StyleGuide
+    can :manage, Effective::Trash, user_id: user.id
 
     if user.is?(:admin)
       can :manage, Effective::Asset
@@ -37,6 +38,7 @@ class Ability
       can :manage, Effective::Page
       can :manage, Effective::Post
       can :manage, Effective::Region
+      can :manage, Effective::Trash
 
       # Effective Orders
       can :manage, Effective::Order
@@ -48,6 +50,7 @@ class Ability
       can :admin, :effective_pages
       can :admin, :effective_posts
       can :admin, :effective_roles
+      can :admin, :effective_trash
     end
   end
 
