@@ -2,7 +2,7 @@
 
 This is a rails 5 starter website that uses most of the effective_* gems.
 
-Version 1.0.0
+Version 1.1.0
 
 ## Getting Started
 
