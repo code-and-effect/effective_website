@@ -1,71 +1,7 @@
 class Admin::UsersController < Admin::ApplicationController
-  def index
-    authorize! :index, User
+  include Effective::CrudController
 
-    @page_title = 'Users'
-    @datatable = UsersDatatable.new
-  end
-
-  def new
-    @user = User.new
-    authorize! :new, @user
-
-    @page_title = 'Create User'
-  end
-
-  def create
-    @user = User.new(user_params)
-    authorize! :create, @user
-
-    @page_title = 'Create User'
-
-    if @user.save
-      flash[:success] = "User registered! The user has *not* been notified by email"
-      redirect_to admin_users_path
-    else
-      flash.now[:danger] = 'Unable to create user'
-      render action: :new
-    end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-    authorize! :edit, @user
-
-    @page_title = "Edit #{@user}"
-  end
-
-  def update
-    @user = User.find(params[:id])
-    authorize! :update, @user
-
-    @page_title = "Edit #{@user}"
-
-    @user.attributes = user_params
-
-    if @user.save
-      flash[:success] = 'Successfully updated user'
-      redirect_to edit_admin_user_path(@user)
-    else
-      flash.now[:danger] = 'Unable to update user'
-      render action: :new
-    end
-  end
-
-  def destroy
-    @user = User.find(params[:id])
-    authorize! :destroy, @user
-
-    if @user.destroy
-      flash[:success] = 'Successfully deleted user'
-    else
-      flash[:danger] = "Unable to delete user: #{@user.errors.full_messages.to_sentence}"
-    end
-
-    redirect_to admin_users_path
-  end
-
-  private
+  protected
 
   def user_params
     if params[:user] && params[:user][:password].blank?

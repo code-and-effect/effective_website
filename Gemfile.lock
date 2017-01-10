@@ -1,15 +1,3 @@
-PATH
-  remote: ~/Sites/effective_developer
-  specs:
-    effective_developer (0.0.9)
-      rails (>= 3.2.0)
-
-PATH
-  remote: ~/Sites/effective_resources
-  specs:
-    effective_resources (0.1.0)
-      rails (>= 3.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -157,6 +145,8 @@ GEM
       rails (>= 3.2.0)
       sass-rails
       simple_form
+    effective_developer (0.0.10)
+      rails (>= 3.2.0)
     effective_form_inputs (1.0.1)
       rails (>= 3.2.0)
       simple_form (>= 3.1.0)
@@ -201,6 +191,8 @@ GEM
       haml-rails
       rails (>= 3.2.0)
       virtus
+    effective_resources (0.1.0)
+      rails (>= 3.2.0)
     effective_roles (1.4.1)
       rails (>= 3.2.0)
     effective_slugs (1.3.1)
@@ -441,14 +433,14 @@ DEPENDENCIES
   effective_assets
   effective_ckeditor
   effective_datatables
-  effective_developer!
+  effective_developer
   effective_form_inputs
   effective_logging
   effective_orders
   effective_pages
   effective_posts
   effective_regions
-  effective_resources!
+  effective_resources
   effective_roles
   effective_style_guide
   effective_test_bot

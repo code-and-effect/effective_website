@@ -5,5 +5,4 @@
     .row
       .col-sm-6= render 'admin/users/invitation', f: f
 
-  %p.text-right
-    = f.button :submit, 'Save', class: 'btn btn-primary', data: { disable_with: 'Saving...' }
+  = simple_form_submit(f)
