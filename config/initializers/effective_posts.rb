@@ -9,9 +9,8 @@ EffectivePosts.setup do |config|
 
   # Create top level routes for each category
   # Should each of the above categories have a top level route created for it
-  # For example:
-  #   Visiting /blog will display all posts created with the :blog category
-  #   Visiting /news will display all posts created with the :news category
+  # - Visiting /blog will display all posts created with the :blog category
+  # - Visiting /news will display all posts created with the :news category
   #
   # Regardless of this setting, posts will always be available via /posts?category=blog
   config.use_category_routes = true

@@ -8,12 +8,15 @@ Version 1.1.0
 
 - Install rvm.
 - Clone this repo.
-- Create a config/database.yml based on the example.
-- Create a ~/.env based on the example.
+
+- Create a config/database.yml.
+- Create a ~/.env
 
 - `bundle`
 - `bundle exec rake db:create db:migrate db:seed`
 - `rails server`
+
+- Search the entire project for 'example' and fill in your site specifics.
 
 Good luck!
 

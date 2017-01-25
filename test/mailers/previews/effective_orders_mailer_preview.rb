@@ -57,7 +57,7 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
   end
 
   def preview_user
-    User.new(email: 'buyer@example.com').tap do |user|
+    User.new(email: 'buyer@website.com').tap do |user|
       user.name = 'Valued Customer' if user.respond_to?(:name=)
       user.full_name = 'Valued Customer' if user.respond_to?(:full_name=)
 

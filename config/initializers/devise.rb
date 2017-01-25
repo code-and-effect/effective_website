@@ -55,13 +55,13 @@ Devise.setup do |config|
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
-  # given strategies, for example, `config.params_authenticatable = [:database]` will
+  # given strategies like `config.params_authenticatable = [:database]` will
   # enable it only for database (email + password) authentication.
   # config.params_authenticatable = true
 
   # Tell if authentication through HTTP Auth is enabled. False by default.
   # It can be set to an array that will enable http authentication only for the
-  # given strategies, for example, `config.http_authenticatable = [:database]` will
+  # given strategies like `config.http_authenticatable = [:database]` will
   # enable it only for database authentication. The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
   # config.http_authenticatable = false
@@ -170,7 +170,7 @@ Devise.setup do |config|
   # config.allow_unconfirmed_access_for = 2.days
 
   # A period that the user is allowed to confirm their account before their
-  # token becomes invalid. For example, if set to 3.days, the user can confirm
+  # token becomes invalid. If set to 3.days, the user can confirm
   # their account within 3 days after the mail was sent, but on the fourth day
   # their account can't be confirmed with the token any more.
   # Default is nil, meaning there is no restriction on how long a user can take
@@ -313,7 +313,7 @@ Devise.setup do |config|
   #
   #     mount MyEngine, at: '/my_engine'
   #
-  # The router that invoked `devise_for`, in the example above, would be:
+  # The router that invoked `devise_for`, in the above, would be:
   # config.router_name = :my_engine
   #
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,

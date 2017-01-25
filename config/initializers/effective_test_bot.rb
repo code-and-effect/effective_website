@@ -26,7 +26,7 @@ if Rails.env.test?
 
     # Fill form fields with these values
     # Based on the input name
-    # :email => 'j.smith@example.com', 'user.last_name' => 'Smith'
+    # :email => 'j.smith@website.com', 'user.last_name' => 'Smith'
     config.form_fills = {}
 
     # Should capybara generate a series of *.png screenshots as it goes through the test?

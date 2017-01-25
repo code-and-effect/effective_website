@@ -6,16 +6,16 @@
   = f.input :email, as: :effective_email, hint: 'Send an invitation to this email address'
 
   = f.input :emails, label: "Multiple Emails (#{link_to('strip whitespace', '#', 'data-strip-whitespace': true)})".html_safe,
-    as: :text,
+    as: :text
     value: f.object.emails.to_s.gsub('  ', ''),
     hint: "Send an invitation to each email address. One per line, upto #{Invitation::EMAILS_LIMIT} total lines. Copy & paste a .csv file matching the below format. If present, first and last names will be assigned."
 
   .well
-    j.smith@example.com,John,Smith
+    j.smith@website.com,John,Smith
     %br
-    jane.doe@somewhere.com,Jane,Doe
+    jane.doe@website.com,Jane,Doe
     %br
-    r.roe@placeholder.com,Richard,Roe
+    r.roe@website.com,Richard,Roe
 
   = f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
 
