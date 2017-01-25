@@ -1,4 +1,4 @@
-class UsersDatatable < Effective::Datatable
+class Admin::UsersDatatable < Effective::Datatable
   datatable do
     default_order :updated_at, :desc
 
