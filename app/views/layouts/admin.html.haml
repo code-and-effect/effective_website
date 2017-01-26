@@ -2,26 +2,25 @@
 %html{lang: 'en'}
   %head
     %meta{charset: 'utf-8'}
-    %meta{content: 'index, follow', name: 'robots'}
-    %meta{:content => 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
-    %meta{:content => 'width=device-width, initial-scale=1', :name => 'viewport'}
+    %meta{content: 'IE=edge', 'http-equiv': 'X-UA-Compatible'}
+    %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
+    %meta{content: 'noindex, nofollow', name: 'robots'}
     = csrf_meta_tags
 
     = stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
 
     = effective_pages_header_tags
     = effective_regions_include_tags
 
   %body{class: effective_pages_body_classes}
-    = render partial: 'layouts/flash'
-    = render partial: 'admin/navbar'
+    = render partial: 'layouts/navbar_admin'
 
-    #admin-content.container
-      - if content_for?(:sidebar)
+    #admin-wrap
+      = render partial: 'layouts/alert'
+
+      .container
         .row
-          #sidebar.col-sm-3= yield :sidebar
-          #main.col-sm-9
+          .col-xs-12
             = yield
-      - else
-        = yield
+
+    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload', 'data-turbolinks-eval': 'false'
