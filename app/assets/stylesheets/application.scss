@@ -1,7 +1,7 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
+
+@import 'vendor/*';
 
 @import 'effective_assets';
 @import 'effective_ckeditor';
@@ -10,5 +10,4 @@
 @import 'effective_orders';
 
 @import 'base/*';
-@import 'layout/*';
-@import 'modules/*';
+@import 'components/*';
