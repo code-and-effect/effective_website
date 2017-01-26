@@ -60,7 +60,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    builder (3.2.2)
+    builder (3.2.3)
     byebug (9.0.6)
     cancancan (1.15.0)
     capybara (2.7.1)
@@ -145,7 +145,8 @@ GEM
       rails (>= 3.2.0)
       sass-rails
       simple_form
-    effective_developer (0.0.10)
+    effective_developer (0.2)
+      effective_resources
       rails (>= 3.2.0)
     effective_form_inputs (1.0.1)
       rails (>= 3.2.0)
@@ -191,7 +192,7 @@ GEM
       haml-rails
       rails (>= 3.2.0)
       virtus
-    effective_resources (0.1.0)
+    effective_resources (0.2)
       rails (>= 3.2.0)
     effective_roles (1.4.1)
       rails (>= 3.2.0)
@@ -412,7 +413,7 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.6)
       rack (>= 1.0)
-    websocket-driver (0.6.4)
+    websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     xpath (2.0.0)
