@@ -10,5 +10,7 @@
 //= require effective_ckeditor
 //= require effective_datatables
 //= require effective_form_inputs
+//= require effective_orders
 
+//= require_tree ./vendor
 //= require_tree ./admin

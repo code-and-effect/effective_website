@@ -12,4 +12,5 @@
 //= require effective_form_inputs
 //= require effective_orders
 
+//= require_tree ./vendor
 //= require_tree ./base

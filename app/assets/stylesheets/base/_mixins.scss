@@ -4,17 +4,15 @@
           box-sizing: border-box;
 }
 
+// Use to override clear fixes from Bootstrap
 @mixin preserve-float() {
-  // Use to override clear fixes from Bootstrap
   &:before,
   &:after {
     display: none;
     content: none;
   }
 
-  &:after {
-    clear: none;
-  }
+  &:after { clear: none; }
 }
 
 @mixin border-radius ($radius) {
@@ -50,6 +48,7 @@
        -o-transform: $transforms;
           transform: $transforms;
 }
+
 // rotate
 @mixin rotate ($deg) {
   @include transform(rotate(#{$deg}deg));
@@ -59,14 +58,17 @@
 @mixin scale ($scale) {
    @include transform(scale($scale));
 }
+
 // translate
 @mixin translate ($x, $y) {
    @include transform(translate($x, $y));
 }
+
 // skew
 @mixin skew ($x, $y) {
    @include transform(skew(#{$x}deg, #{$y}deg));
 }
+
 //transform origin
 @mixin transform-origin ($origin) {
   -webkit-transform-origin: $origin;
