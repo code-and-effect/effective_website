@@ -17,7 +17,7 @@ class Admin::InvitationsController < Admin::ApplicationController
       flash[:success] = "Successfully invited #{@invitation}"
       redirect_to new_admin_invitation_path
     else
-      flash.now[:danger] = "Encountered errors with #{@invitation.errors.keys.map(&:to_s).to_sentence}. No invitation emails have been sent.  Please try again."
+      flash.now[:danger] = "Encountered errors with #{@invitation.errors.keys.map(&:to_s).to_sentence}. No invitation emails have been sent. Please try again."
       render :new
     end
   end

@@ -8,7 +8,8 @@
   = f.input :emails, label: "Multiple Emails (#{link_to('strip whitespace', '#', 'data-strip-whitespace': true)})".html_safe,
     as: :text,
     value: f.object.emails.to_s.gsub('  ', ''),
-    hint: "Send an invitation to each email address. One per line, upto #{Invitation::EMAILS_LIMIT} total lines. Copy & paste a .csv file matching the below format. If present, first and last names will be assigned."
+    hint: "Send an invitation to each email address. One per line, upto #{Invitation::EMAILS_LIMIT} total lines. Copy & paste a .csv file matching the below format. If present, first and last names will be assigned.",
+    input_html: { 'data-test-bot-skip' => true}
 
   .well
     j.smith@website.com,John,Smith

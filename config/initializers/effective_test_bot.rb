@@ -9,6 +9,10 @@ if Rails.env.test?
     #   'posts#update_invalid' => ['page_title', 'current_path'],
     #   'no_unpermitted_params'
     # ]
+    config.except = [
+      'new_user_invitation_path', 'test_exception_path', 'test_email_path',
+      'admin/invitations#create_valid' => :path
+    ]
 
     # Run only the following tests.  Doesn't work with individual assertions
     # config.only = [
