@@ -7,5 +7,5 @@
         %span.icon-bar
         %span.icon-bar
     .collapse.navbar-collapse
-      = render_menu('main menu', class: 'navbar-right') do
+      = render_menu(:main, class: 'navbar-right') do
         %li= link_to_current_cart(class: '')

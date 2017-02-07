@@ -20,9 +20,7 @@
         - if content_for?(:breadcrumb)
           = yield :breadcrumb
         - else
-          %ol.breadcrumb
-            %li= link_to 'Home', '/'
-            %li.active= @page_title
+          = render_breadcrumbs(:main, @page_title)
 
     #content-wrap
       = render partial: 'layouts/alert'

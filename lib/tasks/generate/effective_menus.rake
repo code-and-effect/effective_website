@@ -5,9 +5,10 @@ class EffectiveMenusGenerator
   end
 
   def create_main_menu
-    Effective::Menu.where(title: 'main menu').first.try(:destroy)
+    Effective::Menu.where(title: 'main').first.try(:destroy)
+    Effective::Menu.where(title: 'footer').first.try(:destroy)
 
-    Effective::Menu.new(title: 'main menu').build do
+    Effective::Menu.new(title: 'main').build do
       item 'News', '/news'
       item 'Blog', '/blog'
 
@@ -30,7 +31,7 @@ class EffectiveMenusGenerator
       item 'Sign In', :new_user_session_path, signed_out: true
     end.save!
 
-    Effective::Menu.new(title: 'footer menu').build do
+    Effective::Menu.new(title: 'footer').build do
       item 'News', '/news'
       item 'Blog', '/blog'
       item Effective::Page.find_by_title('About')
