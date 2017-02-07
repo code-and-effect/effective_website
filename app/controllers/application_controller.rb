@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
   before_action :set_effective_trash_current_user
 
   rescue_from CanCan::AccessDenied do |exception|
+    assign_test_bot_access_denied_exception(exception) if defined?(EffectiveTestBot)
+
     respond_to do |format|
       @page_title = 'Access Denied'
       format.html { render 'static_pages/access_denied', layout: 'application', status: 403, locals: { exception: exception } }

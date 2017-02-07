@@ -15,6 +15,8 @@ if Rails.env.test?
     #   'posts', 'events#index'
     # ]
 
+    config.user = proc { |test| User.first }
+
     # Silence skipped routes
     config.silence_skipped_routes = false
 
