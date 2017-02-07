@@ -1,0 +1,11 @@
+%p Hello #{@resource.email},
+
+%p
+  You have been invited to #{link_to(root_url, root_url)}.
+  Please accept your invitation through the link below:
+
+%p= link_to 'Accept Invitation', accept_invitation_url(@resource, invitation_token: @token)
+
+%p
+  If you don't want to accept the invitation, please ignore this email.
+  Your account won't be created until you access the link above.
