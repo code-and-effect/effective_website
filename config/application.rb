@@ -29,7 +29,7 @@ module EffectiveWebsite
     config.filter_parameters += [:password]
 
     # Session options
-    config.session_store :cookie_store, key: '_effective_website_session'
+    config.session_store :cookie_store, key: '_example_session'
 
     # sucker_punch runs active jobs asynchronously in the web server process
     config.active_job.queue_adapter = :sucker_punch

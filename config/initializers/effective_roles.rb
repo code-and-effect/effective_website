@@ -24,7 +24,7 @@ EffectiveRoles.setup do |config|
   #
   config.role_descriptions = {
     :admin => 'full access to everything. Can manage users and all website content.',
-    :member => 'cannot access admin area.  Can see all content in members-only sections of the website.'
+    :member => 'access to members-only sections of the website.'
   }
 
   # config.assignable_roles
