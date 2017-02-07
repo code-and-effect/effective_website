@@ -171,7 +171,7 @@ EffectiveOrders.setup do |config|
     send_pending_order_invoice_to_buyer: true,
     send_order_receipts_when_mark_as_paid_by_admin: false,
 
-    subject_prefix: '[Effective]',
+    subject_prefix: '[example]',
     subject_for_order_receipt_to_admin: '',
     subject_for_order_receipt_to_buyer: '',
     subject_for_order_receipt_to_seller: '',
@@ -248,7 +248,7 @@ EffectiveOrders.setup do |config|
       secret_key: 'sk_test_IKd6HDaYUfoRjflWQTXfFNfc',
       publishable_key: 'pk_test_liEGn9f0mcxKmoSjoeNbbuE1',
       currency: 'usd',
-      site_title: 'Effective Website',
+      site_title: 'Example Website',
       site_image: '', # A relative URL pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
       connect_client_id: ''
     }
@@ -257,7 +257,7 @@ EffectiveOrders.setup do |config|
       secret_key: 'sk_test_IKd6HDaYUfoRjflWQTXfFNfc',
       publishable_key: 'pk_test_liEGn9f0mcxKmoSjoeNbbuE1',
       currency: 'usd',
-      site_title: 'Effective Website',
+      site_title: 'Example Website',
       site_image: 'logo-admin.png', # A relative URL pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
       connect_client_id: ''
     }
