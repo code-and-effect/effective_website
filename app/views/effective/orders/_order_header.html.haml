@@ -1,0 +1,20 @@
+.effective-order-header
+  %h3 example Industries Inc.
+  .row
+    .col-sm-6
+      - email_address = EffectiveOrders.mailer[:admin_email] || 'info@example.com'
+      %p= mail_to u(email_address), email_address
+      %p
+        1234 Fake Street
+        %br
+        Edmonton, AB, T5H 4A5
+        %br
+        %small Customize me by overriding '/app/views/effective/orders/_order_header.html.haml'
+
+    .col-sm-6
+      - if order.purchased?
+        %p Receipt: ##{order.to_param}
+        %p Purchased at: #{order.purchased_at.strftime("%Y-%m-%d %H:%M")}
+      - elsif order.persisted?
+        %p Order: ##{order.to_param}
+        %p Date: #{Time.zone.now.strftime("%Y-%m-%d %H:%M")}
