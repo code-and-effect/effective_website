@@ -1,53 +1,21 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
+puts '== Creating users ======================'
 
-puts "== Creating admin user ======================"
+fields = proc do
+  {
+    first_name: ['Adam', 'Ben', 'Charles', 'Daniel', 'Eric', 'Farren', 'Greg'].sample,
+    last_name: ['Jones', 'Wayne', 'Smith', 'Franklin', 'Dickens', 'the Great'].sample,
+    password: 'be_effective',
+    password_confirmation: 'be_effective'
+  }
+end
 
-user = User.new(
-  email: 'admin@codeandeffect.com',
-  first_name: 'Admin',
-  last_name: 'User',
-  password: 'be_effective',
-  password_confirmation: 'be_effective'
-)
-user.roles = :admin
-user.save!
-
-user = User.new(
-  email: 'admin@agilestyle.com',
-  first_name: 'Admin',
-  last_name: 'User',
-  password: 'be_effective',
-  password_confirmation: 'be_effective',
-  roles: :admin
-)
-user.save!
-
-user = User.new(
-  email: 'member@codeandeffect.com',
-  first_name: 'Member',
-  last_name: 'User',
-  password: 'be_effective',
-  password_confirmation: 'be_effective',
-  roles: :member
-)
-user.save!
-
-user = User.new(
-  email: 'guest@codeandeffect.com',
-  first_name: 'Guest',
-  last_name: 'User',
-  password: 'be_effective',
-  password_confirmation: 'be_effective',
-  roles: nil
-)
-user.save!
+User.new(user_fields.call.merge(email: 'admin@agilestyle.com', roles: :admin)).save!
+User.new(user_fields.call.merge(email: 'admin@codeandeffect.com', roles: :admin)).save!
+User.new(user_fields.call.erge(email: 'member@codeandeffect.com', roles: :member)).save!
+User.new(user_fields.call.merge(email: 'guest@codeandeffect.com', roles: nil)).save!
 
 # lib/tasks/generate
 Rake::Task['generate:effective_pages'].invoke
