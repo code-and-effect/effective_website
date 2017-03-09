@@ -94,4 +94,12 @@ Rails.application.configure do
       :sender_address => %{"EW" <website@example.com>},
       :exception_recipients => %w{errors@agilestyle.com}
     }
+
+  require 'letsencrypt/middleware'
+  if config.force_ssl
+    config.middleware.insert_before ActionDispatch::SSL, Letsencrypt::Middleware
+  else
+    config.middleware.use Letsencrypt::Middleware
+  end
+
 end

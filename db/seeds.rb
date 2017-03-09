@@ -20,3 +20,11 @@ User.new(user_fields.call.merge(email: 'guest@codeandeffect.com', roles: nil)).s
 # lib/tasks/generate
 Rake::Task['generate:effective_pages'].invoke
 Rake::Task['generate:effective_menus'].invoke
+
+Effective::Post.new(
+  title: 'First Post',
+  category: EffectivePosts.categories.first.presence || 'posts',
+  published_at: Time.zone.now,
+  draft: false,
+  body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae dictum arcu, et tincidunt metus.</p>'
+).save!
