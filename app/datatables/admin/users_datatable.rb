@@ -1,18 +1,19 @@
 class Admin::UsersDatatable < Effective::Datatable
+
   datatable do
-    default_order :updated_at, :desc
+    order :updated_at, :desc
 
-    table_column :id, visible: false
-    table_column :updated_at, label: 'Updated', as: :date
-    table_column :created_at, label: 'Created', as: :date, visible: false
+    col :id, visible: false
+    col :updated_at, label: 'Updated'
+    col :created_at, label: 'Created', visible: false
 
-    table_column :email
-    table_column :first_name, visible: false
-    table_column :last_name, visible: false
+    col :email
+    col :first_name, visible: false
+    col :last_name, visible: false
 
-    table_column :invitation_sent_at
+    col :invitation_sent_at
 
-    table_column :invitation_accepted_at do |user|
+    col :invitation_accepted_at do |user|
       if user.invitation_sent_at
         if user.invitation_accepted_at
           user.invitation_accepted_at.strftime('%F %H:%M')
@@ -22,17 +23,18 @@ class Admin::UsersDatatable < Effective::Datatable
       end
     end
 
-    table_column :roles
+    col :roles
 
-    table_column :sign_in_count, visible: false
-    table_column :last_sign_in_at, visible: false do |user|
+    col :sign_in_count, visible: false
+    col :last_sign_in_at, visible: false do |user|
       (user.current_sign_in_at.presence || user.last_sign_in_at).try(:strftime, '%F %H:%M')
     end
 
-    actions_column
+    actions_col
   end
 
-  def collection
+  collection do
     User.all
   end
+
 end

@@ -27,3 +27,6 @@
         - if can? :manage, User
           %li= link_to 'Users', admin_users_path
 
+        - if can? :manage, Effective::Trash
+          %li= link_to 'Trash', effective_trash.admin_trash_index_path
+

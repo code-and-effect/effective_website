@@ -135,7 +135,7 @@ PATH
 PATH
   remote: ~/Sites/effective_resources
   specs:
-    effective_resources (0.3.1)
+    effective_resources (0.3.2)
       rails (>= 3.2.0)
 
 PATH
