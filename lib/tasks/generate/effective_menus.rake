@@ -10,7 +10,7 @@ class EffectiveMenusGenerator
 
     Effective::Menu.new(title: 'main').build do
       item 'News', '/news'
-      item 'Blog', '/blog'
+      item 'Events', '/events'
 
       item Effective::Page.find_by_title('About')
       item Effective::Page.find_by_title('Contact')
@@ -33,7 +33,7 @@ class EffectiveMenusGenerator
 
     Effective::Menu.new(title: 'footer').build do
       item 'News', '/news'
-      item 'Blog', '/blog'
+      item 'Events', '/events'
       item Effective::Page.find_by_title('About')
       item Effective::Page.find_by_title('Contact')
     end.save!

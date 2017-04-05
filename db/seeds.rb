@@ -3,7 +3,7 @@
 
 puts '== Creating users ======================'
 
-fields = proc do
+user_fields = proc do
   {
     first_name: ['Adam', 'Ben', 'Charles', 'Daniel', 'Eric', 'Farren', 'Greg'].sample,
     last_name: ['Jones', 'Wayne', 'Smith', 'Franklin', 'Dickens', 'the Great'].sample,
@@ -14,7 +14,7 @@ end
 
 User.new(user_fields.call.merge(email: 'admin@agilestyle.com', roles: :admin)).save!
 User.new(user_fields.call.merge(email: 'admin@codeandeffect.com', roles: :admin)).save!
-User.new(user_fields.call.erge(email: 'member@codeandeffect.com', roles: :member)).save!
+User.new(user_fields.call.merge(email: 'member@codeandeffect.com', roles: :member)).save!
 User.new(user_fields.call.merge(email: 'guest@codeandeffect.com', roles: nil)).save!
 
 # lib/tasks/generate

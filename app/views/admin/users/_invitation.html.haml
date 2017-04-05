@@ -4,11 +4,11 @@
 
 .row
   .col-sm-6
-    = f.input :invitation_sent_at, as: :effective_static_control, value: f.object.invitation_sent_at.try(:strftime, '%Y-%m-%d %H:%M') || 'Not sent'
+    = f.input :invitation_sent_at, as: :effective_static_control, value: f.object.invitation_sent_at.try(:strftime, '%F %H:%M') || 'Not sent'
   .col-sm-6
     - if f.object.invitation_sent_at.present?
       = f.input :invitation_accepted_at,
         as: :effective_static_control,
-        value: f.object.invitation_accepted_at.try(:strftime, '%Y-%m-%d %H:%M') || 'Not accepted'
+        value: f.object.invitation_accepted_at.try(:strftime, '%F %H:%M') || 'Not accepted'
 
-%p= link_to 'Resend invitation', reinvite_user_invitation_path(f.object), method: :post, 'data-confirm' => 'Resend invitation?'
+%p= link_to 'Resend invitation', reinvite_user_invitation_path(f.object), class: 'btn btn-default', data: { method: :post, confirm: 'Resend invitation?' }

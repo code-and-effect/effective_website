@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221200928) do
+ActiveRecord::Schema.define(version: 20161221200929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,9 +183,15 @@ ActiveRecord::Schema.define(version: 20161221200928) do
     t.string   "title"
     t.string   "category"
     t.boolean  "draft",        default: false
+    t.datetime "published_at"
     t.text     "tags"
     t.integer  "roles_mask",   default: 0
-    t.datetime "published_at"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "location"
+    t.string   "website_name"
+    t.string   "website_href"
+    t.text     "extra"
     t.datetime "updated_at"
     t.datetime "created_at"
   end
