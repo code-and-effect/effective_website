@@ -28,6 +28,7 @@ class Ability
     can :show, Effective::Page do |page| page.roles_permit?(user) end
     can [:index, :show], Effective::Post
     can :show, Effective::StyleGuide
+    can :index, Effective::Datatables::StyleGuide
     can :manage, Effective::Trash, user_id: user.id
 
     if user.is?(:admin)

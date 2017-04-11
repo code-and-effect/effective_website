@@ -95,11 +95,4 @@ Rails.application.configure do
       :exception_recipients => %w{errors@agilestyle.com}
     }
 
-  require 'letsencrypt/middleware'
-  if config.force_ssl
-    config.middleware.insert_before ActionDispatch::SSL, Letsencrypt::Middleware
-  else
-    config.middleware.use Letsencrypt::Middleware
-  end
-
 end

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  # http_basic_authenticate_with name: 'example', password: 'staging' if Rails.env.production?
+
   # Meta and titles
   before_action :set_devise_page_title, if: :devise_controller?
   before_action :set_meta_description
@@ -11,7 +13,7 @@ class ApplicationController < ActionController::Base
   before_action :restrict_admin_routes, if: -> { request.path.start_with?('/admin'.freeze) }
 
   # Logging, and trash
-  log_page_views
+  # log_page_views
   before_action :set_effective_logging_current_user
   before_action :set_effective_trash_current_user
 

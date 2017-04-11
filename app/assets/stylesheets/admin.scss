@@ -1,6 +1,7 @@
+@import 'base/*';
+
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-
 @import 'vendor/*';
 
 @import 'effective_assets';
@@ -9,7 +10,5 @@
 @import 'effective_form_inputs';
 @import 'effective_orders';
 
-@import 'base/*';
 @import 'components/*';
-
 @import 'admin/*';
