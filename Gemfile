@@ -66,7 +66,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'effective_test_bot', path: '~/Sites/effective_test_bot'
+  gem 'effective_test_bot'
 end
 
 group :production do

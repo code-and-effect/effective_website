@@ -11,8 +11,6 @@ require 'capybara/webkit'
 require 'capybara-screenshot/minitest'
 require 'capybara/slow_finder_errors'
 
-require 'database_cleaner'
-
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
@@ -27,17 +25,6 @@ class Capybara::Rails::TestCase
   include Warden::Test::Helpers if defined?(Devise)
 
   include EffectiveTestBot::DSL
-
-  def after_setup
-    super()
-    DatabaseCleaner.start
-  end
-
-  def after_teardown
-    super()
-    DatabaseCleaner.clean
-    Capybara.reset_sessions!  # Some apps seem to need this to correctly reset the test_06:_capybara_can_sign_in
-  end
 end
 
 Capybara.default_driver = :webkit
@@ -88,15 +75,15 @@ end
 # They are unneeded with effective_test_bot.  On my machine. But I leave them here as a reference.
 # Try one or both if you are having issues passing rake test:bot:environment
 
-class ActiveRecord::Base
-  mattr_accessor :shared_connection
-  @@shared_connection = nil
+# class ActiveRecord::Base
+#   mattr_accessor :shared_connection
+#   @@shared_connection = nil
 
-  def self.connection
-    @@shared_connection || retrieve_connection
-  end
-end
-ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+#   def self.connection
+#     @@shared_connection || retrieve_connection
+#   end
+# end
+# ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 # ActiveRecord::ConnectionAdapters::ConnectionPool.class_eval do
 #   def current_connection_id
