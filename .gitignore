@@ -26,3 +26,6 @@ config/database.yml
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# effective_test_bot tours
+test/tours/*.gif
