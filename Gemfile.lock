@@ -1,3 +1,23 @@
+PATH
+  remote: ~/Sites/effective_test_bot
+  specs:
+    effective_test_bot (0.6.5)
+      capybara
+      capybara-screenshot
+      capybara-slow_finder_errors
+      capybara-webkit (>= 1.6.0)
+      database_cleaner
+      effective_resources
+      faker
+      minitest
+      minitest-capybara
+      minitest-fail-fast
+      minitest-rails
+      minitest-rails-capybara
+      minitest-reporters
+      rails (>= 3.2.0)
+      rmagick
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -135,7 +155,7 @@ GEM
     effective_ckeditor (1.8.2)
       rails (>= 3.2.0)
       sass-rails
-    effective_datatables (3.0.5)
+    effective_datatables (3.0.6)
       coffee-rails
       effective_resources (>= 0.3.0)
       rails (>= 3.2.0)
@@ -163,7 +183,7 @@ GEM
       rails (>= 3.2.0)
       sass-rails
       simple_form
-    effective_pages (1.1.5)
+    effective_pages (1.1.6)
       effective_ckeditor (>= 1.6.2)
       effective_datatables (>= 2.0.0)
       effective_regions (>= 1.4.4)
@@ -196,22 +216,6 @@ GEM
       faker
       rails (>= 3.2.0)
       simple_form
-    effective_test_bot (0.6.5)
-      capybara
-      capybara-screenshot
-      capybara-slow_finder_errors
-      capybara-webkit (>= 1.6.0)
-      database_cleaner
-      effective_resources
-      faker
-      minitest
-      minitest-capybara
-      minitest-fail-fast
-      minitest-rails
-      minitest-rails-capybara
-      minitest-reporters
-      rails (>= 3.2.0)
-      rmagick
     effective_trash (0.2.4)
       coffee-rails
       devise
@@ -456,7 +460,7 @@ DEPENDENCIES
   effective_posts
   effective_roles
   effective_style_guide
-  effective_test_bot
+  effective_test_bot!
   effective_trash
   exception_notification
   flamegraph
