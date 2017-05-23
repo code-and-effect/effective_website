@@ -25,6 +25,7 @@ class Ability
     can :manage, Effective::Order, user_id: user.id # Orders cannot be deleted
     can :manage, Effective::Subscription, user_id: user.id # We don't use subscriptions in this app
 
+    can :index, Effective::Log
     can :show, Effective::Page do |page| page.roles_permit?(user) end
     can [:index, :show], Effective::Post
     can :show, Effective::StyleGuide
