@@ -1,8 +1,10 @@
 # Effective Website
 
-This is a rails 5 starter website that uses most of the effective_* gems.
+This is a rails starter website that uses most of the effective_* gems.
 
-Version 1.1.0
+Rails 5.1
+
+Version 1.2
 
 ## Getting Started
 
@@ -56,6 +58,7 @@ MIT License.  Copyright [Code and Effect Inc.](http://www.codeandeffect.com/)
 
 ```ruby
 rake test
+rake test:bot
 ```
 
 ## Contributing
