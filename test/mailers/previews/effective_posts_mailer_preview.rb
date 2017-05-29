@@ -11,7 +11,7 @@ class EffectivePostsMailerPreview < ActionMailer::Preview
 
   def build_preview_post
     post = Effective::Post.new(
-      title: 'An example post',
+      title: 'A new post',
       category: EffectivePosts.categories.first.presence || 'posts',
       published_at: Time.zone.now,
       draft: true,
