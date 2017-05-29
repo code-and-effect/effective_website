@@ -1,4 +1,4 @@
-class CreateEffectivePosts < ActiveRecord::Migration
+class CreateEffectivePosts < ActiveRecord::Migration[4.2]
   def self.up
     create_table :posts do |t|
       t.integer :user_id
