@@ -19,7 +19,7 @@ User.new(user_fields.call.merge(email: 'guest@codeandeffect.com', roles: nil)).s
 
 # lib/tasks/generate
 Rake::Task['generate:effective_pages'].invoke
-Rake::Task['generate:effective_menus'].invoke
+#Rake::Task['generate:effective_menus'].invoke
 
 Effective::Post.new(
   title: 'First Post',

@@ -2,27 +2,31 @@ EffectiveDatatables.setup do |config|
   # Authorization Method
   #
   # This method is called by all controller actions with the appropriate action and resource
-  # If the method returns false, an Effective::AccessDenied Error will be raised (see README.md for complete info)
+  # If it raises an exception or returns false, an Effective::AccessDenied Error will be raised
   #
-  # Use via Proc (and with CanCan):
-  # config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
+  # Use via Proc:
+  # Proc.new { |controller, action, resource| authorize!(action, resource) }       # CanCan
+  # Proc.new { |controller, action, resource| can?(action, resource) }             # CanCan with skip_authorization_check
+  # Proc.new { |controller, action, resource| authorize "#{action}?", resource }   # Pundit
+  # Proc.new { |controller, action, resource| current_user.is?(:admin) }           # Custom logic
   #
-  # Use via custom method:
+  # Use via Boolean:
+  # config.authorization_method = true  # Always authorized
+  # config.authorization_method = false # Always unauthorized
+  #
+  # Use via Method (probably in your application_controller.rb):
   # config.authorization_method = :my_authorization_method
-  #
-  # And then in your application_controller.rb:
-  #
-  # def my_authorization_method(action, resource)
-  #   current_user.is?(:admin)
+  # def my_authorization_method(resource, action)
+  #   true
   # end
-  #
-  # Or disable the check completely:
-  # config.authorization_method = false
-  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) } # CanCanCan
+  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
 
   # Default number of entries shown per page
-  # Valid options are: 5, 10, 25, 50, 100, 250, 1000, :all
+  # Valid options are: 5, 10, 25, 50, 100, 250, 500, :all
   config.default_length = 25
+
+  # Default class used on the <table> tag
+  config.html_class = 'table table-bordered table-striped'
 
   # When using the actions_column DSL method, apply the following behavior
   # Valid values for each action are:
@@ -38,7 +42,7 @@ EffectiveDatatables.setup do |config|
     destroy: true,
   }
 
-  # Which packages to load when using the charts DSL
-  config.google_chart_packages = ['corechart']
+  # Log search/sort information to the console
+  config.debug = true
 
 end

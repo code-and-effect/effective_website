@@ -10,23 +10,23 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         - if can? :manage, Effective::Log
-          %li= link_to 'Logs', effective_logging.admin_logs_path
+          = nav_link_to 'Logs', effective_logging.admin_logs_path
 
         - if can? :manage, Effective::Menu
-          %li= link_to 'Menus', effective_pages.admin_menus_path
+          = nav_link_to 'Menus', effective_pages.admin_menus_path
 
         - if can? :manage, Effective::Order
-          %li= link_to 'Orders', effective_orders.admin_orders_path
+          = nav_link_to 'Orders', effective_orders.admin_orders_path
 
         - if can? :manage, Effective::Page
-          %li= link_to 'Pages', effective_pages.admin_pages_path
+          = nav_link_to 'Pages', effective_pages.admin_pages_path
 
         - if can? :manage, Effective::Post
-          %li= link_to 'Posts', effective_posts.admin_posts_path
+          = nav_link_to 'Posts', effective_posts.admin_posts_path
 
         - if can? :manage, User
-          %li= link_to 'Users', admin_users_path
+          = nav_link_to 'Users', admin_users_path
 
         - if can? :manage, Effective::Trash
-          %li= link_to 'Trash', effective_trash.admin_trash_index_path
+          = nav_link_to 'Trash', effective_trash.admin_trash_index_path
 

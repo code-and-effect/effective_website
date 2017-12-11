@@ -7,5 +7,15 @@
         %span.icon-bar
         %span.icon-bar
     .collapse.navbar-collapse
-      = render_menu(:main, class: 'navbar-right') do
-        %li= link_to_current_cart(class: '')
+      %ul.nav.navbar-nav.navbar-right
+        = nav_link_to 'News', '/news'
+        = nav_link_to 'Events', '/events'
+        = nav_link_to 'Style Guide', '/style-guide'
+
+        - if current_user.present?
+          = nav_dropdown 'Settings' do
+            = nav_link_to 'Account Settings', user_settings_path
+            %li.divider
+            = nav_link_to 'Sign Out', destroy_user_session_path, method: :delete
+        - else
+          = nav_link_to 'Sign In', new_user_session_path
