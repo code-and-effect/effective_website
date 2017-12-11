@@ -1,30 +1,30 @@
-class UserSettingsController < ApplicationController
+class Users::SettingsController < ApplicationController
   before_action :authenticate_user!
+
+  before_action { @page_title = 'Account Settings' }
 
   # Get to here by visiting /settings
   def edit
     @user = current_user
     authorize! :edit, @user
 
-    @page_title = 'Account Settings'
+    render 'users/settings'
   end
 
   def update
     @user = current_user
     authorize! :update, @user
 
-    @page_title = 'Account Settings'
-
     delete_blank_password_params
 
-    if @user.update(permitted_params)
+    if @user.update_attributes(permitted_params)
       bypass_sign_in(@user)
 
       flash[:success] = 'Successfully updated account settings.'
       redirect_to user_settings_path
     else
       flash.now[:danger] = "Unable to update account settings: #{@user.errors.full_messages.to_sentence}"
-      render :edit
+      render 'users/settings'
     end
   end
 
