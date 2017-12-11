@@ -9,7 +9,7 @@
 
 - if Rails.env.development?
   .well.col-xs-10
-     - if exception.subject.kind_of?(Symbol)
+    - if exception.subject.kind_of?(Symbol)
       %h4 cannot :#{exception.action}, :#{exception.subject.to_s.presence || 'nil'}
     - else
       %h4 cannot :#{exception.action}, #{exception.subject.to_s.presence || 'nil'}
