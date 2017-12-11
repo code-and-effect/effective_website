@@ -9,16 +9,18 @@
 
 - if Rails.env.development?
   .well.col-xs-10
-    - if exception.subject.kind_of?(Symbol)
-      %h4 cannot :#{exception.action}, :#{exception.subject}
+     - if exception.subject.kind_of?(Symbol)
+      %h4 cannot :#{exception.action}, :#{exception.subject.to_s.presence || 'nil'}
     - else
-      %h4 cannot :#{exception.action}, #{exception.subject}
+      %h4 cannot :#{exception.action}, #{exception.subject.to_s.presence || 'nil'}
     %p
       current_user:
       - if current_user.present?
         = link_to current_user.to_s, edit_admin_user_path(current_user)
       - else
         none
+    - if current_user.present?
+      %p roles: #{current_user.roles}
     %p= link_to 'Refresh', request.path, class: 'btn btn-default'
 
     - exception.backtrace.first(10).each do |str|

@@ -7,8 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: User.permitted_sign_up_params)
   end
 
-  def after_sign_up_path_for(resource)
-    root_path
+  def after_sign_up_path_for(user)
+    session[:user_return_to] || root_path
   end
 
 end
