@@ -5,8 +5,7 @@ module CsvImporters
     def columns
       {
         email: A,
-        first_name: B,
-        last_name: C
+        name: B
       }
     end
 
@@ -14,12 +13,7 @@ module CsvImporters
     def process_row
       return unless col(:email).include?('@') && col(:email).include?('.')
 
-      User.invite!(
-        email: col(:email),
-        roles: roles,
-        first_name: col(:first_name),
-        last_name: col(:last_name)
-      )
+      User.invite!(email: col(:email), name: col(:name), roles: roles)
     end
 
     private

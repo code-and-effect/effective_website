@@ -14,8 +14,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.0]
 
       # User fields
       t.string    :email, null: false, default: ''
-      t.string    :first_name
-      t.string    :last_name
+      t.string    :name
 
       t.integer   :roles_mask
 

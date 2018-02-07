@@ -8,8 +8,7 @@ class Admin::UsersDatatable < Effective::Datatable
     col :created_at, label: 'Created', visible: false
 
     col :email
-    col :first_name, visible: false
-    col :last_name, visible: false
+    col :name, visible: false
 
     col :invitation_sent_at
 

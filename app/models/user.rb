@@ -7,7 +7,7 @@ class User < ApplicationRecord
   acts_as_trashable
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
-    [:email, :password, :password_confirmation, :first_name, :last_name]
+    [:email, :password, :password_confirmation, :name]
   end
 
   # Attributes
@@ -32,16 +32,20 @@ class User < ApplicationRecord
   # invitations_count       :integer
 
   # email                   :string
-  # first_name              :string
-  # last_name               :string
+  # name                    :string
 
   # roles_mask              :integer
 
   # timestamps
 
-  def full_name
-    [first_name.presence, last_name.presence].compact.join(' ')
+  scope :sorted, -> { order(:name) }
+
+  # Prepopulate the name based on email
+  before_validation(if: -> { email.present? && name.blank? }) do
+    self.name = email.split('@').first
   end
+
+  validates :name, presence: true
 
   def to_s
     email

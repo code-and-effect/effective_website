@@ -27,7 +27,6 @@ class Ability
 
     can :index, Effective::Log
     can :show, Effective::Page do |page| page.roles_permit?(user) end
-    can [:index, :show], Effective::Post
     can :show, Effective::StyleGuide
     can :index, EffectiveStyleGuideDatatable
     can :manage, Effective::Trash, user_id: user.id
@@ -37,7 +36,6 @@ class Ability
       can :manage, Effective::Log
       can :manage, Effective::Menu
       can :manage, Effective::Page
-      can :manage, Effective::Post
       can :manage, Effective::Region
       can :manage, Effective::Trash
 
@@ -49,7 +47,6 @@ class Ability
       can :admin, :effective_logging
       can :admin, :effective_orders
       can :admin, :effective_pages
-      can :admin, :effective_posts
       can :admin, :effective_roles
       can :admin, :effective_trash
     end

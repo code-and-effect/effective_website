@@ -9,10 +9,14 @@
 
 - if Rails.env.development?
   .well.col-xs-10
-    - if exception.subject.kind_of?(Symbol)
-      %h4 cannot :#{exception.action}, :#{exception.subject.to_s.presence || 'nil'}
+    - if exception.subject.blank?
+      %h4 cannot :#{exception.action}, nil
+    - elsif exception.subject.kind_of?(Symbol)
+      %h4 cannot :#{exception.action}, :#{exception.subject}
+    - elsif exception.subject.to_s.present?
+      %h4 cannot :#{exception.action}, #{exception.subject}
     - else
-      %h4 cannot :#{exception.action}, #{exception.subject.to_s.presence || 'nil'}
+      %h4 cannot :#{exception.action}, #{exception.subject.class.name}
     %p
       current_user:
       - if current_user.present?

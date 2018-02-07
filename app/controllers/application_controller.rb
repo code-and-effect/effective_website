@@ -60,8 +60,6 @@ class ApplicationController < ActionController::Base
   def set_meta_description
     @meta_description ||= (
       case params[:controller]
-      when 'effective/posts'  # News
-        "News and information."
       when 'devise/registrations' # Sign Up
         "Create an account to apply for full membership."
       when 'devise/sessions' # Sign In

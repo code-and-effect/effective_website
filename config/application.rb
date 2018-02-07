@@ -17,6 +17,8 @@ module ExampleWebsite
     config.assets.version = '1.0'
     config.assets.precompile += %w( admin.js admin.css )
 
+    config.time_zone = 'Mountain Time (US & Canada)'
+
     # JSON options
     config.action_dispatch.cookies_serializer = :json
 

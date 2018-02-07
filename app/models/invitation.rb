@@ -34,11 +34,7 @@ class Invitation
           break
         end
 
-        @invitations << {
-          email: row[0].strip,
-          first_name: row[1],
-          last_name: row[2]
-        }
+        @invitations << { email: row[0].strip, name: row[1].strip }
 
         index += 1
       end

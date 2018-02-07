@@ -21,9 +21,6 @@
         - if can? :manage, Effective::Page
           = nav_link_to 'Pages', effective_pages.admin_pages_path
 
-        - if can? :manage, Effective::Post
-          = nav_link_to 'Posts', effective_posts.admin_posts_path
-
         - if can? :manage, User
           = nav_link_to 'Users', admin_users_path
 

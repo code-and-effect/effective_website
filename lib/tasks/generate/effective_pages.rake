@@ -1,5 +1,5 @@
 class EffectivePagesGenerator
-  def self.generate
+  def self.generate!
     generator = new()
     generator.create_public_pages
     generator.create_member_pages
@@ -8,14 +8,14 @@ class EffectivePagesGenerator
   def create_public_pages
     Effective::Page.new(
       title: 'About',
-      meta_description: 'About the effective website',
+      meta_description: 'About the example website',
       layout: 'application',
       template: 'page'
     ).save!
 
     Effective::Page.new(
       title: 'Contact',
-      meta_description: 'Contact us at the effective website',
+      meta_description: 'Contact us at the example website',
       layout: 'application',
       template: 'page'
     ).save!
@@ -24,7 +24,7 @@ class EffectivePagesGenerator
   def create_member_pages
     page = Effective::Page.new(
       title: 'Member Information',
-      meta_description: 'A members-only page',
+      meta_description: 'A example members-only page',
       layout: 'application',
       template: 'page'
     )
@@ -39,6 +39,6 @@ end
 namespace :generate do
   task :effective_pages => :environment do
     puts "== Generating effective pages =="
-    EffectivePagesGenerator.generate
+    EffectivePagesGenerator.generate!
   end
 end

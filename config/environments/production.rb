@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # sucker_punch runs active jobs asynchronously in the web server process
+  # config.active_job.queue_adapter = :sidekiq
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -85,14 +88,4 @@ Rails.application.configure do
   # Email
   config.action_mailer.default_url_options = { host: 'https://www.example.com' }  # No trailing /
   config.action_mailer.asset_host = 'https://www.example.com' # No trailing /
-
-  # ExceptionNotification gem
-  config.middleware.use ExceptionNotification::Rack,
-    # :ignore_cascade_pass => false, # send email for 404s
-    :email => {
-      :email_prefix => '[EW] ',
-      :sender_address => %{"EW" <website@example.com>},
-      :exception_recipients => %w{errors@agilestyle.com}
-    }
-
 end

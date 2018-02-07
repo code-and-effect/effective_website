@@ -8,9 +8,10 @@
         %span.icon-bar
     .collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
-        = nav_link_to 'News', '/news'
-        = nav_link_to 'Events', '/events'
         = nav_link_to 'Style Guide', '/style-guide'
+
+        = nav_link_to 'About', '/about'
+        = nav_link_to 'Contact', '/contact'
 
         - if current_user.present?
           = nav_dropdown 'Settings' do
