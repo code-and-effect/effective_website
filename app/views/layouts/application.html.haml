@@ -15,12 +15,6 @@
     #header-wrap
       = render partial: 'layouts/navbar'
 
-      .container
-        - if content_for?(:breadcrumb)
-          = yield :breadcrumb
-        - else
-          = render_breadcrumbs(:main, @page_title)
-
     #content-wrap
       = render partial: 'layouts/alert'
 

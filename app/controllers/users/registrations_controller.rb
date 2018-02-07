@@ -1,6 +1,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
 
+  def create
+    super do
+      unless resource.persisted?
+        flash.now[:danger] = resource.errors.full_messages.to_sentence
+      end
+    end
+  end
+
   protected
 
   def configure_sign_up_params
