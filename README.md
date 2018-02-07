@@ -2,9 +2,7 @@
 
 This is a rails starter website that uses most of the effective_* gems.
 
-Rails 5.1
-
-Version 1.2
+Ruby 2.5.0. Rails 5.1.4
 
 ## Getting Started
 
@@ -43,16 +41,9 @@ Push all changes to `origin master`.
 
 This workflow provides the normal `origin/master`, while maintaining the ability to pull in changes from `effective_website/master` if ever desired.
 
-## menus
-
-To change the main menu, you can use the full screen editor.  Or:
-
-Edit `lib/tasks/generate/effective_menus.rake` and then run `rake generate:effective_menus`
-
 ## License
 
 MIT License.  Copyright [Code and Effect Inc.](http://www.codeandeffect.com/)
-
 
 ## Testing
 

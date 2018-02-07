@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.0'
 
 gem 'rails'
+gem 'bootsnap'
 gem 'pg', '< 1.0'
 
 gem 'coffee-rails'
@@ -34,25 +35,9 @@ gem 'effective_roles'
 gem 'effective_style_guide'
 gem 'effective_trash'
 
-# gem 'effective_addresses', path: '~/Sites/effective_addresses'
-# gem 'effective_assets', path: '~/Sites/effective_assets'
-# gem 'effective_ckeditor', path: '~/Sites/effective_ckeditor'
-# gem 'effective_datatables', path: '~/Sites/effective_datatables'
-# gem 'effective_developer', path: '~/Sites/effective_developer'
-# gem 'effective_form_inputs', path: '~/Sites/effective_form_inputs'
-# gem 'effective_logging', path: '~/Sites/effective_logging'
-# gem 'effective_orders', path: '~/Sites/effective_orders'
-# gem 'effective_pages', path: '~/Sites/effective_pages'
-# gem 'effective_qb_sync', path: '~/Sites/effective_qb_sync'
-# gem 'effective_regions', path: '~/Sites/effective_regions'
-# gem 'effective_resources', path: '~/Sites/effective_resources'
-# gem 'effective_roles', path: '~/Sites/effective_roles'
-# gem 'effective_style_guide', path: '~/Sites/effective_style_guide'
-# gem 'effective_trash', path: '~/Sites/effective_trash'
-
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'pry-byebug' # If you encounter readline issues: rvm pkg install readline
+  gem 'pry-byebug'
 end
 
 group :test do
