@@ -3,6 +3,6 @@
 
   - if @user.persisted?
     .row
-      .col-sm-6= render 'admin/users/invitation', f: f
+      .col-6= render 'admin/users/invitation', f: f
 
   = simple_form_submit(f)

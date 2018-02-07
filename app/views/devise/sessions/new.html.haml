@@ -1,5 +1,5 @@
 .row
-  .col-sm-6.col-sm-offset-3
+  .col-md-6.offset-md-3
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       = f.input :email, as: :effective_email, required: true, autofocus: true
       = f.input :password, required: true

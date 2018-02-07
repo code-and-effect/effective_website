@@ -2,9 +2,9 @@
 %html{lang: 'en'}
   %head
     %meta{charset: 'utf-8'}
-    %meta{content: 'IE=edge', 'http-equiv': 'X-UA-Compatible'}
-    %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
-    %meta{content: 'index, follow', name: 'robots'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
+    %meta{name: 'robots', content: 'index, follow'}
+
     = csrf_meta_tags
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -12,8 +12,7 @@
     = effective_pages_header_tags
 
   %body{class: effective_pages_body_classes}
-    #header-wrap
-      = render partial: 'layouts/navbar'
+    = render partial: 'layouts/navbar'
 
     #content-wrap
       = render partial: 'layouts/alert'
@@ -21,11 +20,11 @@
       .container
         - if content_for?(:sidebar)
           .row
-            .col-sm-3#sidebar= yield :sidebar
-            .col-sm-9#main= yield
+            .col-3#sidebar= yield :sidebar
+            .col-9#main= yield
         - else
           .row
-            .col-sm-12#main= yield
+            .col#main= yield
 
     #footer-wrap
       = render partial: 'layouts/footer'

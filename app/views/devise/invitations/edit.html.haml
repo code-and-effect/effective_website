@@ -6,9 +6,9 @@
   = f.input :invitation_token, as: :hidden
 
   .row
-    .col-sm-6
+    .col-6
       = render 'users/sign_up_fields', f: f
-    .col-sm-6
+    .col-6
       = effective_roles_summary(f.object)
 
   = f.button :submit, 'Accept Invitation', class: 'btn btn-primary', data: { disable_with: 'Accepting...' }

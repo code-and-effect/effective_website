@@ -19,8 +19,7 @@
 
       .container
         .row
-          .col-xs-12
-            = yield
+          .col= yield
 
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload', 'data-turbolinks-eval': 'false'
     = effective_regions_include_tags

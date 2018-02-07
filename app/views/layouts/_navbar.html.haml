@@ -1,22 +1,26 @@
-%nav.navbar.navbar-default
-  .container
-    .navbar-header
-      = link_to(image_tag('logo.png', alt: 'Logo'), '/', class: 'navbar-brand')
-      %button.navbar-toggle.collapsed{data: {toggle: 'collapse', target: '.navbar-collapse', 'aria-expanded': false}}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
-        = nav_link_to 'Style Guide', '/style-guide'
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  = link_to(image_tag('logo.png', alt: 'Logo'), '/', class: 'navbar-brand')
 
-        = nav_link_to 'About', '/about'
-        = nav_link_to 'Contact', '/contact'
+  %button.navbar-toggler{type: 'button', data: {toggle: 'collapse', target: '#navContent', 'aria-controls': 'navContent', 'aria-label': 'Toggle navigation'}}
+    %span.navbar-toggler-icon
 
-        - if current_user.present?
-          = nav_dropdown 'Settings' do
-            = nav_link_to 'Account Settings', user_settings_path
-            %li.divider
-            = nav_link_to 'Sign Out', destroy_user_session_path, method: :delete
-        - else
-          = nav_link_to 'Sign In', new_user_session_path
+  #navContent.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      = nav_link_to 'Style Guide', effective_style_guide.style_guide_path
+      = nav_link_to 'About', '/about'
+      = nav_link_to 'Contact', '/contact'
+
+    %ul.navbar-nav
+      - if current_user.present?
+        = nav_dropdown('Account', right: true) do
+          = nav_link_to 'Settings', user_settings_path
+
+          - if can?(:access, :admin)
+            = nav_divider
+            = nav_link_to 'Site Admin', '/admin'
+
+          = nav_divider
+          = nav_link_to 'Sign Out', destroy_user_session_path, method: :delete
+      - else
+        = nav_link_to 'Sign In', new_user_session_path
+

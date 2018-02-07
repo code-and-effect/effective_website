@@ -1,3 +1,18 @@
+PATH
+  remote: ../effective_style_guide
+  specs:
+    effective_style_guide (1.5.5)
+      coffee-rails
+      faker
+      rails (>= 3.2.0)
+      simple_form
+
+PATH
+  remote: ../effective_resources
+  specs:
+    effective_resources (0.7.10)
+      rails (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -64,9 +79,10 @@ GEM
     bcrypt (3.1.11)
     bootsnap (1.1.8)
       msgpack (~> 1.0)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
+    bootstrap (4.0.0)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.0)
     cancancan (2.1.3)
@@ -181,17 +197,10 @@ GEM
       effective_ckeditor
       rails (>= 3.2.0)
       virtus
-    effective_resources (0.7.10)
-      rails (>= 3.2.0)
     effective_roles (1.4.3)
       rails (>= 3.2.0)
     effective_slugs (1.3.1)
       rails (>= 3.2.0)
-    effective_style_guide (1.5.5)
-      coffee-rails
-      faker
-      rails (>= 3.2.0)
-      simple_form
     effective_test_bot (0.6.13)
       capybara
       capybara-screenshot
@@ -292,6 +301,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     pg (0.21.0)
+    popper_js (1.12.9)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -373,8 +383,6 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.5)
-      execjs (>= 0.3.0, < 3)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -393,7 +401,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap-sass
+  bootstrap (~> 4.0.0)
   cancancan
   cocoon
   coffee-rails
@@ -408,8 +416,9 @@ DEPENDENCIES
   effective_logging
   effective_orders
   effective_pages
+  effective_resources!
   effective_roles
-  effective_style_guide
+  effective_style_guide!
   effective_test_bot
   effective_trash
   exception_notification
@@ -427,7 +436,6 @@ DEPENDENCIES
   simple_form
   sucker_punch
   turbolinks
-  uglifier
 
 RUBY VERSION
    ruby 2.5.0p0

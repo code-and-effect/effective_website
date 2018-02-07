@@ -1,16 +1,15 @@
 #footer.container
   .row
-    .col-sm-3
+    .col-3
       = effective_region :footer_left do
         %h4 Links
-      = render_menu(:footer, class: 'footer-menu')
 
-    .col-sm-6
+    .col-6
       = effective_region :footer_center do
         %h4 About
         %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ante est, sollicitudin at sagittis in, aliquet porttitor massa. Morbi fermentum euismod eleifend. Sed condimentum est vitae lectus tincidunt fermentum. Etiam nec nisl non elit congue hendrerit. Nam consequat hendrerit felis accumsan convallis.
 
-    .col-sm-3
+    .col-3
       = effective_region :footer_right do
         %h4 Contact
         %p
@@ -29,7 +28,7 @@
           = mail_to 'info@codeandeffect.com'
 
   .row
-    .col-xs-12.text-center
+    .col.text-center
       = effective_region :footer_bottom do
         %p Terms of Use, Privicy Policy, etc.
       %p Copyright &copy; #{Time.zone.now.year} Code and Effect
