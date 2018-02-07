@@ -8,8 +8,10 @@
     = csrf_meta_tags
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
     = effective_pages_header_tags
+    = effective_regions_include_tags
 
   %body{class: effective_pages_body_classes}
     = render partial: 'layouts/navbar'
@@ -29,5 +31,3 @@
     #footer-wrap
       = render partial: 'layouts/footer'
 
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', 'data-turbolinks-eval': 'false'
-    = effective_regions_include_tags

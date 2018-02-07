@@ -2,14 +2,16 @@
 %html{lang: 'en'}
   %head
     %meta{charset: 'utf-8'}
-    %meta{content: 'IE=edge', 'http-equiv': 'X-UA-Compatible'}
-    %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
-    %meta{content: 'noindex, nofollow', name: 'robots'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
+    %meta{name: 'robots', content: 'index, follow'}
+
     = csrf_meta_tags
 
     = stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
 
     = effective_pages_header_tags
+    = effective_regions_include_tags
 
   %body{class: effective_pages_body_classes}
     = render partial: 'layouts/navbar_admin'
@@ -21,5 +23,3 @@
         .row
           .col= yield
 
-    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload', 'data-turbolinks-eval': 'false'
-    = effective_regions_include_tags
