@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.0'
 
-gem 'rails'
+gem 'rails', github: 'rails/rails', branch: '5-2-stable'
 gem 'bootsnap'
 gem 'pg', '< 1.0'
 gem 'turbolinks'
@@ -9,8 +9,9 @@ gem 'turbolinks'
 gem 'bootstrap', '~> 4.0.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'font-awesome-sass'
 gem 'sass-rails'
+
+gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "master"
 
 gem 'cancancan'
 gem 'cocoon'
@@ -24,9 +25,9 @@ gem 'sucker_punch'
 
 gem 'effective_addresses'
 gem 'effective_assets'
-gem 'effective_datatables'
+gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
+#gem 'effective_datatables'
 gem 'effective_developer'
-gem 'effective_form_inputs'
 gem 'effective_logging'
 gem 'effective_orders'
 gem 'effective_pages'

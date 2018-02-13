@@ -8,7 +8,6 @@
 //= require effective_addresses
 //= require effective_assets
 //= require effective_datatables
-//= require effective_form_inputs
 //= require effective_orders
 
 //= require_tree ./vendor

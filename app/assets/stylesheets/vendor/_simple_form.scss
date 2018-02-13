@@ -1,0 +1,22 @@
+// https://gist.github.com/anlek/50e2e464cdfef44a86f105210e76dcca
+// Fix for validations on simple form
+// Need to import bootstrap functions and mixins if you want to dynamically set colors
+// Otherwise replace theme-color... with hex color
+@import 'bootstrap/functions';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+
+.has-invalid {
+  .invalid-feedback {
+    display: block;
+  }
+
+  label {
+    color: theme-color('danger');
+  }
+
+  .form-control {
+    background: theme-color-level('danger', -10);
+    border-color: theme-color('danger');
+  }
+}

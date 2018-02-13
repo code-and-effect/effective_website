@@ -35,5 +35,7 @@ module ExampleWebsite
 
     # sucker_punch runs active jobs asynchronously in the web server process
     config.active_job.queue_adapter = :sucker_punch
+
+    config.action_view.form_with_generates_ids = true
   end
 end
