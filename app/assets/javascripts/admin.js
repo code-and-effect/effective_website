@@ -1,12 +1,13 @@
-//= require jquery
-//= require jquery_ujs
+//= require jquery3
+//= require popper
+//= require bootstrap
 //= require turbolinks
 
-//= require bootstrap-sprockets
 //= require cocoon
 
 //= require effective_addresses
 //= require effective_assets
+//= require effective_bootstrap
 //= require effective_datatables
 //= require effective_orders
 

@@ -11,8 +11,6 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
 
-gem "bootstrap_form", git: "https://github.com/bootstrap-ruby/bootstrap_form.git", branch: "master"
-
 gem 'cancancan'
 gem 'cocoon'
 gem 'devise'
@@ -20,13 +18,12 @@ gem 'devise_invitable'
 gem 'foreman'
 gem 'hamlit-rails'
 gem 'puma'
-gem 'simple_form'
 gem 'sucker_punch'
 
 gem 'effective_addresses'
 gem 'effective_assets'
 gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
-#gem 'effective_datatables'
+gem 'effective_datatables', path: '~/Sites/effective_datatables'
 gem 'effective_developer'
 gem 'effective_logging'
 gem 'effective_orders'

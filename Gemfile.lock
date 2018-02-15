@@ -64,14 +64,6 @@ GIT
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
 
-GIT
-  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
-  revision: 8a7188fbb2d55bbd6c64f9130e7882eea56bfee9
-  branch: master
-  specs:
-    bootstrap_form (4.0.0.dev)
-      rails (>= 5.0)
-
 PATH
   remote: ../effective_bootstrap
   specs:
@@ -92,6 +84,16 @@ PATH
     effective_style_guide (2.0.1)
       faker
       rails (>= 3.2.0)
+
+PATH
+  remote: ../effective_datatables
+  specs:
+    effective_datatables (3.4.0)
+      coffee-rails
+      effective_resources (>= 0.7.0)
+      rails (>= 3.2.0)
+      sass-rails
+      simple_form
 
 GEM
   remote: https://rubygems.org/
@@ -200,12 +202,6 @@ GEM
     effective_ckeditor (1.8.2)
       rails (>= 3.2.0)
       sass-rails
-    effective_datatables (3.3.14)
-      coffee-rails
-      effective_resources (>= 0.7.0)
-      rails (>= 3.2.0)
-      sass-rails
-      simple_form
     effective_developer (0.2.12)
       effective_resources
       rails (>= 3.2.0)
@@ -428,7 +424,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 4.0.0)
-  bootstrap_form!
   cancancan
   cocoon
   coffee-rails
@@ -438,6 +433,7 @@ DEPENDENCIES
   effective_addresses
   effective_assets
   effective_bootstrap!
+  effective_datatables!
   effective_developer
   effective_logging
   effective_orders
@@ -458,7 +454,6 @@ DEPENDENCIES
   rails!
   rails_12factor
   sass-rails
-  simple_form
   sucker_punch
   turbolinks
 

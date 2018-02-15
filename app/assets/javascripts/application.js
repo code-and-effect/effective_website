@@ -7,11 +7,9 @@
 
 //= require effective_addresses
 //= require effective_assets
-//= require effective_ckeditor
+//= require effective_bootstrap
 //= require effective_datatables
 //= require effective_orders
-
-//= require effective_bootstrap
 
 //= require_tree ./vendor
 //= require_tree ./base
