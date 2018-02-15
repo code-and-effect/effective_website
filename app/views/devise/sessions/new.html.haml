@@ -1,10 +1,10 @@
 .row
   .col-md-6.offset-md-3
-    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      = f.input :email, as: :effective_email, required: true, autofocus: true
-      = f.input :password, required: true
-      = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+    = effective_form_with(model: resource, url: session_path(resource_name)) do |f|
+      = f.email_field :email, required: true, autofocus: true
+      = f.password_field :password, required: true
+      = f.check_box :remember_me if devise_mapping.rememberable?
 
-      = f.button :submit, 'Sign in', class: 'btn btn-primary', data: { disable_with: 'Signing in...' }
+      = f.submit 'Sign in', data: { disable_with: 'Signing in...' }
 
     = render 'devise/shared/links'
