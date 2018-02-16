@@ -2,11 +2,10 @@
   .col-6
     = render 'users/sign_up_fields', f: f
   .col-6
-    %p Roles...
-    - if current_user.is?(:admin)
-      /= f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
+    - if current_user.is?(:admin) && f.object != current_user
+      = f.collection_check_boxes :roles, EffectiveRoles.roles_collection(f.object, current_user), :second, :first
     - else
-      /= effective_roles_summary(f.object)
+      = effective_roles_summary(f.object)
 
 /= f.input :files, as: :asset_box
 
