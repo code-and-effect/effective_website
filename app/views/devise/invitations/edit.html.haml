@@ -2,8 +2,8 @@
 
 %p Accept your invitation to create a user account on this website.
 
-= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f|
-  = f.input :invitation_token, as: :hidden
+= effective_form_with(model: resource, url: invitation_path(resource_name), html: { method: :put }) do |f|
+  = f.hidden_field :invitation_token
 
   .row
     .col-6
@@ -11,4 +11,4 @@
     .col-6
       = effective_roles_summary(f.object)
 
-  = f.button :submit, 'Accept Invitation', class: 'btn btn-primary', data: { disable_with: 'Accepting...' }
+  = f.button :submit, 'Accept Invitation'

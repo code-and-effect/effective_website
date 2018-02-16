@@ -1,10 +1,13 @@
-.row
-  .col-md-6.offset-md-3
-    = effective_form_with(model: resource, url: session_path(resource_name)) do |f|
-      = f.email_field :email, required: true, autofocus: true
-      = f.password_field :password, required: true
-      = f.check_box :remember_me if devise_mapping.rememberable?
+.row.justify-content-center
+  .col-12.col-md-8.col-lg-6
+    .card
+      .card-body
+        %h5.card-title= @page_title
+        = effective_form_with(model: resource, url: session_path(resource_name)) do |f|
+          = f.email_field :email, required: true, autofocus: true
+          = f.password_field :password, required: true
+          = f.check_box :remember_me if devise_mapping.rememberable?
 
-      = f.submit 'Sign in', data: { disable_with: 'Signing in...' }
+          = f.submit 'Sign in'
 
-    = render 'devise/shared/links'
+        = render 'devise/shared/links'

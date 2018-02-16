@@ -1,9 +1,9 @@
-= f.input :email, as: :effective_email, required: true, autofocus: true
-= f.input :name
+= f.email_field :email, required: true, autofocus: true
+= f.text_field :name
 
 - if f.object.persisted? && !f.object.invited_to_sign_up?
-  = f.input :password, required: false, hint: 'leave blank to keep existing password'
-  = f.input :password_confirmation, required: false, hint: 'leave blank to keep existing password'
+  = f.password_field :password, required: false, hint: 'leave blank to keep existing password'
+  = f.password_field :password_confirmation, required: false, hint: 'leave blank to keep existing password'
 - else
-  = f.input :password, required: true
-  = f.input :password_confirmation, required: true
+  = f.password_field :password, required: true
+  = f.password_field :password_confirmation, required: true

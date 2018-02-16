@@ -1,10 +1,12 @@
-.row
-  .col-md-6.offset-md-3
-    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-      = f.error_notification
+.row.justify-content-center
+  .col-12.col-md-8.col-lg-6
+    .card
+      .card-body
+        %h5.card-title= @page_title
+        = effective_form_with(model: resource, url: password_path(resource_name)) do |f|
+          = f.error_notification
+          = f.email_field :email, required: true, autofocus: true, Label: 'Email address of your account'
 
-      = f.input :email, as: :effective_email, required: true, autofocus: true, labeled: 'Email address of your account'
+          = f.submit 'Send me reset password instructions'
 
-      = f.button :submit, 'Send me reset password instructions', class: 'btn btn-primary', data: { disable_with: 'Sending...' }
-
-    = render 'devise/shared/links'
+        = render 'devise/shared/links'
