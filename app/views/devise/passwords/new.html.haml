@@ -4,7 +4,7 @@
       .card-body
         %h5.card-title= @page_title
         = effective_form_with(model: resource, url: password_path(resource_name)) do |f|
-          = f.error_notification
+          = f.errors
           = f.email_field :email, required: true, autofocus: true, Label: 'Email address of your account'
 
           = f.submit 'Send me reset password instructions'

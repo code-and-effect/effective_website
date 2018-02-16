@@ -3,10 +3,9 @@
     .card
       .card-body
         %h5.card-title= @page_title
-        = effective_form_with(model: resource, url: password_path(resource_name), html: { method: :put}) do |f|
-          = f.error_notification
+        = effective_form_with(model: resource, url: password_path(resource_name), method: :put) do |f|
           = f.hidden_field :reset_password_token
-          = f.full_error :reset_password_token
+          = f.error :reset_password_token
 
           = f.password_field :password, label: 'New password', required: true, autofocus: true
           = f.password_field :password_confirmation, label: 'Confirm your new password', required: true
