@@ -1,7 +1,6 @@
 %h2 Account Settings
 
-= simple_form_for @user, url: user_settings_path do |f|
+= effective_form_with(model: @user, url: user_settings_path) do |f|
   = render 'users/form', f: f
 
-  .pull-right
-    %p= f.button :submit, 'Update Account Settings', class: 'btn btn-primary', data: { disable_with: 'Saving...' }
+  = f.submit 'Update Account Settings'

@@ -1,19 +1,20 @@
 .row
-  .col-sm-6
+  .col-6
     = render 'users/sign_up_fields', f: f
-  .col-sm-6
+  .col-6
+    %p Roles...
     - if current_user.is?(:admin)
-      = f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
+      /= f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
     - else
-      = effective_roles_summary(f.object)
+      /= effective_roles_summary(f.object)
 
-= f.input :files, as: :asset_box
+/= f.input :files, as: :asset_box
 
 .row
-  .col-sm-6
+  .col-6
     %h3 Billing Address
     = effective_address_fields(f, :billing_address)
 
-  .col-sm-6
+  .col-6
     %h3 Shipping Address
     = effective_address_fields(f, :shipping_address)

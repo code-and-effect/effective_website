@@ -73,6 +73,16 @@ PATH
       rails (>= 5.1)
 
 PATH
+  remote: ../effective_datatables
+  specs:
+    effective_datatables (3.4.0)
+      coffee-rails
+      effective_resources (>= 0.7.0)
+      rails (>= 3.2.0)
+      sass-rails
+      simple_form
+
+PATH
   remote: ../effective_resources
   specs:
     effective_resources (0.7.10)
@@ -84,16 +94,6 @@ PATH
     effective_style_guide (2.0.1)
       faker
       rails (>= 3.2.0)
-
-PATH
-  remote: ../effective_datatables
-  specs:
-    effective_datatables (3.4.0)
-      coffee-rails
-      effective_resources (>= 0.7.0)
-      rails (>= 3.2.0)
-      sass-rails
-      simple_form
 
 GEM
   remote: https://rubygems.org/
@@ -186,7 +186,7 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
-    effective_addresses (1.7.4)
+    effective_addresses (1.8.0)
       carmen-rails
       coffee-rails
       rails (>= 3.2.0)
