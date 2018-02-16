@@ -21,7 +21,6 @@ gem 'puma'
 gem 'sucker_punch'
 
 gem 'effective_addresses'
-gem 'effective_assets'
 gem 'effective_bootstrap', github: 'code-and-effect/effective_bootstrap', branch: 'master'
 gem 'effective_datatables', github: 'code-and-effect/effective_datatables', branch: 'master'
 gem 'effective_developer'

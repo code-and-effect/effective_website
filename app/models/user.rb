@@ -2,7 +2,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable
 
   acts_as_addressable :billing, :shipping
-  acts_as_asset_box :files
   acts_as_role_restricted
   acts_as_trashable
 

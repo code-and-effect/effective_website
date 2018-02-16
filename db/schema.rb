@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221200928) do
+ActiveRecord::Schema.define(version: 2016_12_21_200928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,36 +30,6 @@ ActiveRecord::Schema.define(version: 20161221200928) do
     t.datetime "created_at"
     t.index ["addressable_id"], name: "index_addresses_on_addressable_id"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
-  end
-
-  create_table "assets", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.text "extra"
-    t.integer "user_id"
-    t.string "content_type"
-    t.text "upload_file"
-    t.string "data"
-    t.boolean "processed", default: false
-    t.string "aws_acl", default: "public-read"
-    t.integer "data_size"
-    t.integer "height"
-    t.integer "width"
-    t.text "versions_info"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["content_type"], name: "index_assets_on_content_type"
-    t.index ["user_id"], name: "index_assets_on_user_id"
-  end
-
-  create_table "attachments", id: :serial, force: :cascade do |t|
-    t.integer "asset_id"
-    t.string "attachable_type"
-    t.integer "attachable_id"
-    t.integer "position"
-    t.string "box"
-    t.index ["asset_id"], name: "index_attachments_on_asset_id"
-    t.index ["attachable_id"], name: "index_attachments_on_attachable_id"
-    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id"
   end
 
   create_table "cart_items", id: :serial, force: :cascade do |t|

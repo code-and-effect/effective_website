@@ -15,6 +15,8 @@ Ruby 2.5.0. Rails 5.1.4
 - `bundle exec rake db:create db:migrate db:seed`
 - `rails server`
 
+Login as `admin@codeandeffect.com` with any password.
+
 - Search the entire project for 'example' and fill in your site specifics.
 
 - Good luck!

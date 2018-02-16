@@ -20,7 +20,6 @@ class Ability
   private
 
   def effective_abilities!(user)
-    can :manage, Effective::Asset, user_id: user.id
     can :manage, Effective::Cart, user_id: user.id
     can :manage, Effective::Order, user_id: user.id # Orders cannot be deleted
     can :manage, Effective::Subscription, user_id: user.id # We don't use subscriptions in this app
@@ -31,7 +30,6 @@ class Ability
     can :manage, Effective::Trash, user_id: user.id
 
     if user.is?(:admin)
-      can :manage, Effective::Asset
       can :manage, Effective::Log
       can :manage, Effective::Menu
       can :manage, Effective::Page
