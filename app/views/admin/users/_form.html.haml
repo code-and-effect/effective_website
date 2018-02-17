@@ -1,8 +1,8 @@
-= simple_form_for [:admin, @user] do |f|
+= effective_form_with model: [:admin, @user] do |f|
   = render 'users/form', f: f
 
   - if @user.persisted?
     .row
       .col-6= render 'admin/users/invitation', f: f
 
-  = simple_form_submit(f)
+  = f.submit

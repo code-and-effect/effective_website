@@ -10,7 +10,6 @@ class Admin::UsersController < Admin::ApplicationController
     end
 
     params.require(:user).permit(*User.permitted_sign_up_params,
-      EffectiveAssets.permitted_params,
       EffectiveRoles.permitted_params,
       billing_address: EffectiveAddresses.permitted_params,
       shipping_address: EffectiveAddresses.permitted_params

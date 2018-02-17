@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/code-and-effect/effective_bootstrap.git
-  revision: 4b001dba12027e26bb0a62911fe871fdd3320d3d
+  revision: fb29d097a1d70d75d1b9108f2ca3ce39cb730fb1
   branch: master
   specs:
     effective_bootstrap (0.0.1)
