@@ -2,23 +2,23 @@
 
 %p An email with instructions to active an account will be sent to the following:
 
-= simple_form_for([:admin, @invitation], method: :post) do |f|
-  = f.input :email, as: :effective_email, hint: 'Send an invitation to this email address'
+= effective_form_with(model: [:admin, @invitation], method: :post) do |f|
+  = f.email_field :email, hint: 'Send an invitation to this email address'
 
-  = f.input :emails, label: "Multiple Emails (#{link_to('strip whitespace', '#', 'data-strip-whitespace': true)})".html_safe,
-    as: :text,
+  = f.text_area :emails, label: "Multiple Emails (#{link_to('strip whitespace', '#', 'data-strip-whitespace': true)})".html_safe,
     value: f.object.emails.to_s.gsub('  ', ''),
     hint: "Send an invitation to each email address. One per line, upto #{Invitation::EMAILS_LIMIT} total lines. Copy & paste a .csv file matching the below format. If present, first and last names will be assigned.",
     input_html: { 'data-test-bot-skip' => true}
 
-  .well
-    j.smith@website.com,John,Smith
-    %br
-    jane.doe@website.com,Jane,Doe
-    %br
-    r.roe@website.com,Richard,Roe
+  .card
+    .card-body
+      j.smith@website.com,John,Smith
+      %br
+      jane.doe@website.com,Jane,Doe
+      %br
+      r.roe@website.com,Richard,Roe
 
-  = f.input :roles, collection: EffectiveRoles.roles_collection(f.object, current_user), as: :check_boxes
+  = f.collection_check_boxes :roles, EffectiveRoles.roles_collection(f.object, current_user), :second, :first
 
-  = f.button :submit, 'Send Invitation', class: 'btn btn-primary', data: { disable_with: 'Inviting...' }
+  = f.submit 'Send Invitation'
 
