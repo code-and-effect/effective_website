@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/code-and-effect/effective_bootstrap.git
-  revision: fb29d097a1d70d75d1b9108f2ca3ce39cb730fb1
+  revision: 9b7eabff071724974ade5f15e833b34eb0bcff1f
   branch: master
   specs:
     effective_bootstrap (0.0.1)
@@ -10,10 +10,10 @@ GIT
 
 GIT
   remote: git://github.com/code-and-effect/effective_datatables.git
-  revision: 16cb52a26b3bc4b8c14ceb63fc8d79bcc8d526e8
+  revision: 1ca54f0cb34a12c3f812fdc1e9c6138e97b1c9b3
   branch: master
   specs:
-    effective_datatables (3.4.0)
+    effective_datatables (4.0.0.pre.beta)
       coffee-rails
       effective_bootstrap
       effective_resources
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: git://github.com/code-and-effect/effective_resources.git
-  revision: 73e1b0cbfb123c4df45388ae631f404338260e21
+  revision: cc59204248788b9b526868ad16efdce508afbaa0
   branch: master
   specs:
     effective_resources (0.7.10)
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 50d3ce69fb5ba1d7af6a93c0b967cb4adcd67ff7
+  revision: 8e6114acb81bf8ac3b833a6d6ffcbe399df13752
   branch: 5-2-stable
   specs:
     actioncable (5.2.0.rc1)
@@ -101,7 +101,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (9.0.0)
-    autoprefixer-rails (7.2.5)
+    autoprefixer-rails (8.0.0)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -117,7 +117,7 @@ GEM
     builder (3.2.3)
     byebug (10.0.0)
     cancancan (2.1.3)
-    capybara (2.17.0)
+    capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
@@ -158,7 +158,7 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    devise_invitable (1.7.2)
+    devise_invitable (1.7.3)
       actionmailer (>= 4.1.0)
       devise (>= 4.0.0)
     dotenv (2.2.1)
@@ -244,7 +244,7 @@ GEM
       thor (~> 0.19.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    hamlit (2.8.6)
+    hamlit (2.8.7)
       temple (>= 0.8.0)
       thor
       tilt
@@ -312,7 +312,7 @@ GEM
     pry-byebug (3.6.0)
       byebug (~> 10.0)
       pry (~> 0.10)
-    public_suffix (3.0.1)
+    public_suffix (3.0.2)
     puma (3.11.2)
     rack (2.0.4)
     rack-test (0.8.2)
@@ -348,7 +348,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    simple_form (3.5.0)
+    simple_form (3.5.1)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
     sprockets (3.7.1)
