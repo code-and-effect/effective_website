@@ -32,6 +32,10 @@ gem 'effective_roles'
 gem 'effective_style_guide'
 gem 'effective_trash'
 
+# gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
+# gem 'effective_datatables', path: '~/Sites/effective_datatables'
+# gem 'effective_resources', path: '~/Sites/effective_resources'
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'

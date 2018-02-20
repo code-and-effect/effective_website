@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/code-and-effect/effective_datatables.git
-  revision: 1ca54f0cb34a12c3f812fdc1e9c6138e97b1c9b3
+  revision: 01951327a95938ce39ec5eebf78c1504d5f827d1
   branch: master
   specs:
     effective_datatables (4.0.0.pre.beta)
@@ -22,10 +22,10 @@ GIT
 
 GIT
   remote: git://github.com/code-and-effect/effective_resources.git
-  revision: cc59204248788b9b526868ad16efdce508afbaa0
+  revision: 2142b86446f6ba299a51e91ff048075eefffc4af
   branch: master
   specs:
-    effective_resources (0.7.10)
+    effective_resources (0.7.11)
       rails (>= 3.2.0)
 
 GIT
