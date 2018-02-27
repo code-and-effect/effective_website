@@ -8,31 +8,34 @@
   %p= link_to 'Home', root_path, class: 'btn btn-primary'
 
 - if Rails.env.development?
-  .well.col-xs-10
-    - if exception.subject.blank?
-      %h4 cannot :#{exception.action}, nil
-    - elsif exception.subject.kind_of?(Symbol)
-      %h4 cannot :#{exception.action}, :#{exception.subject}
-    - elsif exception.subject.to_s.present?
-      %h4 cannot :#{exception.action}, #{exception.subject}
-    - else
-      %h4 cannot :#{exception.action}, #{exception.subject.class.name}
-    %p
-      current_user:
-      - if current_user.present?
-        = link_to current_user.to_s, edit_admin_user_path(current_user)
-      - else
-        none
-    - if current_user.present?
-      %p roles: #{current_user.roles}
-    %p= link_to 'Refresh', request.path, class: 'btn btn-default'
+  .row.justify-content-center
+    .col-12.col-md-8.col-lg-6
+      .card
+        .card-body
+          - if exception.subject.blank?
+            %h4 cannot :#{exception.action}, nil
+          - elsif exception.subject.kind_of?(Symbol)
+            %h4 cannot :#{exception.action}, :#{exception.subject}
+          - elsif exception.subject.to_s.present?
+            %h4 cannot :#{exception.action}, #{exception.subject}
+          - else
+            %h4 cannot :#{exception.action}, #{exception.subject.class.name}
 
-    - exception.backtrace.first(10).each do |str|
-      %p= str
+          - if current_user.present?
+            %p current_user: #{link_to current_user.to_s, edit_admin_user_path(current_user)}
+            %p roles: #{current_user.roles}
+          - else
+            %p current_user: none
 
-    %hr
-    %p.text-center
-      %small This well of debugging information is only displayed when in development mode.
+          %p= link_to 'Refresh', request.path, class: 'btn btn-secondary'
+
+          - exception.backtrace.first(10).each do |str|
+            %p= str
+
+          %hr
+
+          %p.text-center
+            %small This well of debugging information is only displayed when in development mode.
 
 
 
