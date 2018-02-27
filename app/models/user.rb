@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable
+  has_one_attached :avatar
+  has_many_attached :files
 
   acts_as_addressable :billing, :shipping
   acts_as_role_restricted

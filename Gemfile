@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.0'
 
 gem 'rails', github: 'rails/rails', branch: '5-2-stable'
-gem 'bootsnap'
+gem 'bootsnap', require: false
 gem 'pg', '< 1.0'
 gem 'turbolinks'
 
@@ -11,6 +11,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
 
+gem 'aws-sdk-s3', require: false
 gem 'cancancan'
 gem 'cocoon'
 gem 'devise'
@@ -25,16 +26,12 @@ gem 'effective_bootstrap', github: 'code-and-effect/effective_bootstrap', branch
 gem 'effective_datatables', github: 'code-and-effect/effective_datatables', branch: 'master'
 gem 'effective_developer'
 gem 'effective_logging'
-gem 'effective_orders'
+gem 'effective_orders', github: 'code-and-effect/effective_orders', branch: 'three-dot-zero'
 gem 'effective_pages'
 gem 'effective_resources', github: 'code-and-effect/effective_resources', branch: 'master'
 gem 'effective_roles'
 gem 'effective_style_guide'
 gem 'effective_trash'
-
-# gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
-# gem 'effective_datatables', path: '~/Sites/effective_datatables'
-# gem 'effective_resources', path: '~/Sites/effective_resources'
 
 group :development, :test do
   gem 'dotenv-rails'

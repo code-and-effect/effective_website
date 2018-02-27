@@ -3,11 +3,17 @@
     = render 'users/sign_up_fields', f: f
   .col-6
     - if current_user.is?(:admin) && f.object != current_user
-      = f.collection_check_boxes :roles, EffectiveRoles.roles_collection(f.object, current_user), :second, :first
+      = f.radios :roles, EffectiveRoles.roles_collection(f.object, current_user)
     - else
       = effective_roles_summary(f.object)
 
-/= f.input :files, as: :asset_box
+.row
+  .col-6
+    %p Avatar
+    = f.file_field :avatar, direct_upload: true
+  .col-6
+    %p Files
+    = f.file_field :files, multiple: true, direct_upload: true
 
 .row
   .col-6

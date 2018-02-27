@@ -32,6 +32,7 @@ class Users::SettingsController < ApplicationController
 
   def permitted_params
     params.require(:user).permit(*User.permitted_sign_up_params,
+      :avatar, files: [],
       billing_address: EffectiveAddresses.permitted_params,
       shipping_address: EffectiveAddresses.permitted_params
     )

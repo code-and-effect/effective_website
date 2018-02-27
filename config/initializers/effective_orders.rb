@@ -10,7 +10,6 @@ EffectiveOrders.setup do |config|
   config.subscriptions_table_name = :subscriptions
   config.products_table_name = :products
 
-
   # Authorization Method
   #
   # This method is called by all controller actions with the appropriate action and resource
@@ -30,7 +29,7 @@ EffectiveOrders.setup do |config|
   #
   # Or disable the check completely:
   # config.authorization_method = false
-  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
+  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) } # CanCanCan
 
   # Skip automatically mounting the EffectiveOrders engine
   config.skip_mount_engine = false
@@ -38,21 +37,12 @@ EffectiveOrders.setup do |config|
   # Filter the @orders on admin/orders#index screen
   # config.orders_collection_scope = Proc.new { |scope| scope.where(...) }
 
-  # Register Effective::Order with ActiveAdmin if ActiveAdmin is present
-  # You must have authorization to authorized?(:manage, Effective::Order)
-  # For the activeadmin menu to item to show up
-  config.use_active_admin = true
-  config.active_admin_namespace = :admin  # Passed internally to ActiveAdmin.register
-
   # Use effective_obfuscation gem to change order.id into a seemingly random 10-digit number
   config.obfuscate_order_ids = false
 
-  # Silence the price deprecation warnings
-  config.silence_deprecation_warnings = false
-
   # Require these addresses when creating a new Order.  Works with effective_addresses gem
   config.require_billing_address = true
-  config.require_shipping_address = true
+  config.require_shipping_address = false
 
   # Use billing/shipping address full name in checkout process. Address full name will be validated.
   # Works with effective_addresses gem
@@ -95,9 +85,14 @@ EffectiveOrders.setup do |config|
 
   # Free Orders
   # Allow orders with a total of 0.00 to be purchased (regardless of the minimum charge setting)
-  # When enabled, the checkout process will skip the paypal/stripe/purchasing step
   # and just display the 'Thank You' after checkout is clicked
   config.allow_free_orders = true
+
+  # Refunds
+  # Allow admins to create orders with a negative total
+  # Refunds don't perform any kind of refund action with the payment processor.
+  # This just changes the validations
+  config.allow_refunds = false
 
   # Display a 'Purchase order' button on the Checkout screen allowing the user
   # to purchase an Order without going through the payment processor
@@ -137,12 +132,12 @@ EffectiveOrders.setup do |config|
   config.admin_simple_form_options = {}  # For the /admin/orders/new form
 
   # config.simple_form_options = {
-  #   html: {class: 'form-horizontal'},
-  #   wrapper: :horizontal_form,
-  #   wrapper_mappings: {
-  #     boolean: :horizontal_boolean,
-  #     check_boxes: :horizontal_radio_and_checkboxes,
-  #     radio_buttons: :horizontal_radio_and_checkboxes
+  #   :html => {:class => ['form-horizontal']},
+  #   :wrapper => :horizontal_form,
+  #   :wrapper_mappings => {
+  #     :boolean => :horizontal_boolean,
+  #     :check_boxes => :horizontal_radio_and_checkboxes,
+  #     :radio_buttons => :horizontal_radio_and_checkboxes
   #   }
   # }
 
@@ -169,14 +164,27 @@ EffectiveOrders.setup do |config|
     send_order_receipt_to_seller: true,   # Only applies to StripeConnect
     send_payment_request_to_buyer: true,
     send_pending_order_invoice_to_buyer: true,
-    send_order_receipts_when_mark_as_paid_by_admin: false,
+    send_order_receipts_when_mark_as_paid: false,
+
+    send_subscription_payment_succeeded: true,
+    send_subscription_payment_failed: true,
+    send_subscription_canceled: true,
+    send_subscription_trial_expiring: true,   # Only if you schedule the rake task to run
+    send_subscription_trial_expired: true,    # Only if you schedule the rake task to run
 
     subject_prefix: '[example]',
+
     subject_for_order_receipt_to_admin: '',
     subject_for_order_receipt_to_buyer: '',
     subject_for_order_receipt_to_seller: '',
     subject_for_pending_order_invoice_to_buyer: '',
     subject_for_payment_request_to_buyer: '',
+
+    subject_for_subscription_payment_succeeded: '',
+    subject_for_subscription_payment_failed: '',
+    subject_for_subscription_canceled: '',
+    subject_for_subscription_trial_expiring: '',
+    subject_for_subscription_trial_expired: '',
 
     layout: 'effective_orders_mailer_layout',
 
@@ -184,12 +192,16 @@ EffectiveOrders.setup do |config|
     admin_email: 'admin@example.com',
 
     deliver_method: nil,   # :deliver (rails < 4.2), :deliver_now (rails >= 4.2) or :deliver_later
-    delayed_job_deliver: false
+    delayed_job_deliver: false   # Use the oldschool pre-ActiveJob delayed_job way of sending email
   }
 
   #######################################
   ### Payment Provider specific options
   #######################################
+
+  # Mark an order as paid without going through a processor
+  # This is accessed via the admin screens only. Must have can?(:admin, :effective_orders)
+  config.mark_as_paid_enabled = false
 
   # Moneris configuration
   config.moneris_enabled = false
@@ -239,9 +251,18 @@ EffectiveOrders.setup do |config|
 
   # Stripe configuration
   config.stripe_enabled = false
-  config.stripe_subscriptions_enabled = false # https://stripe.com/docs/subscriptions
+  config.subscriptions_enabled = false # https://stripe.com/docs/subscriptions
+
   config.stripe_connect_enabled = false # https://stripe.com/docs/connect
   config.stripe_connect_application_fee_method = Proc.new { |order_item| order_item.total * 0.10 } # 10 percent
+
+  config.subscription = {
+    trial_name: 'Free Trial',
+    trial_description: '45-Day Free Trial',
+    trial_period: 45.days,
+    trial_remind_at: [1.day, 3.days, 7.days],  # Send email notification to trialing users 1, 3 and 7 days before expiring. false to disable.
+    webhook_secret: 'whsec_1234567890'
+  }
 
   if Rails.env.production?
     config.stripe = {

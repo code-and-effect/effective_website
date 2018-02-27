@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/code-and-effect/effective_bootstrap.git
-  revision: 9b7eabff071724974ade5f15e833b34eb0bcff1f
+  revision: 630812040bc365564a4d2a0bb2e521f8730d58f9
   branch: master
   specs:
     effective_bootstrap (0.0.1)
@@ -10,13 +10,27 @@ GIT
 
 GIT
   remote: git://github.com/code-and-effect/effective_datatables.git
-  revision: 01951327a95938ce39ec5eebf78c1504d5f827d1
+  revision: f04cbe14cfdf146c19573aa80b9fff64822a1e07
   branch: master
   specs:
     effective_datatables (4.0.0.pre.beta)
       coffee-rails
       effective_bootstrap
       effective_resources
+      rails (>= 3.2.0)
+      sass-rails
+
+GIT
+  remote: git://github.com/code-and-effect/effective_orders.git
+  revision: 3f472eafd4215c265022305626daa0ccd186bdf2
+  branch: three-dot-zero
+  specs:
+    effective_orders (2.2.4)
+      coffee-rails
+      devise
+      effective_addresses (>= 1.6.0)
+      effective_datatables (>= 3.0.0)
+      jquery-rails
       rails (>= 3.2.0)
       sass-rails
 
@@ -30,7 +44,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 8e6114acb81bf8ac3b833a6d6ffcbe399df13752
+  revision: 7289e477f46c1b2559d028814ba33edd725d83fe
   branch: 5-2-stable
   specs:
     actioncable (5.2.0.rc1)
@@ -103,6 +117,19 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (8.0.0)
       execjs
+    aws-partitions (1.67.0)
+    aws-sdk-core (3.17.0)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.5.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.8.2)
+      aws-sdk-core (~> 3)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.0.2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -181,16 +208,7 @@ GEM
       effective_datatables (>= 2.0.0)
       effective_resources
       rails (>= 3.2.0)
-    effective_orders (2.2.4)
-      coffee-rails
-      devise
-      effective_addresses (>= 1.6.0)
-      effective_datatables (>= 2.0.0)
-      jquery-rails
-      rails (>= 3.2.0)
-      sass-rails
-      simple_form
-    effective_pages (1.1.7)
+    effective_pages (1.1.8)
       effective_ckeditor (>= 1.6.2)
       effective_datatables (>= 2.0.0)
       effective_regions (>= 1.4.4)
@@ -198,7 +216,6 @@ GEM
       effective_slugs (>= 1.1.0)
       rails (>= 3.2.0)
       sass-rails
-      simple_form
     effective_regions (1.7.4)
       effective_ckeditor
       rails (>= 3.2.0)
@@ -207,7 +224,7 @@ GEM
       rails (>= 3.2.0)
     effective_slugs (1.3.1)
       rails (>= 3.2.0)
-    effective_style_guide (2.0.2)
+    effective_style_guide (2.0.3)
       faker
       rails (>= 3.2.0)
     effective_test_bot (0.6.13)
@@ -239,7 +256,7 @@ GEM
     execjs (2.7.0)
     faker (1.8.7)
       i18n (>= 0.7)
-    ffi (1.9.21)
+    ffi (1.9.23)
     foreman (0.84.0)
       thor (~> 0.19.1)
     globalid (0.4.1)
@@ -259,6 +276,7 @@ GEM
     inline_svg (1.3.1)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
+    jmespath (1.3.1)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -315,7 +333,7 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.2)
     rack (2.0.4)
-    rack-test (0.8.2)
+    rack-test (0.8.3)
       rack (>= 1.0, < 3)
     rack-timeout (0.4.2)
     rails-dom-testing (2.0.3)
@@ -348,9 +366,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    simple_form (3.5.1)
-      actionpack (> 4, < 5.2)
-      activemodel (> 4, < 5.2)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -386,6 +401,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-s3
   bootsnap
   bootstrap (~> 4.0.0)
   cancancan
@@ -399,7 +415,7 @@ DEPENDENCIES
   effective_datatables!
   effective_developer
   effective_logging
-  effective_orders
+  effective_orders!
   effective_pages
   effective_resources!
   effective_roles
