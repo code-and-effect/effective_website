@@ -22,7 +22,7 @@ gem 'puma'
 gem 'sucker_punch'
 
 gem 'effective_addresses'
-gem 'effective_bootstrap', github: 'code-and-effect/effective_bootstrap', branch: 'master'
+#gem 'effective_bootstrap', github: 'code-and-effect/effective_bootstrap', branch: 'master'
 gem 'effective_datatables', github: 'code-and-effect/effective_datatables', branch: 'master'
 gem 'effective_developer'
 gem 'effective_logging'
@@ -32,6 +32,8 @@ gem 'effective_resources', github: 'code-and-effect/effective_resources', branch
 gem 'effective_roles'
 gem 'effective_style_guide'
 gem 'effective_trash'
+
+gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
 
 group :development, :test do
   gem 'dotenv-rails'

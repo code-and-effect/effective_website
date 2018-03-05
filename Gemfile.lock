@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/code-and-effect/effective_bootstrap.git
-  revision: 630812040bc365564a4d2a0bb2e521f8730d58f9
-  branch: master
-  specs:
-    effective_bootstrap (0.0.1)
-      bootstrap (~> 4.0.0)
-      inline_svg
-      rails (>= 5.1)
-
-GIT
   remote: git://github.com/code-and-effect/effective_datatables.git
   revision: f04cbe14cfdf146c19573aa80b9fff64822a1e07
   branch: master
@@ -107,6 +97,15 @@ GIT
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+
+PATH
+  remote: ../effective_bootstrap
+  specs:
+    effective_bootstrap (0.0.1)
+      bootstrap (~> 4.0.0)
+      coffee-rails
+      inline_svg
+      rails (>= 5.1)
 
 GEM
   remote: https://rubygems.org/

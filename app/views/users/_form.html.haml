@@ -7,13 +7,15 @@
     - else
       = effective_roles_summary(f.object)
 
-.row
-  .col-6
-    %p Avatar
-    = f.file_field :avatar, direct_upload: true
-  .col-6
-    %p Files
-    = f.file_field :files, multiple: true, direct_upload: true
+= f.file_field :avatar
+
+= f.file_field :files
+
+/ .row
+/   .col-6
+/     = f.file_field :avatar, direct_upload: true
+/   .col-6
+/     = f.file_field :files, multiple: true, direct_upload: true
 
 .row
   .col-6

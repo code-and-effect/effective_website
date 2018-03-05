@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_27_174349) do
+ActiveRecord::Schema.define(version: 2018_02_27_174350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_02_27_174349) do
     t.integer "cart_id"
     t.string "purchasable_type"
     t.integer "purchasable_id"
+    t.string "unique"
     t.integer "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,8 +77,11 @@ ActiveRecord::Schema.define(version: 2018_02_27_174349) do
   create_table "customers", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "stripe_customer_id"
-    t.string "stripe_active_card"
+    t.string "active_card"
+    t.string "stripe_subscription_id"
+    t.string "status"
     t.string "stripe_connect_access_token"
+    t.integer "subscriptions_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_customers_on_user_id"
@@ -192,15 +196,17 @@ ActiveRecord::Schema.define(version: 2018_02_27_174349) do
 
   create_table "subscriptions", id: :serial, force: :cascade do |t|
     t.integer "customer_id"
+    t.integer "subscribable_id"
+    t.string "subscribable_type"
     t.string "stripe_plan_id"
-    t.string "stripe_subscription_id"
-    t.string "stripe_coupon_id"
-    t.string "title"
+    t.string "status"
+    t.string "name"
     t.integer "price", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["customer_id"], name: "index_subscriptions_on_customer_id"
-    t.index ["stripe_subscription_id"], name: "index_subscriptions_on_stripe_subscription_id"
+    t.index ["subscribable_id"], name: "index_subscriptions_on_subscribable_id"
+    t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable_type_and_subscribable_id"
   end
 
   create_table "trash", id: :serial, force: :cascade do |t|

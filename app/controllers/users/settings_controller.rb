@@ -5,7 +5,7 @@ class Users::SettingsController < ApplicationController
 
   # Get to here by visiting /settings
   def edit
-    @user = current_user
+    @user = User.with_attached_files.find(current_user.id)
     authorize! :edit, @user
 
     render 'users/settings'

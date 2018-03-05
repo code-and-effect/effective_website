@@ -52,4 +52,7 @@ Rails.application.configure do
   # Email
   config.action_mailer.default_url_options = { host: 'http://localhost', port: 3000 }
   config.action_mailer.asset_host = 'http://localhost:3000'
+
+  # ActiveStorage
+  config.active_storage.service = :amazon
 end

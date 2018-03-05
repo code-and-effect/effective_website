@@ -88,4 +88,7 @@ Rails.application.configure do
   # Email
   config.action_mailer.default_url_options = { host: 'https://www.example.com' }  # No trailing /
   config.action_mailer.asset_host = 'https://www.example.com' # No trailing /
+
+  # ActiveStorage
+  config.active_storage.service = :amazon
 end
