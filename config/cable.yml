@@ -7,9 +7,8 @@ test:
 
 # production:
 #   adapter: redis
-#   host: ec2-34-232-179-152.compute-1.amazonaws.com
+#   host: ec2-1-2-3-4.compute-1.amazonaws.com
 #   port: 55749
-#   password: pcb3f74490a16460bd4811fbf404ac26f798cb70aecd35f37e4955f2fa76a233e
+#   password: password
 #   inline: true
 #   timeout: 1
-#   #url: ENV.fetch('REDIS_URL')
