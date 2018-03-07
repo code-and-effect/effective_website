@@ -1,18 +1,6 @@
 GIT
-  remote: git://github.com/code-and-effect/effective_datatables.git
-  revision: f04cbe14cfdf146c19573aa80b9fff64822a1e07
-  branch: master
-  specs:
-    effective_datatables (4.0.0.pre.beta)
-      coffee-rails
-      effective_bootstrap
-      effective_resources
-      rails (>= 3.2.0)
-      sass-rails
-
-GIT
   remote: git://github.com/code-and-effect/effective_orders.git
-  revision: 3f472eafd4215c265022305626daa0ccd186bdf2
+  revision: 3c889b0b93973cd9822b6f21f72df0168abcca14
   branch: three-dot-zero
   specs:
     effective_orders (2.2.4)
@@ -25,16 +13,8 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/code-and-effect/effective_resources.git
-  revision: 2142b86446f6ba299a51e91ff048075eefffc4af
-  branch: master
-  specs:
-    effective_resources (0.7.11)
-      rails (>= 3.2.0)
-
-GIT
   remote: git://github.com/rails/rails.git
-  revision: 7289e477f46c1b2559d028814ba33edd725d83fe
+  revision: 14873f4c0a0ab8dae6402a7a1ce68cd057f063cf
   branch: 5-2-stable
   specs:
     actioncable (5.2.0.rc1)
@@ -98,15 +78,6 @@ GIT
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
 
-PATH
-  remote: ../effective_bootstrap
-  specs:
-    effective_bootstrap (0.0.1)
-      bootstrap (~> 4.0.0)
-      coffee-rails
-      inline_svg
-      rails (>= 5.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -114,9 +85,9 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (9.0.0)
-    autoprefixer-rails (8.0.0)
+    autoprefixer-rails (8.1.0)
       execjs
-    aws-partitions (1.67.0)
+    aws-partitions (1.69.0)
     aws-sdk-core (3.17.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
@@ -134,7 +105,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
-    bootsnap (1.1.8)
+    bootsnap (1.2.0)
       msgpack (~> 1.0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
@@ -176,6 +147,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    daemons (1.2.6)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.4.1)
@@ -191,22 +163,33 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
-    effective_addresses (1.8.0)
+    effective_addresses (1.8.2)
       carmen-rails
       coffee-rails
       rails (>= 3.2.0)
+    effective_bootstrap (0.0.2)
+      bootstrap (~> 4.0.0)
+      coffee-rails
+      inline_svg
+      rails (>= 5.1)
     effective_ckeditor (1.8.2)
+      rails (>= 3.2.0)
+      sass-rails
+    effective_datatables (4.0.0)
+      coffee-rails
+      effective_bootstrap
+      effective_resources
       rails (>= 3.2.0)
       sass-rails
     effective_developer (0.2.12)
       effective_resources
       rails (>= 3.2.0)
-    effective_logging (1.11.5)
+    effective_logging (2.0.0)
       coffee-rails
       devise
-      effective_datatables (>= 2.0.0)
+      effective_datatables
       effective_resources
-      rails (>= 3.2.0)
+      rails (>= 4)
     effective_pages (1.1.8)
       effective_ckeditor (>= 1.6.2)
       effective_datatables (>= 2.0.0)
@@ -215,11 +198,13 @@ GEM
       effective_slugs (>= 1.1.0)
       rails (>= 3.2.0)
       sass-rails
-    effective_regions (1.7.4)
+    effective_regions (1.7.5)
       effective_ckeditor
       rails (>= 3.2.0)
       virtus
-    effective_roles (1.4.3)
+    effective_resources (0.7.12)
+      rails (>= 3.2.0)
+    effective_roles (1.4.4)
       rails (>= 3.2.0)
     effective_slugs (1.3.1)
       rails (>= 3.2.0)
@@ -241,14 +226,14 @@ GEM
       minitest-reporters
       rails (>= 3.2.0)
       rmagick
-    effective_trash (0.2.6)
-      coffee-rails
+    effective_trash (0.3.0)
       devise
       effective_datatables
       effective_resources
-      rails (>= 3.2.0)
+      rails (>= 4.0.0)
     equalizer (0.0.11)
-    erubi (1.7.0)
+    erubi (1.7.1)
+    eventmachine (1.2.5)
     exception_notification (4.2.2)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
@@ -316,11 +301,14 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.2.2)
+    msgpack (1.2.4)
     nio4r (2.2.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    passenger (5.2.1)
+      rack
+      rake (>= 0.8.1)
     pg (0.21.0)
     popper_js (1.12.9)
     pry (0.11.3)
@@ -330,7 +318,6 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (3.0.2)
-    puma (3.11.2)
     rack (2.0.4)
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
@@ -346,7 +333,7 @@ GEM
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     rake (12.3.0)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     responders (2.4.0)
@@ -375,6 +362,10 @@ GEM
     sucker_punch (2.0.4)
       concurrent-ruby (~> 1.0.0)
     temple (0.8.0)
+    thin (1.7.2)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -410,13 +401,13 @@ DEPENDENCIES
   devise_invitable
   dotenv-rails
   effective_addresses
-  effective_bootstrap!
-  effective_datatables!
+  effective_bootstrap
+  effective_datatables
   effective_developer
   effective_logging
   effective_orders!
   effective_pages
-  effective_resources!
+  effective_resources
   effective_roles
   effective_style_guide
   effective_test_bot
@@ -425,14 +416,15 @@ DEPENDENCIES
   foreman
   hamlit-rails
   jquery-rails
+  passenger
   pg (< 1.0)
   pry-byebug
-  puma
   rack-timeout
   rails!
   rails_12factor
   sass-rails
   sucker_punch
+  thin
   turbolinks
 
 RUBY VERSION

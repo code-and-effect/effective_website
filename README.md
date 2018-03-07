@@ -2,7 +2,7 @@
 
 This is a rails starter website that uses most of the effective_* gems.
 
-Ruby 2.5.0. Rails 5.1.4
+Ruby 2.5.0. Rails 5.2
 
 ## Getting Started
 
