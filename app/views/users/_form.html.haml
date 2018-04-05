@@ -3,7 +3,7 @@
     = render 'users/sign_up_fields', f: f
   .col-6
     - if current_user.is?(:admin) && f.object != current_user
-      = f.radios :roles, EffectiveRoles.roles_collection(f.object, current_user)
+      = f.checks :roles, EffectiveRoles.roles_collection(f.object, current_user)
     - else
       = effective_roles_summary(f.object)
 

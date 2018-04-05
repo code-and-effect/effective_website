@@ -14,11 +14,12 @@
     = effective_regions_include_tags
 
   %body{class: effective_pages_body_classes}
+    = render partial: 'layouts/staging'
     = render partial: 'layouts/navbar_admin'
 
     #admin-wrap
       = render partial: 'layouts/alert'
 
-      .container
+      %div{class: params[:action] == 'index' ? 'container-fluid' : 'container' }
         = yield
 

@@ -94,22 +94,14 @@ EffectiveOrders.setup do |config|
   # This just changes the validations
   config.allow_refunds = false
 
+  # Pretend Purchase
   # Display a 'Purchase order' button on the Checkout screen allowing the user
-  # to purchase an Order without going through the payment processor
-  config.allow_pretend_purchase_in_development = true
-
-  # Allow Pretend Purchase in Production
+  # to purchase an Order without going through the payment processor.
   # WARNING: Setting this option to true will allow users to purchase! an Order without entering a credit card
   # WARNING: When true, users can purchase! anything without paying money
-  #
-  # This should basically always be false, but sometimes you want to make a Beta/Demo site
-  # where users may test the purchase workflow without actually paying money
-  #
-  # When true, there will be a 'Process Order' button on the Checkout screen.
-  # Clicking this button will mark an Order purchased and redirect the user to the
-  # Thank You page just as if they had successfully Checked Out through a payment processor
-  config.allow_pretend_purchase_in_production = false
-  config.allow_pretend_purchase_in_production_message = '* payment information is not required to process this order at this time.'
+  config.pretend_enabled = !Rails.env.production?
+  config.pretend_message = '* payment information is not required to process this order at this time.'
+
 
   # Show/hide the 'Order History' button on the 'Cart Page'
   config.show_order_history_button = true

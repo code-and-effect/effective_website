@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post 'invitation/:id/reinvite', to: 'users/invitations#reinvite', as: :reinvite_user_invitation
+
+    match '/impersonate/:id', to: 'users/impersonations#create', via: [:patch, :put, :post], as: :impersonate_user
+    match '/impersonate', to: 'users/impersonations#destroy', via: [:delete], as: :impersonate
   end
 
   match '/settings', to: 'users/settings#edit', as: :user_settings, via: [:get]
