@@ -20,6 +20,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.0]
       t.string    :name
 
       t.integer   :roles_mask
+      t.boolean   :avatar_attached
 
       t.timestamps
     end

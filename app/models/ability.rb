@@ -2,10 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    cannot :access, :admin
+
     user ||= User.new
     effective_abilities!(user)
 
-    cannot :access, :admin
     can [:edit, :update], User, id: user.id
 
     if user.is?(:member)

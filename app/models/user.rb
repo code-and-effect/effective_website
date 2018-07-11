@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable # :confirmable
+
   has_one_attached :avatar
   has_many_attached :files
 
@@ -36,6 +37,7 @@ class User < ApplicationRecord
   # name                    :string
 
   # roles_mask              :integer
+  # avatar_attached         :boolean
 
   # timestamps
 
@@ -47,6 +49,12 @@ class User < ApplicationRecord
   end
 
   validates :name, presence: true
+
+  validate(if: -> { avatar.attached? }) do
+    self.errors.add(:avatar, 'must be an image') unless avatar.image?
+  end
+
+  before_save { self.avatar_attached = avatar.attached? }
 
   def to_s
     email

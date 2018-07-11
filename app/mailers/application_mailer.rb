@@ -4,7 +4,7 @@ class ApplicationMailer < ActionMailer::Base
   layout 'mailer'
 
   def test_email
-    mail(to: 'matthew@agilestyle.com', subject: 'Active job and email systems functioning normally')
+    mail(to: 'matthew@codeandeffect.com', subject: 'Active job and email systems functioning normally')
   end
 
   def test_exception

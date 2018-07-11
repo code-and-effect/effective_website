@@ -17,14 +17,23 @@ class ApplicationController < ActionController::Base
   before_action :set_effective_logging_current_user
   before_action :set_effective_trash_current_user
 
-  rescue_from CanCan::AccessDenied do |exception|
-    assign_test_bot_access_denied_exception(exception) if defined?(EffectiveTestBot)
-
+  rescue_from CanCan::AccessDenied, Effective::AccessDenied do |exception|
     respond_to do |format|
       @page_title = 'Access Denied'
-      format.html { render 'static_pages/access_denied', layout: 'application', status: 403, locals: { exception: exception } }
+
+      format.html do
+        render 'static_pages/access_denied', layout: 'application', status: 403, locals: { exception: exception }
+      end
+
+      format.js do
+        Rails.logger.info "cannot :#{exception.action}, #{exception.subject.class.name}"
+        render text: "Access Denied: #{exception.message}", status: 403
+      end
+
       format.any { render text: "Access Denied: #{exception.message}", status: 403 }
     end
+
+    assign_test_bot_access_denied_exception(exception) if defined?(EffectiveTestBot) && Rails.env.test?
   end
 
   def after_sign_in_path_for(user)
