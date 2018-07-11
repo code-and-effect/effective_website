@@ -1,0 +1,14 @@
+- resource = (@_effective_resource || Effective::Resource.new(controller_path))
+- @resource = instance_variable_get('@' + resource.name) if resource.name
+
+- if @resource
+  .row
+    .col-8
+      %h1= @page_title
+    .col-4.text-right
+      = render_resource_actions(@resource, effective_resource: resource, show: false)
+
+  = render @resource
+
+.form-actions
+  = link_to 'Continue', (resource.action_path(:index) || root_path), class: 'btn btn-primary'

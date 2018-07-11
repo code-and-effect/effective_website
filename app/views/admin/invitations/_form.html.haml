@@ -18,7 +18,7 @@
       %br
       r.roe@website.com,Richard,Roe
 
-  = f.collection_check_boxes :roles, EffectiveRoles.roles_collection(f.object, current_user), :second, :first
+  = f.checks :roles, EffectiveRoles.roles_collection(f.object, current_user)
 
   = f.submit 'Send Invitation'
 
