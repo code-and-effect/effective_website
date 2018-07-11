@@ -18,8 +18,7 @@
     = render partial: 'layouts/navbar_admin'
 
     #admin-wrap
-      = render partial: 'layouts/alert'
-
       %div{class: params[:action] == 'index' ? 'container-fluid' : 'container' }
+        = render partial: 'layouts/alert'
         = yield
 

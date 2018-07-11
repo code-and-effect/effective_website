@@ -10,4 +10,4 @@
       = f.static_field :invitation_accepted_at,
         value: f.object.invitation_accepted_at.try(:strftime, '%F %H:%M') || 'Not accepted'
 
-%p= link_to 'Resend invitation', reinvite_user_invitation_path(f.object), class: 'btn btn-default', data: { method: :post, confirm: 'Resend invitation?' }
+%p= link_to 'Resend invitation', reinvite_user_invitation_path(f.object), class: 'btn btn-secondary', data: { method: :post, confirm: 'Resend invitation?' }
