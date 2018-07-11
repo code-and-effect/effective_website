@@ -31,34 +31,40 @@ EffectiveOrders.setup do |config|
   # config.authorization_method = false
   config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) } # CanCanCan
 
-  # Skip automatically mounting the EffectiveOrders engine
-  config.skip_mount_engine = false
+  # Layout Settings
+  # Configure the Layout per controller, or all at once
+
+  # config.layout = 'application'   # All EffectiveOrders controllers will use this layout
+  config.layout = {
+    carts: 'application',
+    orders: 'application',
+    subscriptions: 'application',
+    admin_customers: 'admin',
+    admin_orders: 'admin'
+  }
 
   # Filter the @orders on admin/orders#index screen
   # config.orders_collection_scope = Proc.new { |scope| scope.where(...) }
 
+  # Require these addresses when creating a new Order.  Works with effective_addresses gem
+  config.billing_address = true
+  config.shipping_address = false
+  config.use_address_full_name = true
+
   # Use effective_obfuscation gem to change order.id into a seemingly random 10-digit number
   config.obfuscate_order_ids = false
-
-  # Require these addresses when creating a new Order.  Works with effective_addresses gem
-  config.require_billing_address = true
-  config.require_shipping_address = false
-
-  # Use billing/shipping address full name in checkout process. Address full name will be validated.
-  # Works with effective_addresses gem
-  config.use_address_full_name = true
 
   # If set, the orders#new screen will render effective/orders/_order_user_fields to capture this User Info
   # The partial can be overridden to customize the form, but the following fields are also fed into strong_paramters
   config.collect_user_fields = []
-  #config.collect_user_fields = [:salutation, :first_name, :last_name] # Must be valid fields on the User object
+  #config.collect_user_fields = [:first_name, :last_name] # Must be valid fields on the User object
 
   # Don't validate_associated :user when saving an Order
   config.skip_user_validation = false
 
   # If set, the orders#new screen will render effective/orders/_order_note_fields to capture any Note info
   config.collect_note = false
-  config.collect_note_required = false   # just required for the form, not a true Order model validation
+  config.collect_note_required = false
   config.collect_note_message = ''
 
   # If true, the orders#new screen will render effective/orders/_terms_and_conditions_fields to require a Terms of Service boolean
@@ -85,14 +91,17 @@ EffectiveOrders.setup do |config|
 
   # Free Orders
   # Allow orders with a total of 0.00 to be purchased (regardless of the minimum charge setting)
-  # and just display the 'Thank You' after checkout is clicked
-  config.allow_free_orders = true
+  config.free_enabled = true
+
+  # Mark as Paid
+  # Mark an order as paid without going through a processor
+  # This is accessed via the admin screens only. Must have can?(:admin, :effective_orders)
+  config.mark_as_paid_enabled = false
 
   # Refunds
   # Allow admins to create orders with a negative total
-  # Refunds don't perform any kind of refund action with the payment processor.
-  # This just changes the validations
-  config.allow_refunds = false
+  # Refunds don't perform any kind of refund action with the payment processor. This just changes the validations.
+  config.refunds_enabled = false
 
   # Pretend Purchase
   # Display a 'Purchase order' button on the Checkout screen allowing the user
@@ -102,80 +111,54 @@ EffectiveOrders.setup do |config|
   config.pretend_enabled = !Rails.env.production?
   config.pretend_message = '* payment information is not required to process this order at this time.'
 
-
-  # Show/hide the 'Order History' button on the 'Cart Page'
-  config.show_order_history_button = true
-
-  # Layout Settings
-  # Configure the Layout per controller, or all at once
-
-  # config.layout = 'application'   # All EffectiveOrders controllers will use this layout
-  config.layout = {
-    carts: 'application',
-    orders: 'application',
-    subscriptions: 'application',
-    admin_customers: 'admin',
-    admin_orders: 'admin'
-  }
-
-  # SimpleForm Options
-  # This Hash of options will be passed into any client facing simple_form_for() calls
-  config.simple_form_options = {}
-  config.admin_simple_form_options = {}  # For the /admin/orders/new form
-
-  # config.simple_form_options = {
-  #   :html => {:class => ['form-horizontal']},
-  #   :wrapper => :horizontal_form,
-  #   :wrapper_mappings => {
-  #     :boolean => :horizontal_boolean,
-  #     :check_boxes => :horizontal_radio_and_checkboxes,
-  #     :radio_buttons => :horizontal_radio_and_checkboxes
-  #   }
-  # }
-
   # Mailer Settings
-  # effective_orders will send out receipts to the buyer, seller and admins.
+  # effective_orders sends out receipts to buyers and admins as well as trial and subscription related emails.
   # For all the emails, the same :subject_prefix will be prefixed.  Leave as nil / empty string if you don't want any prefix
   #
-  # The subject_for_admin_receipt, subject_for_buyer_receipt, subject_for_payment_request and
-  # subject_for_seller_receipt can be one of:
+  # All the subject_* keys below can one of:
   # - nil / empty string to use the built in defaults
   # - A string with the full subject line for this email
   # - A Proc to create the subject line based on the email
-  # In all three of these cases, the subject_prefix will still be used.
+  # The subject_prefix will then be applied ontop of these.
+  #
+  # send_order_receipt_to_buyer: Proc.new { |order| "Order #{order.to_param} has been purchased"}
+  # subject_for_subscription_payment_succeeded: Proc.new { |order| "Order #{order.to_param} has been purchased"}
 
-  # The Procs are the same for admin & buyer receipt, the seller Proc is different
-  # subject_for_order_receipt_to_admin: Proc.new { |order| "Order #{order.to_param} has been purchased"}
-  # subject_for_order_receipt_to_buyer: Proc.new { |order| "Order #{order.to_param} has been purchased"}
-  # subject_for_payment_request_to_buyer: Proc.new { |order| "Pending Order #{order.to_param}"}
-  # subject_for_order_receipt_to_seller: Proc.new { |order, order_items, seller| "Order #{order.to_param} has been purchased"}
+  # subject_for_subscription_trialing: Proc.new { |subscribable| "Pending Order #{order.to_param}"}
 
   config.mailer = {
     send_order_receipt_to_admin: true,
     send_order_receipt_to_buyer: true,
-    send_order_receipt_to_seller: true,   # Only applies to StripeConnect
     send_payment_request_to_buyer: true,
     send_pending_order_invoice_to_buyer: true,
     send_order_receipts_when_mark_as_paid: false,
 
+    send_subscription_created: true,
+    send_subscription_updated: true,
+    send_subscription_canceled: true,
     send_subscription_payment_succeeded: true,
     send_subscription_payment_failed: true,
-    send_subscription_canceled: true,
-    send_subscription_trial_expiring: true,   # Only if you schedule the rake task to run
+
+    send_subscription_trialing: true,   # Only if you schedule the rake task to run
     send_subscription_trial_expired: true,    # Only if you schedule the rake task to run
 
     subject_prefix: '[example]',
 
+    # Procs yield an Effective::Order object
     subject_for_order_receipt_to_admin: '',
     subject_for_order_receipt_to_buyer: '',
-    subject_for_order_receipt_to_seller: '',
-    subject_for_pending_order_invoice_to_buyer: '',
     subject_for_payment_request_to_buyer: '',
+    subject_for_pending_order_invoice_to_buyer: '',
 
+    # Procs yield an Effective::Customer object
+    subject_for_subscription_created: '',
+    subject_for_subscription_updated: '',
+    subject_for_subscription_canceled: '',
     subject_for_subscription_payment_succeeded: '',
     subject_for_subscription_payment_failed: '',
-    subject_for_subscription_canceled: '',
-    subject_for_subscription_trial_expiring: '',
+
+    # Procs yield the acts_as_subscribable object
+    subject_for_subscription_trialing: '',
     subject_for_subscription_trial_expired: '',
 
     layout: 'effective_orders_mailer_layout',
@@ -183,141 +166,104 @@ EffectiveOrders.setup do |config|
     default_from: 'info@example.com',
     admin_email: 'admin@example.com',
 
-    deliver_method: nil,   # :deliver (rails < 4.2), :deliver_now (rails >= 4.2) or :deliver_later
-    delayed_job_deliver: false   # Use the oldschool pre-ActiveJob delayed_job way of sending email
+    deliver_method: nil  # When nil, will use deliver_later if active_job is configured, otherwise deliver_now
   }
 
   #######################################
-  ### Payment Provider specific options
+  ## Payment Provider specific options ##
   #######################################
 
-  # Mark an order as paid without going through a processor
-  # This is accessed via the admin screens only. Must have can?(:admin, :effective_orders)
-  config.mark_as_paid_enabled = false
+  # Cheque
+  config.cheque = false
 
-  # Moneris configuration
-  config.moneris_enabled = false
+  # config.cheque = {
+  #   confirm: 'Your order will not be considered purchased until we receive your cheque. Proceed with pay by cheque?',
+  #   success_message: 'Thank you! You have indicated that this order will be purchased by cheque. Please send us a cheque and a copy of this invoice at your earliest convenience. We will mark this order purchased upon receiving payment.'
+  # }
 
-  if Rails.env.production?
-    config.moneris = {
-      ps_store_id: '',
-      hpp_key: '',
-      hpp_url: 'https://www3.moneris.com/HPPDP/index.php',
-      verify_url: 'https://www3.moneris.com/HPPDP/verifyTxn.php'
-    }
-  else
-    config.moneris = {
-      ps_store_id: '',
-      hpp_key: '',
-      hpp_url: 'https://esqa.moneris.com/HPPDP/index.php',
-      verify_url: 'https://esqa.moneris.com/HPPDP/verifyTxn.php'
-    }
-  end
+  # Moneris
+  config.moneris = false
 
-  # Paypal configuration
-  config.paypal_enabled = false
+  # if Rails.env.production?
+  #   config.moneris = {
+  #     ps_store_id: '',
+  #     hpp_key: '',
+  #     hpp_url: 'https://www3.moneris.com/HPPDP/index.php',
+  #     verify_url: 'https://www3.moneris.com/HPPDP/verifyTxn.php'
+  #   }
+  # else
+  #   config.moneris = {
+  #     ps_store_id: '',
+  #     hpp_key: '',
+  #     hpp_url: 'https://esqa.moneris.com/HPPDP/index.php',
+  #     verify_url: 'https://esqa.moneris.com/HPPDP/verifyTxn.php'
+  #   }
+  # end
 
-  if Rails.env.production?
-    config.paypal = {
-      seller_email: '',
-      secret: '',
-      cert_id: '',
-      paypal_url: 'https://www.paypal.com/cgi-bin/webscr',
-      currency: 'CAD',
-      paypal_cert: "#{Rails.root}/config/paypalcerts/production/paypal_cert.pem",
-      app_cert: "#{Rails.root}/config/paypalcerts/production/app_cert.pem",
-      app_key: "#{Rails.root}/config/paypalcerts/production/app_key.pem"
-    }
-  else
-    config.paypal = {
-      seller_email: '',
-      secret: '',
-      cert_id: '',
-      paypal_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr',
-      currency: 'CAD',
-      paypal_cert: "#{Rails.root}/config/paypalcerts/#{Rails.env}/paypal_cert.pem",
-      app_cert: "#{Rails.root}/config/paypalcerts/#{Rails.env}/app_cert.pem",
-      app_key: "#{Rails.root}/config/paypalcerts/#{Rails.env}/app_key.pem"
-    }
-  end
+  # Paypal
+  config.paypal = false
 
-  # Stripe configuration
-  config.stripe_enabled = false
-  config.subscriptions_enabled = false # https://stripe.com/docs/subscriptions
+  # if Rails.env.production?
+  #   config.paypal = {
+  #     seller_email: '',
+  #     secret: '',
+  #     cert_id: '',
+  #     paypal_url: 'https://www.paypal.com/cgi-bin/webscr',
+  #     currency: 'CAD',
+  #     paypal_cert: "#{Rails.root}/config/paypalcerts/production/paypal_cert.pem",
+  #     app_cert: "#{Rails.root}/config/paypalcerts/production/app_cert.pem",
+  #     app_key: "#{Rails.root}/config/paypalcerts/production/app_key.pem"
+  #   }
+  # else
+  #   config.paypal = {
+  #     seller_email: '',
+  #     secret: '',
+  #     cert_id: '',
+  #     paypal_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr',
+  #     currency: 'CAD',
+  #     paypal_cert: "#{Rails.root}/config/paypalcerts/#{Rails.env}/paypal_cert.pem",
+  #     app_cert: "#{Rails.root}/config/paypalcerts/#{Rails.env}/app_cert.pem",
+  #     app_key: "#{Rails.root}/config/paypalcerts/#{Rails.env}/app_key.pem"
+  #   }
+  # end
 
-  config.stripe_connect_enabled = false # https://stripe.com/docs/connect
-  config.stripe_connect_application_fee_method = Proc.new { |order_item| order_item.total * 0.10 } # 10 percent
+  # Stripe
+  config.stripe = false
 
-  config.subscription = {
-    trial_name: 'Free Trial',
-    trial_description: '45-Day Free Trial',
-    trial_period: 45.days,
-    trial_remind_at: [1.day, 3.days, 7.days],  # Send email notification to trialing users 1, 3 and 7 days before expiring. false to disable.
-    webhook_secret: 'whsec_1234567890'
-  }
+  # if Rails.env.production?
+  #   config.stripe = {
+  #     secret_key: 'sk_xxx',
+  #     publishable_key: 'pk_xxx',
+  #     currency: 'usd',
+  #     site_title: 'My Site',
+  #     site_image: 'logo.png' # A relative or absolute URL pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
+  #   }
+  # else
+  #   config.stripe = {
+  #     secret_key: 'sk_test_xxx',
+  #     publishable_key: 'pk_test_xxx',
+  #     currency: 'usd',
+  #     site_title: 'My Site',
+  #     site_image: 'logo.png' # A relative or absolute URL pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
+  #   }
+  # end
 
-  if Rails.env.production?
-    config.stripe = {
-      secret_key: 'sk_test_IKd6HDaYUfoRjflWQTXfFNfc',
-      publishable_key: 'pk_test_liEGn9f0mcxKmoSjoeNbbuE1',
-      currency: 'usd',
-      site_title: 'Example Website',
-      site_image: '', # A relative URL pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
-      connect_client_id: ''
-    }
-  else
-    config.stripe = {
-      secret_key: 'sk_test_IKd6HDaYUfoRjflWQTXfFNfc',
-      publishable_key: 'pk_test_liEGn9f0mcxKmoSjoeNbbuE1',
-      currency: 'usd',
-      site_title: 'Example Website',
-      site_image: 'logo-admin.png', # A relative URL pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
-      connect_client_id: ''
-    }
-  end
+  # Subscriptions (https://stripe.com/docs/subscriptions)
+  config.subscriptions = false
 
-  # CCBill configuration
-  config.ccbill_enabled = false
+  # config.subscriptions = {
+  #   webhook_secret: 'whsec_xxx',
+  #   ignore_livemode: false        # Use this to run test mode in production. careful.
+  # }
 
-  # CCBill Dynamic Pricing documentation describes these variables:
-  # https://www.ccbill.com/cs/wiki/tiki-index.php?page=Dynamic+Pricing+User+Guide
-  if Rails.env.production?
-    config.ccbill = {
-      client_accnum: '',
-      client_subacc: '0000', # initial sub account
-      # Get this from CCBill Admin dashboard after setting up a form
-      form_name: '211cc', # default credit card form
-      # https://www.ccbill.com/cs/wiki/tiki-index.php?page=Webhooks+User+Guide#Appendix_A:_Currency_Codes
-      currency_code: '840', # USD
-      # You'll need to get this salt after having CCBill tech support set up dynamic pricing
-      # https://www.ccbill.com/cs/wiki/tiki-index.php?page=Dynamic+Pricing+User+Guide#Generating_the_MD5_Hash
-      dynamic_pricing_salt: ''
-    }
-  else
-    config.ccbill = {
-      client_accnum: '',
-      client_subacc: '0000',
-      form_name: '211cc',
-      currency_code: '840',
-      dynamic_pricing_salt: ''
-    }
-  end
+  # Trial
+  config.trial = false
 
-  # App checkout configuration
-  config.app_checkout_enabled = false
-
-  config.app_checkout = {
-    checkout_label: '', # Checkout button to finalize the order
-    service: nil, # an EffectiveOrders::AppCheckout type object
-    declined_flash: "Payment was unsuccessful. Please try again."
-  }
-
-  # Pay by Cheque configuration
-  config.cheque_enabled = false
-
-  config.cheque = {
-    confirm: 'Your order will not be considered purchased until we receive your cheque. Proceed with pay by cheque?',
-    success_message: 'Thank you! You have indicated that this order will be purchased by cheque. Please send us a cheque and a copy of this invoice at your earliest convenience. We will mark this order purchased upon receiving payment.'
-  }
+  # config.trial = {
+  #   name: 'Free Trial',
+  #   description: '45-Day Free Trial',
+  #   length: 45.days,
+  #   remind_at: [1.day, 3.days, 7.days, 40.days, 44.days],  # Send email notification to trialing owners on day 1, 3, 7 40 and 44. false to disable
+  # }
 
 end

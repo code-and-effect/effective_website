@@ -1,4 +1,7 @@
+# In Rails 4.1 and above, visit:
 # http://localhost:3000/rails/mailers
+# to see a preview of the following 3 emails:
+
 class EffectiveOrdersMailerPreview < ActionMailer::Preview
   def order_receipt_to_admin
     Effective::OrdersMailer.order_receipt_to_admin(build_preview_order)
@@ -6,11 +9,6 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
 
   def order_receipt_to_buyer
     Effective::OrdersMailer.order_receipt_to_buyer(build_preview_order)
-  end
-
-  def order_receipt_to_seller
-    order = build_preview_order
-    Effective::OrdersMailer.order_receipt_to_seller(order, preview_customer, order.order_items)
   end
 
   def payment_request_to_buyer
@@ -29,12 +27,20 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
     Effective::OrdersMailer.subscription_payment_failed(preview_customer)
   end
 
+  def subscription_created
+    Effective::OrdersMailer.subscription_created(preview_customer)
+  end
+
+  def subscription_updated
+    Effective::OrdersMailer.subscription_updated(preview_customer)
+  end
+
   def subscription_canceled
     Effective::OrdersMailer.subscription_canceled(preview_customer)
   end
 
-  def subscription_trial_expiring
-    Effective::OrdersMailer.subscription_trial_expiring(preview_subscribable)
+  def subscription_trialing
+    Effective::OrdersMailer.subscription_trialing(preview_subscribable)
   end
 
   def subscription_trial_expired
@@ -48,7 +54,7 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
   protected
 
   def build_preview_order
-    order = Effective::Order.new
+    order = Effective::Order.new(id: 1)
     order.user = preview_user
     preview_order_items.each { |atts| order.order_items.build(atts) }
     order.valid?
@@ -65,10 +71,10 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
   # so that this mailer will not have to guess at your app's acts_as_purchasable objects
   def preview_order_items
     [
-      {title: 'Item One', quantity: 2, price: 999, tax_exempt: false},
-      {title: 'Item Two', quantity: 1, price: 25000, tax_exempt: false},
-      {title: 'Item Three', quantity: 1, price: 8999, tax_exempt: false},
-      {title: 'Item Four', quantity: 1, price: 100000, tax_exempt: false}
+      { name: 'Item One', quantity: 2, price: 999, tax_exempt: false },
+      { name: 'Item Two', quantity: 1, price: 25000, tax_exempt: false },
+      { name: 'Item Three', quantity: 1, price: 8999, tax_exempt: false },
+      { name: 'Item Four', quantity: 1, price: 100000, tax_exempt: false }
     ]
   end
 
@@ -87,22 +93,24 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
   end
 
   def preview_customer
-    Effective::Customer.new(user: preview_user, active_card: '**** **** **** 1234 Visa 04/20')
+    customer = Effective::Customer.new(user: preview_user, active_card: '**** **** **** 1234 Visa 04/20')
+
+    if preview_subscribable.present?
+      customer.subscriptions.build(subscribable: preview_subscribable, name: 'Bronze Plan')
+      customer.subscriptions.build(subscribable: preview_subscribable, name: 'Silver Plan')
+    end
+
+    customer
   end
 
   def preview_subscribable
-    Class.new do
-      include ActiveModel::Model
-      attr_accessor :buyer
+    Rails.application.eager_load!
 
-      def to_s
-        'My cool service'
-      end
+    klasses = Array(ActsAsSubscribable.descendants).compact
+    return unless klasses.present?
 
-      def trial_expires_at
-        Time.zone.now + 1.day
-      end
-    end.new(buyer: preview_user)
+    klasses.map { |klass| klass.all.order(Arel.sql('random()')).first }.compact.first ||
+    klasses.first.new(subscribable_buyer: preview_user)
   end
 
 end
