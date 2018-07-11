@@ -12,7 +12,7 @@
 
     %ul.navbar-nav
       - if current_user.present?
-        = nav_dropdown('Account', right: true) do
+        = nav_dropdown(user_tag(current_user), right: true) do
           = nav_link_to 'Settings', user_settings_path
 
           - if can?(:access, :admin)

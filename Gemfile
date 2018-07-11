@@ -16,7 +16,6 @@ gem 'cocoon'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
-gem 'jquery-rails'
 gem 'hamlit-rails'
 gem 'turbolinks'
 

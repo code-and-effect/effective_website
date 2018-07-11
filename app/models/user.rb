@@ -57,7 +57,7 @@ class User < ApplicationRecord
   before_save { self.avatar_attached = avatar.attached? }
 
   def to_s
-    email
+    name.presence || email
   end
 
   def valid_password?(password)

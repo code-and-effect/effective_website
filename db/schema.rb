@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 2018_02_27_174350) do
     t.string "stripe_customer_id"
     t.string "active_card"
     t.string "stripe_subscription_id"
+    t.string "stripe_subscription_interval"
     t.string "status"
-    t.string "stripe_connect_access_token"
     t.integer "subscriptions_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -128,10 +128,9 @@ ActiveRecord::Schema.define(version: 2018_02_27_174350) do
 
   create_table "order_items", id: :serial, force: :cascade do |t|
     t.integer "order_id"
-    t.integer "seller_id"
     t.string "purchasable_type"
     t.integer "purchasable_id"
-    t.string "title"
+    t.string "name"
     t.integer "quantity"
     t.integer "price", default: 0
     t.boolean "tax_exempt"
@@ -144,11 +143,12 @@ ActiveRecord::Schema.define(version: 2018_02_27_174350) do
 
   create_table "orders", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.string "purchase_state"
+    t.string "state"
     t.datetime "purchased_at"
     t.text "note"
     t.text "note_to_buyer"
     t.text "note_internal"
+    t.string "billing_name"
     t.text "payment"
     t.string "payment_provider"
     t.string "payment_card"
@@ -175,9 +175,11 @@ ActiveRecord::Schema.define(version: 2018_02_27_174350) do
   end
 
   create_table "products", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.integer "price", default: 0
+    t.integer "purchased_order_id"
+    t.string "name"
+    t.integer "price"
     t.boolean "tax_exempt", default: false
+    t.string "qb_item_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -199,9 +201,7 @@ ActiveRecord::Schema.define(version: 2018_02_27_174350) do
     t.integer "subscribable_id"
     t.string "subscribable_type"
     t.string "stripe_plan_id"
-    t.string "status"
     t.string "name"
-    t.integer "price", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["customer_id"], name: "index_subscriptions_on_customer_id"
@@ -234,9 +234,13 @@ ActiveRecord::Schema.define(version: 2018_02_27_174350) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.string "email", default: "", null: false
     t.string "name"
     t.integer "roles_mask"
+    t.boolean "avatar_attached"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "invitation_token"

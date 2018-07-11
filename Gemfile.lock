@@ -173,7 +173,7 @@ GEM
       effective_ckeditor
       rails (>= 3.2.0)
       virtus
-    effective_resources (0.8.23)
+    effective_resources (0.8.24)
       rails (>= 4.0.0)
     effective_roles (1.5.1)
       rails (>= 3.2.0)
