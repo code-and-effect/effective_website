@@ -1,0 +1,11 @@
+.row.justify-content-center
+  .col-12.col-md-8.col-lg-6
+    .card
+      .card-body
+        %h5.card-title= @page_title
+        = effective_form_with(model: resource, url: confirmation_path(resource_name), method: :post) do |f|
+          = f.email_field :email, required: true, autofocus: true, label: 'Email address of your account', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+
+          = f.submit 'Resend confirmation instructions'
+
+        = render 'devise/shared/links'

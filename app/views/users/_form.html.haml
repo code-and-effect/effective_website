@@ -1,21 +1,26 @@
 .row
   .col-6
-    = render 'users/sign_up_fields', f: f
+    = f.text_field :name
+    = f.email_field :email, hint: ('still active until your new email address has been confirmed' if f.object.unconfirmed_email.present? )
+
+    - if f.object.unconfirmed_email.present?
+      = f.static_field :unconfirmed_email,
+        hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
+
+    = f.password_field :password, required: false, autocomplate: 'off', hint: 'leave blank to keep existing password'
+    = f.password_field :password_confirmation, required: false, autocomplete: 'off', hint: 'leave blank to keep existing password'
+
   .col-6
     - if current_user.is?(:admin) && f.object != current_user
       = f.checks :roles, EffectiveRoles.roles_collection(f.object, current_user)
     - else
       = effective_roles_summary(f.object)
 
-= f.file_field :avatar
-
-= f.file_field :files
-
-/ .row
-/   .col-6
-/     = f.file_field :avatar, direct_upload: true
-/   .col-6
-/     = f.file_field :files, multiple: true, direct_upload: true
+.row
+  .col-6
+    = f.file_field :avatar, direct_upload: true
+  .col-6
+    = f.file_field :files, multiple: true, direct_upload: true
 
 .row
   .col-6

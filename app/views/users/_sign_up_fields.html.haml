@@ -2,8 +2,7 @@
 = f.text_field :name
 
 - if f.object.persisted? && !f.object.invited_to_sign_up?
-  = f.password_field :password, required: false, hint: 'leave blank to keep existing password'
-  = f.password_field :password_confirmation, required: false, hint: 'leave blank to keep existing password'
+  = f.password_field :password, required: false, autocomplate: 'off', hint: 'leave blank to keep existing password'
+  = f.password_field :password_confirmation, required: false, autocomplete: 'off', hint: 'leave blank to keep existing password'
 - else
-  = f.password_field :password, required: true
-  = f.password_field :password_confirmation, required: true
+  = f.password_field :password, required: true, autocomplete: 'off', hint: '8 characters minimum and no special rules.'

@@ -4,7 +4,7 @@ class Users::ImpersonationsController < ApplicationController
   skip_authorization_check only: [:destroy]
 
   def create
-    @user = User.where(id: params[:id]).first
+    @user = User.find(params[:id])
 
     authorize! :impersonate, @user
 
@@ -27,7 +27,7 @@ class Users::ImpersonationsController < ApplicationController
       impersonate_sign_in(@user)
     end
 
-    redirect_to(root_path)
+    redirect_to(admin_users_path)
   end
 
   private

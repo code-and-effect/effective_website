@@ -1,7 +1,7 @@
 class Users::SettingsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action { @page_title = 'Account Settings' }
+  before_action { @page_title = 'My Settings' }
 
   # Get to here by visiting /settings
   def edit
@@ -20,10 +20,10 @@ class Users::SettingsController < ApplicationController
     if @user.update_attributes(permitted_params)
       bypass_sign_in(@user)
 
-      flash[:success] = 'Successfully updated account settings.'
+      flash[:success] = 'Successfully updated settings.'
       redirect_to user_settings_path
     else
-      flash.now[:danger] = "Unable to update account settings: #{@user.errors.full_messages.to_sentence}"
+      flash.now[:danger] = "Unable to update settings: #{@user.errors.full_messages.to_sentence}"
       render 'users/settings'
     end
   end

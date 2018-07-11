@@ -33,7 +33,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def after_accept_path_for(resource)
-    root_path
+    session[:user_return_to] || root_path
   end
 
 end
