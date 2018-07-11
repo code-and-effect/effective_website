@@ -1,166 +1,101 @@
-GIT
-  remote: git://github.com/code-and-effect/effective_orders.git
-  revision: 3c889b0b93973cd9822b6f21f72df0168abcca14
-  branch: three-dot-zero
+GEM
+  remote: https://rubygems.org/
   specs:
-    effective_orders (2.2.4)
-      coffee-rails
-      devise
-      effective_addresses (>= 1.6.0)
-      effective_datatables (>= 3.0.0)
-      jquery-rails
-      rails (>= 3.2.0)
-      sass-rails
-
-GIT
-  remote: git://github.com/rails/rails.git
-  revision: 14873f4c0a0ab8dae6402a7a1ce68cd057f063cf
-  branch: 5-2-stable
-  specs:
-    actioncable (5.2.0.rc1)
-      actionpack (= 5.2.0.rc1)
+    actioncable (5.2.0)
+      actionpack (= 5.2.0)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailer (5.2.0.rc1)
-      actionpack (= 5.2.0.rc1)
-      actionview (= 5.2.0.rc1)
-      activejob (= 5.2.0.rc1)
+    actionmailer (5.2.0)
+      actionpack (= 5.2.0)
+      actionview (= 5.2.0)
+      activejob (= 5.2.0)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.2.0.rc1)
-      actionview (= 5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
+    actionpack (5.2.0)
+      actionview (= 5.2.0)
+      activesupport (= 5.2.0)
       rack (~> 2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
+    actionview (5.2.0)
+      activesupport (= 5.2.0)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
+    activejob (5.2.0)
+      activesupport (= 5.2.0)
       globalid (>= 0.3.6)
-    activemodel (5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
-    activerecord (5.2.0.rc1)
-      activemodel (= 5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
+    activemodel (5.2.0)
+      activesupport (= 5.2.0)
+    activerecord (5.2.0)
+      activemodel (= 5.2.0)
+      activesupport (= 5.2.0)
       arel (>= 9.0)
-    activestorage (5.2.0.rc1)
-      actionpack (= 5.2.0.rc1)
-      activerecord (= 5.2.0.rc1)
+    activestorage (5.2.0)
+      actionpack (= 5.2.0)
+      activerecord (= 5.2.0)
       marcel (~> 0.3.1)
-    activesupport (5.2.0.rc1)
+    activesupport (5.2.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    rails (5.2.0.rc1)
-      actioncable (= 5.2.0.rc1)
-      actionmailer (= 5.2.0.rc1)
-      actionpack (= 5.2.0.rc1)
-      actionview (= 5.2.0.rc1)
-      activejob (= 5.2.0.rc1)
-      activemodel (= 5.2.0.rc1)
-      activerecord (= 5.2.0.rc1)
-      activestorage (= 5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
-      bundler (>= 1.3.0)
-      railties (= 5.2.0.rc1)
-      sprockets-rails (>= 2.0.0)
-    railties (5.2.0.rc1)
-      actionpack (= 5.2.0.rc1)
-      activesupport (= 5.2.0.rc1)
-      method_source
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
-
-PATH
-  remote: ../effective_pages
-  specs:
-    effective_pages (1.1.8)
-      effective_ckeditor (>= 1.6.2)
-      effective_datatables (>= 2.0.0)
-      effective_regions (>= 1.4.4)
-      effective_roles (>= 1.2.1)
-      effective_slugs (>= 1.1.0)
-      rails (>= 3.2.0)
-      sass-rails
-
-PATH
-  remote: ../effective_roles
-  specs:
-    effective_roles (1.5.0)
-      rails (>= 3.2.0)
-
-PATH
-  remote: ../effective_bootstrap
-  specs:
-    effective_bootstrap (0.0.2)
-      bootstrap (~> 4.0.0)
-      coffee-rails
-      inline_svg
-      rails (>= 5.1)
-
-GEM
-  remote: https://rubygems.org/
-  specs:
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
+    archive-zip (0.11.0)
+      io-like (~> 0.3.0)
     arel (9.0.0)
-    autoprefixer-rails (8.1.0)
+    autoprefixer-rails (8.6.5)
       execjs
-    aws-partitions (1.69.0)
-    aws-sdk-core (3.17.0)
+    aws-eventstream (1.0.1)
+    aws-partitions (1.95.0)
+    aws-sdk-core (3.22.1)
+      aws-eventstream (~> 1.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.5.0)
+    aws-sdk-kms (1.6.0)
       aws-sdk-core (~> 3)
       aws-sigv4 (~> 1.0)
-    aws-sdk-s3 (1.8.2)
-      aws-sdk-core (~> 3)
+    aws-sdk-s3 (1.16.1)
+      aws-sdk-core (~> 3, >= 3.21.2)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
-    aws-sigv4 (1.0.2)
+    aws-sigv4 (1.0.3)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    bcrypt (3.1.11)
-    bootsnap (1.2.0)
+    bcrypt (3.1.12)
+    bootsnap (1.3.1)
       msgpack (~> 1.0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
     builder (3.2.3)
-    byebug (10.0.0)
-    cancancan (2.1.3)
-    capybara (2.18.0)
+    byebug (10.0.2)
+    cancancan (2.2.0)
+    capybara (3.3.1)
       addressable
       mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (>= 2.0, < 4.0)
-    capybara-screenshot (1.0.18)
-      capybara (>= 1.0, < 3)
-      launchy
-    capybara-slow_finder_errors (0.1.4)
-      capybara (~> 2.5)
-    capybara-webkit (1.15.0)
-      capybara (>= 2.3, < 4.0)
-      json
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.1)
     carmen (1.0.2)
       activesupport (>= 3.0.0)
     carmen-rails (1.0.1)
       carmen (~> 1.0.0)
       rails
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (1.2.0)
+      archive-zip (~> 0.10)
+      nokogiri (~> 1.8)
     cocoon (1.2.11)
     coderay (1.1.2)
     coercible (1.0.0)
@@ -173,91 +108,108 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    crass (1.0.3)
+    connection_pool (2.2.2)
+    crass (1.0.4)
     daemons (1.2.6)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.4.1)
+    devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.2)
+      railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise_invitable (1.7.3)
+    devise_invitable (1.7.4)
       actionmailer (>= 4.1.0)
       devise (>= 4.0.0)
-    dotenv (2.2.1)
-    dotenv-rails (2.2.1)
-      dotenv (= 2.2.1)
-      railties (>= 3.2, < 5.2)
-    effective_addresses (1.8.2)
+    dotenv (2.5.0)
+    dotenv-rails (2.5.0)
+      dotenv (= 2.5.0)
+      railties (>= 3.2, < 6.0)
+    effective_addresses (1.8.3)
       carmen-rails
       coffee-rails
       rails (>= 3.2.0)
+    effective_bootstrap (0.1.0)
+      bootstrap (>= 4.0.0)
+      coffee-rails
+      inline_svg
+      jquery-rails
+      rails (>= 4.0.0)
+      sass-rails
     effective_ckeditor (1.8.2)
       rails (>= 3.2.0)
       sass-rails
-    effective_datatables (4.0.0)
+    effective_datatables (4.0.5)
       coffee-rails
       effective_bootstrap
       effective_resources
       rails (>= 3.2.0)
       sass-rails
-    effective_developer (0.2.12)
+    effective_developer (0.2.14)
       effective_resources
       rails (>= 3.2.0)
-    effective_logging (2.0.0)
+    effective_logging (2.0.8)
       coffee-rails
       devise
       effective_datatables
       effective_resources
-      rails (>= 4)
+      rails (>= 4.0.0)
+    effective_orders (4.0.0beta16)
+      coffee-rails
+      devise
+      effective_bootstrap
+      effective_datatables (>= 4.0.0)
+      effective_resources
+      rails (>= 4.0.0)
+      sass-rails
+    effective_pages (2.0.0)
+      effective_datatables (>= 4.0.0)
+      effective_regions
+      effective_resources
+      effective_roles
+      rails (>= 3.2.0)
     effective_regions (1.7.5)
       effective_ckeditor
       rails (>= 3.2.0)
       virtus
-    effective_resources (0.7.12)
+    effective_resources (0.8.23)
+      rails (>= 4.0.0)
+    effective_roles (1.5.1)
       rails (>= 3.2.0)
-    effective_slugs (1.3.1)
-      rails (>= 3.2.0)
-    effective_style_guide (2.0.3)
+    effective_style_guide (2.0.4)
       faker
-      rails (>= 3.2.0)
-    effective_test_bot (0.6.13)
-      capybara
-      capybara-screenshot
-      capybara-slow_finder_errors
-      capybara-webkit (>= 1.6.0)
+      rails (>= 4.1.0)
+    effective_test_bot (1.0.2)
+      capybara (>= 2.15, < 4.0)
+      chromedriver-helper
       effective_resources
       faker
-      minitest
-      minitest-capybara
       minitest-fail-fast
-      minitest-rails
-      minitest-rails-capybara
       minitest-reporters
-      rails (>= 3.2.0)
+      rails (>= 5.1)
       rmagick
-    effective_trash (0.3.0)
+      selenium-webdriver
+    effective_trash (0.3.1)
       devise
       effective_datatables
       effective_resources
       rails (>= 4.0.0)
     equalizer (0.0.11)
     erubi (1.7.1)
-    eventmachine (1.2.5)
+    eventmachine (1.2.7)
     exception_notification (4.2.2)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
-    faker (1.8.7)
+    faker (1.9.1)
       i18n (>= 0.7)
-    ffi (1.9.23)
-    foreman (0.84.0)
+    ffi (1.9.25)
+    foreman (0.85.0)
       thor (~> 0.19.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    hamlit (2.8.7)
+    hamlit (2.8.8)
       temple (>= 0.8.0)
       thor
       tilt
@@ -266,62 +218,46 @@ GEM
       activesupport (>= 4.0.1)
       hamlit (>= 1.2.0)
       railties (>= 4.0.1)
-    i18n (1.0.0)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     inline_svg (1.3.1)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    jmespath (1.3.1)
-    jquery-rails (4.3.1)
+    io-like (0.3.0)
+    jmespath (1.4.0)
+    jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (2.1.0)
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    loofah (2.2.0)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    marcel (0.3.1)
+    marcel (0.3.2)
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    minitest-capybara (0.8.2)
-      capybara (~> 2.2)
-      minitest (~> 5.0)
-      rake
     minitest-fail-fast (0.1.0)
       minitest (~> 5)
-    minitest-metadata (0.6.0)
-      minitest (>= 4.7, < 6.0)
-    minitest-rails (3.0.0)
-      minitest (~> 5.8)
-      railties (~> 5.0)
-    minitest-rails-capybara (3.0.1)
-      capybara (~> 2.7)
-      minitest-capybara (~> 0.8)
-      minitest-metadata (~> 0.6)
-      minitest-rails (~> 3.0)
-    minitest-reporters (1.1.19)
+    minitest-reporters (1.3.0)
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
     msgpack (1.2.4)
-    nio4r (2.2.0)
-    nokogiri (1.8.2)
+    nio4r (2.3.1)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    passenger (5.2.1)
+    passenger (5.3.3)
       rack
       rake (>= 0.8.1)
-    pg (0.21.0)
+    pg (1.0.0)
     popper_js (1.12.9)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -330,30 +266,53 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (3.0.2)
-    rack (2.0.4)
-    rack-test (0.8.3)
+    rack (2.0.5)
+    rack-protection (2.0.3)
+      rack
+    rack-test (1.0.0)
       rack (>= 1.0, < 3)
-    rack-timeout (0.4.2)
+    rack-timeout (0.5.1)
+    rails (5.2.0)
+      actioncable (= 5.2.0)
+      actionmailer (= 5.2.0)
+      actionpack (= 5.2.0)
+      actionview (= 5.2.0)
+      activejob (= 5.2.0)
+      activemodel (= 5.2.0)
+      activerecord (= 5.2.0)
+      activestorage (= 5.2.0)
+      activesupport (= 5.2.0)
+      bundler (>= 1.3.0)
+      railties (= 5.2.0)
+      sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
-    rake (12.3.0)
+    railties (5.2.0)
+      actionpack (= 5.2.0)
+      activesupport (= 5.2.0)
+      method_source
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
+    rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (4.0.1)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
     rmagick (2.16.0)
     ruby-progressbar (1.9.0)
-    sass (3.5.5)
+    rubyzip (1.2.1)
+    sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -364,7 +323,15 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sprockets (3.7.1)
+    selenium-webdriver (3.13.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2)
+    sidekiq (5.1.3)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -381,7 +348,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    turbolinks (5.1.0)
+    turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
@@ -396,7 +363,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    xpath (3.0.0)
+    xpath (3.1.0)
       nokogiri (~> 1.8)
 
 PLATFORMS
@@ -413,14 +380,14 @@ DEPENDENCIES
   devise_invitable
   dotenv-rails
   effective_addresses
-  effective_bootstrap!
+  effective_bootstrap
   effective_datatables
   effective_developer
   effective_logging
-  effective_orders!
-  effective_pages!
+  effective_orders (= 4.0.0beta16)
+  effective_pages
   effective_resources
-  effective_roles!
+  effective_roles
   effective_style_guide
   effective_test_bot
   effective_trash
@@ -429,12 +396,13 @@ DEPENDENCIES
   hamlit-rails
   jquery-rails
   passenger
-  pg (< 1.0)
+  pg
   pry-byebug
   rack-timeout
-  rails!
+  rails
   rails_12factor
   sass-rails
+  sidekiq
   sucker_punch
   thin
   turbolinks

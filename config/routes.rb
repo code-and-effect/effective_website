@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     match '/impersonate', to: 'users/impersonations#destroy', via: [:delete], as: :impersonate
   end
 
+  if Rails.env.production?
+    require 'sidekiq/web'
+
+    authenticate :user, lambda { |user| user.is?(:superadmin) } do
+      mount Sidekiq::Web => '/admin/sidekick'
+    end
+  end
+
   match '/settings', to: 'users/settings#edit', as: :user_settings, via: [:get]
   match '/settings', to: 'users/settings#update', via: [:patch, :put]
 

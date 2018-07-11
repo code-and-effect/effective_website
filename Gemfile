@@ -1,34 +1,34 @@
 source 'https://rubygems.org'
 ruby '2.5.0'
 
-gem 'rails', github: 'rails/rails', branch: '5-2-stable'
+gem 'rails'
 gem 'bootsnap', require: false
-gem 'pg', '< 1.0'
-gem 'turbolinks'
+gem 'pg'
 
-gem 'bootstrap', '~> 4.0.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
 
 gem 'aws-sdk-s3', require: false
+gem 'bootstrap', '~> 4.0.0'
 gem 'cancancan'
 gem 'cocoon'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
+gem 'jquery-rails'
 gem 'hamlit-rails'
-gem 'sucker_punch'
+gem 'turbolinks'
 
 gem 'effective_addresses'
-gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
+gem 'effective_bootstrap'
 gem 'effective_datatables'
 gem 'effective_developer'
 gem 'effective_logging'
-gem 'effective_orders', github: 'code-and-effect/effective_orders', branch: 'three-dot-zero'
-gem 'effective_pages', path: '~/Sites/effective_pages'
+gem 'effective_orders', '= 4.0.0beta16'
+gem 'effective_pages'
 gem 'effective_resources'
-gem 'effective_roles', path: '~/Sites/effective_roles'
+gem 'effective_roles'
 gem 'effective_style_guide'
 gem 'effective_trash'
 
@@ -36,6 +36,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'thin'
+  gem 'sucker_punch'
 end
 
 group :test do
@@ -47,4 +48,5 @@ group :production do
   gem 'passenger'
   gem 'rack-timeout'
   gem 'rails_12factor'
+  gem 'sidekiq'
 end

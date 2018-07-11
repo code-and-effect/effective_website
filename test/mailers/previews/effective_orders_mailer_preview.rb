@@ -1,7 +1,4 @@
-# In Rails 4.1 and above, visit:
 # http://localhost:3000/rails/mailers
-# to see a preview of the following 3 emails:
-
 class EffectiveOrdersMailerPreview < ActionMailer::Preview
   def order_receipt_to_admin
     Effective::OrdersMailer.order_receipt_to_admin(build_preview_order)
