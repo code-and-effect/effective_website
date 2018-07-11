@@ -22,7 +22,7 @@
         = nav_link_to 'Trash', effective_trash.admin_trash_index_path
 
     %ul.navbar-nav
-      = nav_dropdown('Account', right: true) do
+      = nav_dropdown(user_tag(current_user), right: true) do
         = nav_link_to 'Settings', user_settings_path
         = nav_divider
         = nav_link_to 'Sign Out', destroy_user_session_path, method: :delete

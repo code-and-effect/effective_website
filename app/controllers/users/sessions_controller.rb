@@ -16,7 +16,13 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(user)
-    session[:user_return_to] || root_path
+    if session[:user_return_to]
+      session[:user_return_to]
+    elsif user.is?(:admin)
+      admin_root_path
+    else
+      root_path
+    end
   end
 
 end
