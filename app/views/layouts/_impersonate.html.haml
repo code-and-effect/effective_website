@@ -1,5 +1,5 @@
 - if session[:impersonation_user_id].present?
-  .bg-warning.d-print-none
+  .bg-warning.d-print-none.text-center
     You are logged in as <strong>#{current_user}</strong>.
     = link_to 'click here', impersonate_path, 'data-method': :delete
     to return to your original account.

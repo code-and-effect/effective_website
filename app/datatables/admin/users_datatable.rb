@@ -30,7 +30,7 @@ class Admin::UsersDatatable < Effective::Datatable
     end
 
     actions_col do |user|
-      render_resource_actions(user, resource: resource, partial: :dropleft) do
+      render_resource_actions(resource, user, partial: :dropleft) do
         dropdown_link_to('Impersonate', impersonate_user_path(user), title: "Impersonate #{user}", data: { method: :post, confirm: "Impersonate #{user}?"})
       end
     end
