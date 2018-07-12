@@ -1,5 +1,5 @@
 = effective_form_with model: [:admin, @user] do |f|
-  = render 'users/form', f: f
+  = render 'users/fields', f: f
 
   - if @user.persisted?
     .row
