@@ -25,7 +25,7 @@ class Admin::InvitationsController < Admin::ApplicationController
   protected
 
   def invitation_params
-    params.require(:invitation).permit(*User.permitted_sign_up_params, :emails, roles: [])
+    params.require(:invitation).permit!
   end
 
 end

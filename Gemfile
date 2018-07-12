@@ -34,12 +34,12 @@ gem 'effective_trash'
 group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'
-  gem 'thin'
+  gem 'puma'
   gem 'sucker_punch'
 end
 
 group :test do
-  gem 'effective_test_bot'
+  gem 'effective_test_bot', path: '~/Sites/effective_test_bot'
 end
 
 group :production do
