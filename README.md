@@ -42,7 +42,7 @@ Login as `admin@codeandeffect.com` with any password.
 
 ## Suggested git workflow
 
-When starting a new site, create a new empty git repo, `origin`.  Then add `effective_website` as a second remote.
+When starting a new site, create a new empty git repo, `origin`. Then add `effective_website` as a second remote.
 
 Pull the initial code, one time, from `effective_website/master` and from there on, push all changes to `origin/master` or develop.
 
@@ -64,13 +64,18 @@ This workflow provides the normal `origin/master`, while maintaining the ability
 
 ## License
 
-MIT License.  Copyright [Code and Effect Inc.](http://www.codeandeffect.com/)
+MIT License. Copyright [Code and Effect Inc.](http://www.codeandeffect.com/)
 
 ## Testing
 
 ```ruby
-rake test
-rake test:bot
+rails test
+rails test:system
+rails test:bot:environment
+rails test:bot
+
+rails test:system TOUR=true
+rails test:bot TEST=posts#index
 ```
 
 ## Contributing
