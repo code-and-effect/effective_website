@@ -20,13 +20,13 @@ gem 'hamlit-rails'
 gem 'turbolinks'
 
 gem 'effective_addresses'
-gem 'effective_bootstrap'
-gem 'effective_datatables'
+gem 'effective_bootstrap', path: '~/Sites/effective_bootstrap'
+gem 'effective_datatables', path: '~/Sites/effective_datatables'
 gem 'effective_developer'
 gem 'effective_logging'
 gem 'effective_orders', '= 4.0.0beta16'
 gem 'effective_pages'
-gem 'effective_resources'
+gem 'effective_resources', path: '~/Sites/effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
 gem 'effective_trash'
@@ -39,7 +39,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'effective_test_bot', path: '~/Sites/effective_test_bot'
+  gem 'effective_test_bot'
 end
 
 group :production do
