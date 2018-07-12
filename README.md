@@ -64,7 +64,7 @@ This workflow provides the normal `origin/master`, while maintaining the ability
 
 ## License
 
-MIT License. Copyright [Code and Effect Inc.](http://www.codeandeffect.com/)
+MIT License. Copyright [Code and Effect Inc.](https://www.codeandeffect.com/)
 
 ## Testing
 
