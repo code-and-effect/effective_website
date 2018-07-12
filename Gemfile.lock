@@ -1,10 +1,4 @@
 PATH
-  remote: ../effective_resources
-  specs:
-    effective_resources (0.8.25)
-      rails (>= 4.0.0)
-
-PATH
   remote: ../effective_bootstrap
   specs:
     effective_bootstrap (0.1.0)
@@ -24,6 +18,19 @@ PATH
       effective_resources
       rails (>= 3.2.0)
       sass-rails
+
+PATH
+  remote: ../effective_resources
+  specs:
+    effective_resources (0.8.25)
+      rails (>= 4.0.0)
+
+PATH
+  remote: ../effective_developer
+  specs:
+    effective_developer (0.2.14)
+      effective_resources
+      rails (>= 3.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -159,9 +166,6 @@ GEM
     effective_ckeditor (1.8.2)
       rails (>= 3.2.0)
       sass-rails
-    effective_developer (0.2.14)
-      effective_resources
-      rails (>= 3.2.0)
     effective_logging (2.0.8)
       coffee-rails
       devise
@@ -389,7 +393,7 @@ DEPENDENCIES
   effective_addresses
   effective_bootstrap!
   effective_datatables!
-  effective_developer
+  effective_developer!
   effective_logging
   effective_orders (= 4.0.0beta16)
   effective_pages
