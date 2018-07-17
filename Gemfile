@@ -8,6 +8,7 @@ gem 'pg'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
+gem 'uglifier'
 
 gem 'aws-sdk-s3', require: false
 gem 'bootstrap', '~> 4.0.0'

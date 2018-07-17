@@ -8,7 +8,7 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def test_exception
-    raise 'this is an intention exception.  An Active Job has raised this exception.'
+    raise 'this is an intention exception. An Active Job has raised this exception.'
   end
 
 end

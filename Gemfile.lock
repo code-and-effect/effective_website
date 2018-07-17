@@ -348,6 +348,8 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uglifier (4.1.15)
+      execjs (>= 0.3.0, < 3)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -401,6 +403,7 @@ DEPENDENCIES
   sidekiq
   sucker_punch
   turbolinks
+  uglifier
 
 RUBY VERSION
    ruby 2.5.0p0
