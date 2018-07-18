@@ -1,3 +1,3 @@
-if Rails.env.production?
-  Rack::Timeout.timeout = 26
+if defined?(Rack::Timeout)
+  Rails.application.config.middleware.insert_before Rack::Runtime, Rack::Timeout
 end
