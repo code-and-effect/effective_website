@@ -20,7 +20,8 @@ EffectiveRegions.setup do |config|
   #
   # Or disable the check completely:
   # config.authorization_method = false
-  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
+  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) } # CanCanCan
+
 
 
   # Before Region Save Method
@@ -67,5 +68,4 @@ EffectiveRegions.setup do |config|
   # config.before_save_method = false
 
   config.before_save_method = false
-
 end

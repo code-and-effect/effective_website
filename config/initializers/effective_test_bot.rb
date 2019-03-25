@@ -9,17 +9,19 @@ if Rails.env.test?
     #   'posts#update_invalid' => ['page_title', 'current_path'],
     #   'no_unpermitted_params'
     # ]
-    config.except = ['test_exception_path', 'test_email_path']
 
     # Run only the following tests.  Doesn't work with individual assertions
     # config.only = [
     #   'posts', 'events#index'
     # ]
 
-    config.user = proc { |test| User.first }
-
     # Silence skipped routes
     config.silence_skipped_routes = false
+
+    # Set the current user on a per test basis. You must have at least 1 user seeded.
+    # test is a String as per the except, only and TEST= test names
+    # proc = { |test| user = User.first; puts "#{test} #{user}"; user }
+    config.user = proc { |test| User.first }
 
     # Exits immediately if there is a test failure
     config.fail_fast = false
@@ -29,7 +31,7 @@ if Rails.env.test?
 
     # Fill form fields with these values
     # Based on the input name
-    # :email => 'j.smith@website.com', 'user.last_name' => 'Smith'
+    # :email => 'j.smith@example.com', 'user.last_name' => 'Smith'
     config.form_fills = {}
 
     # Should capybara generate a series of *.png screenshots as it goes through the test?

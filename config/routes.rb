@@ -24,11 +24,19 @@ Rails.application.routes.draw do
 
     resources :invitations, only: [:new, :create]
 
-    root to: 'pages#index'
+    
+  # if you want EffectivePages to render the home / root page
+  # uncomment the following line and create an Effective::Page with slug == 'home' 
+  # root :to => 'Effective::Pages#show', :id => 'home'
+root to: 'pages#index'
   end
 
   match 'test/exception', to: 'test#exception', via: :get
   match 'test/email', to: 'test#email', via: :get
 
-  root to: 'static_pages#home'
+  
+  # if you want EffectivePages to render the home / root page
+  # uncomment the following line and create an Effective::Page with slug == 'home' 
+  # root :to => 'Effective::Pages#show', :id => 'home'
+root to: 'static_pages#home'
 end
