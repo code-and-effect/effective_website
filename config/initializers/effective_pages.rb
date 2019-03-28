@@ -1,5 +1,3 @@
-# EffectivePages Rails Engine
-
 EffectivePages.setup do |config|
   config.pages_table_name = :pages
   config.menus_table_name = :menus
@@ -19,8 +17,14 @@ EffectivePages.setup do |config|
   # Any app/views/layouts/ layout files that should be excluded
   config.excluded_layouts = [:admin]
 
-  # This string will be appended to the effective_pages_header_tags title tag
+  # The site_title will be used to populate the og:site_name tag
+  config.site_title = "#{Rails.application.class.name.split('::').first.titleize}"
+
+  # The site_title_suffix will be appended to the effective_pages_header_tags title tag
   config.site_title_suffix = " | #{Rails.application.class.name.split('::').first.titleize}"
+
+  # This site_og_image is the filename for an image placed in /assets/images and will be used to populate the og:image tag
+  config.site_og_image = ''
 
   # When using the effective_pages_header_tags() helper in <head> to set the <meta name='description'>
   # The value will be populated from an Effective::Page's .meta_description field,
@@ -32,7 +36,25 @@ EffectivePages.setup do |config|
   config.silence_missing_page_title_warnings = false
   config.silence_missing_meta_description_warnings = false
 
-  # Use CanCan: authorize!(action, resource)
+  # Authorization Method
+  #
+  # This method is called by all controller actions with the appropriate action and resource
+  # If the method returns false, an Effective::AccessDenied Error will be raised (see README.md for complete info)
+  #
+  # Use via Proc (and with CanCan):
+  # config.authorization_method = Proc.new { |controller, action, resource| can?(action, resource) }
+  #
+  # Use via custom method:
+  # config.authorization_method = :my_authorization_method
+  #
+  # And then in your application_controller.rb:
+  #
+  # def my_authorization_method(action, resource)
+  #   current_user.is?(:admin)
+  # end
+  #
+  # Or disable the check completely:
+  # config.authorization_method = false
   # Use effective_roles:  resource.roles_permit?(current_user)
   config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
 
@@ -41,4 +63,11 @@ EffectivePages.setup do |config|
 
   # The layout for the EffectivePages admin screen
   config.layout = { admin: 'admin' }
+
+  # All effective_page menu options
+  config.menu = {
+    :apply_active_class => true,  # Add an .active class to the appropriate li item based on current page url
+    :maxdepth => 2                # 2 by default, strict bootstrap3 doesnt support dropdowns in your dropdowns
+  }
+
 end

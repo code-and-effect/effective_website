@@ -20,15 +20,21 @@ Rails.application.routes.draw do
   match '/settings', to: 'users/settings#update', via: [:patch, :put]
 
   namespace :admin do
+    resources :invitations, only: [:new, :create]
     resources :users, except: [:show]
 
-    resources :invitations, only: [:new, :create]
-
+    # if you want EffectivePages to render the home / root page
+    # uncomment the following line and create an Effective::Page with slug == 'home'
+    # root :to => 'Effective::Pages#show', :id => 'home'
     root to: 'pages#index'
   end
 
   match 'test/exception', to: 'test#exception', via: :get
   match 'test/email', to: 'test#email', via: :get
 
+
+  # if you want EffectivePages to render the home / root page
+  # uncomment the following line and create an Effective::Page with slug == 'home'
+  # root :to => 'Effective::Pages#show', :id => 'home'
   root to: 'static_pages#home'
 end
