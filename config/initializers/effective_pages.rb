@@ -55,16 +55,14 @@ EffectivePages.setup do |config|
   #
   # Or disable the check completely:
   # config.authorization_method = false
-  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) && resource.roles_permit?(current_user) } # CanCanCan
   # Use effective_roles:  resource.roles_permit?(current_user)
+  config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) }
 
   # Layout Settings
   # Configure the Layout per controller, or all at once
 
   # The layout for the EffectivePages admin screen
-  config.layout = {
-    :admin => 'admin'
-  }
+  config.layout = { admin: 'admin' }
 
   # All effective_page menu options
   config.menu = {

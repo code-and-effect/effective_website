@@ -110,5 +110,5 @@ EffectiveRoles.setup do |config|
 
   # Layout Settings
   # Configure the Layout per controller, or all at once
-  config.layout = 'application'
+  config.layout = 'admin'
 end

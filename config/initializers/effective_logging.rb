@@ -24,12 +24,12 @@ EffectiveLogging.setup do |config|
   config.authorization_method = Proc.new { |controller, action, resource| authorize!(action, resource) } # CanCanCan
 
   # Admin Screens Layout Settings
-  config.layout = 'application'   # All EffectiveLogging controllers will use this layout
+  # config.layout = 'application'   # All EffectiveLogging controllers will use this layout
 
-  # config.layout = {
-  #   logs: 'application',
-  #   admin_logs: 'admin',
-  # }
+  config.layout = {
+    logs: 'application',
+    admin_logs: 'admin',
+  }
 
   # EffectiveLogger.info('my message') macros
   # The following statuses are already present: info, success, error, view, change, email, sign_in, sign_out
