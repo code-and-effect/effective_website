@@ -63,7 +63,7 @@ EffectivePages.setup do |config|
 
   # The layout for the EffectivePages admin screen
   config.layout = {
-    :admin => 'application'
+    :admin => 'admin'
   }
 
   # All effective_page menu options
