@@ -43,9 +43,4 @@ class MatesDatatable < Effective::Datatable
     scope
   end
 
-  def link_to_reinvite(mate)
-    return nil unless mate.client && mate.user && view.can?(:reinvite, mate)
-    "(#{view.link_to 'resend', view.reinvite_mate_path(mate), method: :post, 'data-confirm' => 'Resend invitation?'})"
-  end
-
 end
