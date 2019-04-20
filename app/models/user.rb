@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable # :confirmable
 
-  attr_accessor :importing # Skip any Invitation emails
-
   has_one_attached :avatar  # active_storage
   has_many_attached :files
 

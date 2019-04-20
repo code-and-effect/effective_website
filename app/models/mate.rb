@@ -51,7 +51,7 @@ class Mate < ApplicationRecord
   end
 
   def invitation_accepted?
-    user && user.invitation_accepted? == true
+    user && user.invitation_accepted?
   end
 
   def invitation_sent_at
