@@ -12,15 +12,14 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def reinvite
-    @invitation = Invitation.new(user_id: params[:id])
+    @user = User.find(params[:id])
 
-    authorize! :reinvite, @invitation
+    authorize! :reinvite, @user
 
-    if @invitation.save
-      @invitation.reinvite!
-      flash[:success] = "Successfully resent invitation to #{@invitation}"
+    if @user.reinvite!
+      flash[:success] = "Successfully resent invitation to #{@user.email}"
     else
-      flash[:danger] = "Unable to invite: #{@invitation.errors.full_messages.to_sentence}."
+      flash[:danger] = "Unable to invite: #{@user.errors.full_messages.to_sentence}."
     end
 
     redirect_back(fallback_location: root_path)

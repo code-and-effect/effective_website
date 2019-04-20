@@ -19,19 +19,32 @@ Rails.application.routes.draw do
   match '/settings', to: 'users/settings#edit', as: :user_settings, via: [:get]
   match '/settings', to: 'users/settings#update', via: [:patch, :put]
 
-  namespace :admin do
-    resources :invitations, only: [:new, :create]
-    resources :users, except: [:show]
+  acts_as_archived
 
-    # if you want EffectivePages to render the home / root page
-    # uncomment the following line and create an Effective::Page with slug == 'home'
-    # root :to => 'Effective::Pages#show', :id => 'home'
-    root to: 'pages#index'
+  namespace :admin do
+    resources :mates, only: [:new, :create, :destroy] do
+      post :reinvite, on: :member
+      post :promote, on: :member
+      post :demote, on: :member
+    end
+
+    resources :clients, except: [:show], concerns: :acts_as_archived
+    resources :users, except: [:show], concerns: :acts_as_archived
+
+    root to: 'users#index'
+  end
+
+  # Front end
+  resources :clients
+
+  resources :mates, only: [:new, :create, :destroy] do
+    post :reinvite, on: :member
+    post :promote, on: :member
+    post :demote, on: :member
   end
 
   match 'test/exception', to: 'test#exception', via: :get
   match 'test/email', to: 'test#email', via: :get
-
 
   # if you want EffectivePages to render the home / root page
   # uncomment the following line and create an Effective::Page with slug == 'home'

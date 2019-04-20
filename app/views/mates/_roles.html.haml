@@ -1,0 +1,6 @@
+%p The roles are as follows:
+%ul
+  -  Mate::ROLES.each do |role|
+    %li
+      %strong= role
+      = EffectiveRoles.role_descriptions[role]

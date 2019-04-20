@@ -1,0 +1,39 @@
+= effective_form_with model: [namespace, user] do |f|
+  .row
+    .col-6
+      = f.text_field :name
+      = f.email_field :email, hint: ('still active until your new email address has been confirmed' if f.object.unconfirmed_email.present? )
+
+      - if f.object.unconfirmed_email.present?
+        = f.static_field :unconfirmed_email,
+          hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
+
+      = f.password_field :password, required: false, autocomplate: 'off'
+      = f.password_field :password_confirmation, required: false, autocomplete: 'off', hint: 'leave blank to keep existing password'
+
+    .col-6
+      - if current_user.is?(:admin) && f.object != current_user
+        = f.radios :roles, EffectiveRoles.roles_collection(f.object, current_user)
+      - else
+        = effective_roles_summary(f.object)
+
+  .row
+    .col-6
+      = f.file_field :avatar
+    .col-6
+      = f.file_field :files
+
+  .row
+    .col-6
+      %h3 Billing Address
+      = effective_address_fields(f, :billing_address)
+
+    .col-6
+      %h3 Shipping Address
+      = effective_address_fields(f, :shipping_address)
+
+  - if @user.persisted?
+    .row
+      .col-6= render 'users/form_invitation', f: f
+
+  = effective_submit(f)

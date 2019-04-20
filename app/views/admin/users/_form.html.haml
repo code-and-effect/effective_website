@@ -1,8 +1,11 @@
-= effective_form_with model: [:admin, @user] do |f|
-  = render 'users/fields', f: f
+= tabs do
+  = tab 'Demographics' do
+    = render '/admin/users/form_user', user: user, namespace: :admin
 
-  - if @user.persisted?
-    .row
-      .col-6= render 'admin/users/invitation', f: f
+  - if user.persisted?
+    = tab 'Clients' do
+      = render 'mates/roles'
+      = render_datatable(MatesDatatable.new(user_id: user.id), inline: true)
 
-  = effective_submit(f)
+    = tab 'Logs' do
+      = render_datatable(user.log_changes_datatable)

@@ -6,20 +6,20 @@
 
   #navContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      - if can? :manage, User
+      - if can? :index, User
         = nav_link_to 'Users', admin_users_path
 
-      - if can? :manage, Effective::Order
+      - if can? :index, Client
+        = nav_link_to 'Clients', admin_clients_path
+
+      - if can? :admin, :effective_orders
         = nav_link_to 'Orders', effective_orders.admin_orders_path
 
-      - if can? :manage, Effective::Page
+      - if can? :admin, :effective_pages
         = nav_link_to 'Pages', effective_pages.admin_pages_path
 
-      - if can? :manage, Effective::Log
+      - if can? :admin, :effective_logging
         = nav_link_to 'Logs', effective_logging.admin_logs_path
-
-      - if can? :manage, Effective::Trash
-        = nav_link_to 'Trash', effective_trash.admin_trash_index_path
 
     %ul.navbar-nav
       = nav_dropdown(user_tag(current_user), right: true) do

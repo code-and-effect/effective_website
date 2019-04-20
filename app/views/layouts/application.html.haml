@@ -19,9 +19,9 @@
     = render partial: 'layouts/navbar'
 
     #content-wrap
-      = render partial: 'layouts/alert'
-
       .container
+        = render partial: 'layouts/alert'
+
         - if content_for?(:sidebar)
           .row
             .col-3#sidebar= yield :sidebar

@@ -1,0 +1,23 @@
+= effective_form_with model: [(namespace ||= nil), mate].compact do |f|
+  - if inline_datatable? && f.object.client_id.present?
+    = f.hidden_field :client_id
+    = f.static_field :client
+  - elsif namespace == :admin
+    = f.select :client_id, Client.sorted.where.not(id: f.object.user&.clients)
+  - else
+    = f.select :client_id, Client.sorted.for_user(current_user).where.not(id: f.object.user&.clients)
+
+  - if inline_datatable? && f.object.user_id.present?
+    = f.hidden_field :user_id
+    = f.static_field :user
+  - elsif namespace == :admin
+    = f.select_or_text :user_id, :email, User.sorted.where.not(id: f.object.client&.users), select: { template: :html }
+  - else
+    = f.email_field :email, label: 'Invite email'
+
+  - if namespace == :admin || current_user.client_ids(:owner).include?(f.object.client_id || 0)
+    = f.radios :roles, Mate::ROLES, label: false, selected: (f.object.roles.presence || :member)
+  - else
+    = f.radios :roles, Mate::ROLES - [:owner], label: false, selected: (f.object.roles.presence || :member)
+
+  = effective_submit(f)
