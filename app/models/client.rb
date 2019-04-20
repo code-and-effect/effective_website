@@ -16,6 +16,7 @@ class Client < ApplicationRecord
 
     archived        :boolean, permitted: false
 
+    mates_count     :integer
     timestamps
   end
 
