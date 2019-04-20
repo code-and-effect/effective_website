@@ -5,23 +5,22 @@ gem 'rails'
 gem 'bootsnap', require: false
 gem 'pg'
 
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'sassc-rails'
-gem 'uglifier'
-
 gem 'aws-sdk-s3', require: false
 gem 'bootstrap'
 gem 'cancancan'
 gem 'cocoon'
+gem 'coffee-rails'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
 gem 'hamlit-rails'
+gem 'jquery-rails'
+gem 'sassc-rails'
 gem 'turbolinks'
 
 gem 'effective_addresses'
 gem 'effective_bootstrap'
+gem 'effective_ckeditor'
 gem 'effective_datatables'
 gem 'effective_developer'
 gem 'effective_logging'
@@ -36,17 +35,24 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'puma'
-  gem 'sucker_punch'
 end
 
 group :test do
   gem 'effective_test_bot'
 end
 
-group :production do
+group :production, :staging do
   gem 'exception_notification'
   gem 'passenger'
-  gem 'rack-timeout'
   gem 'rails_12factor'
+  gem 'rack-timeout'
+  gem 'uglifier'
+end
+
+group :develop, :staging, :test do
+  gem 'sucker_punch'
+end
+
+group :production do
   gem 'sidekiq'
 end
