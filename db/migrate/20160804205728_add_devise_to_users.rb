@@ -21,6 +21,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.0]
 
       t.integer   :roles_mask
       t.boolean   :avatar_attached
+      t.boolean   :archived, default: false
 
       t.timestamps
     end
