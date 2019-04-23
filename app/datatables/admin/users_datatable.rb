@@ -4,11 +4,12 @@ class Admin::UsersDatatable < Effective::Datatable
     order :updated_at, :desc
 
     col :id, visible: false
-    col :updated_at, label: 'Updated'
+    col :updated_at, label: 'Updated', visible: false
     col :created_at, label: 'Created', visible: false
 
     col :email
-    col :name, visible: false
+    col :name
+    col :clients
 
     col :invitation_sent_at
 
@@ -22,12 +23,14 @@ class Admin::UsersDatatable < Effective::Datatable
       end
     end
 
-    col :roles
+    col :roles, search: User::ROLES
 
     col :sign_in_count, visible: false
     col :last_sign_in_at, visible: false do |user|
       (user.current_sign_in_at.presence || user.last_sign_in_at).try(:strftime, '%F %H:%M')
     end
+
+    col :archived, search: { value: false }
 
     actions_col do |user|
       dropdown_link_to('Impersonate', impersonate_user_path(user), title: "Impersonate #{user}", data: { method: :post, confirm: "Impersonate #{user}?"})
@@ -36,7 +39,7 @@ class Admin::UsersDatatable < Effective::Datatable
   end
 
   collection do
-    User.all
+    User.deep.all
   end
 
 end

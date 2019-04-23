@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_27_174352) do
+ActiveRecord::Schema.define(version: 2019_04_20_034055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,12 +74,20 @@ ActiveRecord::Schema.define(version: 2018_02_27_174352) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.boolean "archived", default: false
+    t.integer "mates_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customers", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "stripe_customer_id"
     t.string "active_card"
-    t.string "stripe_subscription_id"
-    t.string "stripe_subscription_interval"
     t.string "status"
     t.integer "subscriptions_count", default: 0
     t.datetime "created_at"
@@ -106,6 +114,14 @@ ActiveRecord::Schema.define(version: 2018_02_27_174352) do
     t.index ["associated_type", "associated_id"], name: "index_logs_on_associated_type_and_associated_id"
     t.index ["parent_id"], name: "index_logs_on_parent_id"
     t.index ["user_id"], name: "index_logs_on_user_id"
+  end
+
+  create_table "mates", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "user_id"
+    t.integer "roles_mask"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "menu_items", id: :serial, force: :cascade do |t|
@@ -204,27 +220,17 @@ ActiveRecord::Schema.define(version: 2018_02_27_174352) do
     t.integer "subscribable_id"
     t.string "subscribable_type"
     t.string "stripe_plan_id"
+    t.string "stripe_subscription_id"
     t.string "name"
+    t.string "description"
+    t.string "interval"
+    t.integer "quantity"
+    t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["customer_id"], name: "index_subscriptions_on_customer_id"
     t.index ["subscribable_id"], name: "index_subscriptions_on_subscribable_id"
     t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable_type_and_subscribable_id"
-  end
-
-  create_table "trash", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.string "trashed_type"
-    t.integer "trashed_id"
-    t.string "trashed_to_s"
-    t.string "trashed_extra"
-    t.text "details"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["trashed_extra"], name: "index_trash_on_trashed_extra"
-    t.index ["trashed_id"], name: "index_trash_on_trashed_id"
-    t.index ["trashed_type", "trashed_id"], name: "index_trash_on_trashed_type_and_trashed_id"
-    t.index ["user_id"], name: "index_trash_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -244,6 +250,7 @@ ActiveRecord::Schema.define(version: 2018_02_27_174352) do
     t.string "name"
     t.integer "roles_mask"
     t.boolean "avatar_attached"
+    t.boolean "archived", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "invitation_token"

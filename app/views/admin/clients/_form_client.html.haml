@@ -1,0 +1,27 @@
+= effective_form_with(model: [:admin, client]) do |f|
+  .row
+    .col-sm-6.border-right
+      %h3 Contact Info
+      %p
+        %small.text-muted The client can see and update these fields
+
+      = f.text_field :name
+      = f.phone_field :phone
+      = f.email_field :email
+
+    .col-sm-6
+      %h3 Admin Only
+      %p
+        %small.text-muted Only admin can see or update these fields.
+
+  %hr
+
+  .row
+    .col-sm-6
+      %h3 Billing Address
+      = effective_address_fields(f, :billing)
+    .col-sm-6
+      %h3 Shipping Address
+      = effective_address_fields(f, :shipping)
+
+  = effective_submit(f)

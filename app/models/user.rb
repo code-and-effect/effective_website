@@ -5,13 +5,13 @@ class User < ApplicationRecord
   has_many_attached :files
 
   acts_as_addressable :billing, :shipping  # effective_addresses
-  acts_as_archived cascade: :mates         # effective_resources
+  acts_as_archived                         # effective_resources
   acts_as_role_restricted                  # effective_roles
   log_changes                              # effective_logging
 
   # My clients
   has_many :mates, -> { order(:id) }, dependent: :destroy, inverse_of: :user
-  has_many :clients, -> { Client.sorted }, through: :mates, inverse_of: :user
+  has_many :clients, -> { Client.sorted }, through: :mates
   accepts_nested_attributes_for :mates
 
   # If we want to implement client mate roles:
@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   # This is just here to help the mates collection inputs
   # This must be a subset of effective_roles roles. Doesn't interact with roles_masks here.
-  ROLES = [:admin, :staff, :client]
+  ROLES = [:superadmin, :admin, :client]
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
     [:email, :password, :password_confirmation, :name]
@@ -59,7 +59,11 @@ class User < ApplicationRecord
     timestamps
   end
 
+  scope :deep, -> { includes(:clients) }
   scope :sorted, -> { order(:name) }
+  scope :datatables_filter, -> { sorted.select(:name, :id) }
+
+  before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 
   # Prepopulate the name based on email
   before_validation(if: -> { email.present? && name.blank? }) do
@@ -67,6 +71,7 @@ class User < ApplicationRecord
   end
 
   validates :name, presence: true
+  validates :roles, presence: true
 
   validate(if: -> { avatar.attached? }) do
     self.errors.add(:avatar, 'must be an image') unless avatar.image?
@@ -76,6 +81,10 @@ class User < ApplicationRecord
 
   def to_s
     name.presence || email
+  end
+
+  def reinvite!
+    invite!
   end
 
   def active_for_authentication?

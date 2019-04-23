@@ -1,0 +1,10 @@
+= tabs do
+  = tab 'Demographics' do
+    = render '/admin/clients/form_client', client: client
+
+  - if client.persisted?
+    = tab 'Users' do
+      = render_datatable(MatesDatatable.new(client_id: client.id, namespace: :admin), inline: true)
+
+    = tab 'Logs' do
+      = render_datatable(client.log_changes_datatable)

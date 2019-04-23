@@ -29,7 +29,6 @@ gem 'effective_pages'
 gem 'effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
-gem 'effective_trash'
 
 group :development, :test do
   gem 'dotenv-rails'

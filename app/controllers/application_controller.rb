@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
   # Logging, and trash
   # log_page_views
   before_action :set_effective_logging_current_user
-  before_action :set_effective_trash_current_user
 
   rescue_from CanCan::AccessDenied, Effective::AccessDenied do |exception|
     respond_to do |format|

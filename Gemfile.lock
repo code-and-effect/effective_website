@@ -182,11 +182,6 @@ GEM
       rails (>= 5.1)
       rmagick
       selenium-webdriver
-    effective_trash (0.3.3)
-      devise
-      effective_datatables
-      effective_resources
-      rails (>= 4.0.0)
     erubi (1.8.0)
     exception_notification (4.3.0)
       actionmailer (>= 4.0, < 6)
@@ -378,7 +373,6 @@ DEPENDENCIES
   effective_roles
   effective_style_guide
   effective_test_bot
-  effective_trash
   exception_notification
   foreman
   hamlit-rails
