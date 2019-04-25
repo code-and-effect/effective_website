@@ -23,3 +23,5 @@ end
 
 # lib/tasks/generate
 Rake::Task['generate:effective_pages'].invoke
+
+puts 'Visit http://localhost:3000 and Sign In as: admin@codeandeffect.com with any password'

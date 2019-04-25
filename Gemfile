@@ -26,6 +26,7 @@ gem 'effective_developer'
 gem 'effective_logging'
 gem 'effective_orders'
 gem 'effective_pages'
+gem 'effective_posts'
 gem 'effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
@@ -34,6 +35,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'puma'
+  gem 'sqlite3'
 end
 
 group :test do
