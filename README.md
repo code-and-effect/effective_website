@@ -9,6 +9,7 @@ Ruby 2.5.0. Rails 5.2
 ```ruby
 git clone git@github.com:code-and-effect/effective_website.git
 cd effective_website
+cp .env.example .env  # Fixes SECRET_KEY_BASE errors
 bundle
 rails db:create db:migrate db:seed
 rails server
