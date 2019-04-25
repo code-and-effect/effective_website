@@ -10,6 +10,9 @@
       = nav_link_to 'About', '/about'
       = nav_link_to 'Contact', '/contact'
 
+      - if can?(:index, Effective::Post)
+        = nav_link_to 'Blog', effective_posts.posts_path
+
     %ul.navbar-nav
       - if current_user.present?
         = nav_dropdown(user_tag(current_user), right: true) do

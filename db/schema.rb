@@ -10,16 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_20_034055) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2019_04_20_034056) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -36,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "addresses", id: :serial, force: :cascade do |t|
+  create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
     t.integer "addressable_id"
     t.string "category", limit: 64
@@ -53,7 +50,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
-  create_table "cart_items", id: :serial, force: :cascade do |t|
+  create_table "cart_items", force: :cascade do |t|
     t.integer "cart_id"
     t.string "purchasable_type"
     t.integer "purchasable_id"
@@ -66,12 +63,18 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["purchasable_type", "purchasable_id"], name: "index_cart_items_on_purchasable_type_and_purchasable_id"
   end
 
-  create_table "carts", id: :serial, force: :cascade do |t|
+  create_table "carts", force: :cascade do |t|
     t.integer "user_id"
     t.integer "cart_items_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "ck_assets", force: :cascade do |t|
+    t.boolean "global", default: false
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -84,7 +87,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "customers", id: :serial, force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.integer "user_id"
     t.string "stripe_customer_id"
     t.string "active_card"
@@ -95,7 +98,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
-  create_table "logs", id: :serial, force: :cascade do |t|
+  create_table "logs", force: :cascade do |t|
     t.integer "parent_id"
     t.integer "user_id"
     t.string "changes_to_type"
@@ -124,7 +127,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "menu_items", id: :serial, force: :cascade do |t|
+  create_table "menu_items", force: :cascade do |t|
     t.integer "menu_id"
     t.integer "menuable_id"
     t.string "menuable_type"
@@ -139,13 +142,13 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["lft"], name: "index_menu_items_on_lft"
   end
 
-  create_table "menus", id: :serial, force: :cascade do |t|
+  create_table "menus", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "order_items", id: :serial, force: :cascade do |t|
+  create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
     t.string "purchasable_type"
     t.integer "purchasable_id"
@@ -160,7 +163,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["purchasable_type", "purchasable_id"], name: "index_order_items_on_purchasable_type_and_purchasable_id"
   end
 
-  create_table "orders", id: :serial, force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.string "state"
     t.datetime "purchased_at"
@@ -180,7 +183,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "pages", id: :serial, force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.string "title"
     t.string "meta_description"
     t.boolean "draft", default: false
@@ -193,7 +196,27 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
-  create_table "products", id: :serial, force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "excerpt"
+    t.string "description"
+    t.string "category"
+    t.boolean "draft", default: false
+    t.datetime "published_at"
+    t.text "tags"
+    t.integer "roles_mask", default: 0
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string "location"
+    t.string "website_name"
+    t.string "website_href"
+    t.text "extra"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "products", force: :cascade do |t|
     t.integer "purchased_order_id"
     t.string "name"
     t.integer "price"
@@ -203,7 +226,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.datetime "updated_at"
   end
 
-  create_table "regions", id: :serial, force: :cascade do |t|
+  create_table "regions", force: :cascade do |t|
     t.string "regionable_type"
     t.integer "regionable_id"
     t.string "title"
@@ -215,7 +238,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["regionable_type", "regionable_id"], name: "index_regions_on_regionable_type_and_regionable_id"
   end
 
-  create_table "subscriptions", id: :serial, force: :cascade do |t|
+  create_table "subscriptions", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "subscribable_id"
     t.string "subscribable_type"
@@ -233,7 +256,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable_type_and_subscribable_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -241,8 +264,8 @@ ActiveRecord::Schema.define(version: 2019_04_20_034055) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"

@@ -18,6 +18,9 @@
       - if can? :admin, :effective_pages
         = nav_link_to 'Pages', effective_pages.admin_pages_path
 
+      - if can? :admin, :effective_posts
+        = nav_link_to 'Posts', effective_posts.admin_posts_path
+
       - if can? :admin, :effective_logging
         = nav_link_to 'Logs', effective_logging.admin_logs_path
 

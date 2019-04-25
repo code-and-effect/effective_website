@@ -9,6 +9,7 @@ class Ability
     # Account / Shared abilities
     can [:edit, :update], User, id: user.id
     can(:show, Effective::Page) { |page| page.roles_permit?(user) }
+    can :index, Effective::Post
     can [:index, :show], Effective::StyleGuide
 
     if user.is?(:client)
@@ -45,8 +46,10 @@ class Ability
     can :access, :admin
 
     # Effective Gems
+    can :manage, Effective::CkAsset
     can :manage, Effective::Log
     can :manage, Effective::Page
+    can :manage, Effective::Post
     can :manage, Effective::Region
 
     can :manage, Effective::Order
@@ -55,6 +58,7 @@ class Ability
     can :admin, :effective_logging
     can :admin, :effective_orders
     can :admin, :effective_pages
+    can :admin, :effective_posts
     can :admin, :effective_roles
 
     # Clients

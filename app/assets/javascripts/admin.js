@@ -12,6 +12,7 @@
 //= require effective_bootstrap
 //= require effective_datatables
 //= require effective_orders
+//= require effective_posts
 
 //= require_tree ./vendor
 //= require_tree ./admin
