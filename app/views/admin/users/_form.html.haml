@@ -8,4 +8,4 @@
       = render_datatable(MatesDatatable.new(user_id: user.id), inline: true)
 
     = tab 'Logs' do
-      = render_datatable(user.log_changes_datatable)
+      = render_datatable(EffectiveLogsDatatable.new(for: user.id))

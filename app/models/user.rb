@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   # This is just here to help the mates collection inputs
   # This must be a subset of effective_roles roles. Doesn't interact with roles_masks here.
-  ROLES = [:superadmin, :admin, :client]
+  ROLES = [:admin, :staff, :client]
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
     [:email, :password, :password_confirmation, :name]
@@ -62,6 +62,10 @@ class User < ApplicationRecord
   scope :deep, -> { includes(:clients) }
   scope :sorted, -> { order(:name) }
   scope :datatables_filter, -> { sorted.select(:name, :id) }
+
+  scope :admins, -> { unarchived.with_role(:admin) }
+  scope :staff, -> { unarchived.with_role(:staff) }
+  scope :clients, -> { unarchived.with_role(:clients) }
 
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 

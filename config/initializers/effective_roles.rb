@@ -1,37 +1,19 @@
 EffectiveRoles.setup do |config|
   # So this is a bit weird because of the flat array
-  # The :superadmin, :admin, :client are for USERS
+  # The :admin, :staff, :client and :reserved are for USERS
   # the owner, member, collaborator are for MATES
   # Sorry.
 
-  config.roles = [:superadmin, :admin, :reserved, :client, :owner, :member, :collaborator] # Only add to the end of this array.  Never prepend roles.
+  config.roles = [:admin, :staff, :client, :reserved, :owner, :member, :collaborator] # Only add to the end of this array.  Never prepend roles.
 
   # config.role_descriptions
   # ========================
   # This setting configures the text that is displayed by form helpers (see README.md)
-  #
-  # Use this Hash syntax if you want different labels depending on the resource being editted
-  #
-  # config.role_descriptions = {
-  #   'User' => {
-  #     :superadmin => 'full access to everything. Can manage users and all website content.',
-  #     :admin => 'full access to website content.  Cannot manage users.',
-  #     :member => 'cannot access admin area.  Can see all content in members-only sections of the website.''
-  #   },
-  #   'Effective::Page' => {
-  #     :superadmin => 'allow superadmins to see this page',
-  #     :admin => 'allow admins to see this page',
-  #     :member => 'allow members to see this page'
-  #   }
-  # }
-  #
-  # Or just keep it simple, and use this Hash syntax of permissions for every resource
-  #
+
   config.role_descriptions = {
     # User roles
-    :superadmin => 'full access to everything.',
-    :admin => 'can log in to the /admin section of the website.',
-    :reserved => '',
+    :admin => 'can log in to the /admin section of the website. full access to everything.',
+    :staff => 'can log in to the /admin section of the website.',
     :client => 'can log in to the /client section of the website.',
 
     # Mate roles
@@ -45,32 +27,12 @@ EffectiveRoles.setup do |config|
   # =======================
   # When current_user is passed into a form helper function (see README.md)
   # this setting determines which roles that current_user may assign
-  #
-  # Use this Hash syntax if you want different permissions depending on the resource being editted
-  #
-  # config.assignable_roles = {
-  #   'User' => {
-  #     :superadmin => [:superadmin, :admin, :member],  # Superadmins may assign Users any role
-  #     :admin => [:admin, :member],                    # Admins may only assign a User the :admin or :member role
-  #     :member => []                                   # Members may not assign any roles
-  #   },
-  #   'Page' => {
-  #     :superadmin => [:superadmin, :admin, :member],  # Superadmins may create Pages for any role
-  #     :admin => [:admin, :member],                    # Admins may create Pages for admin and members
-  #     :member => [:member]                            # Members may create Pages for members
-  #   }
-  #
-  # Or just keep it simple, and use this Hash syntax of permissions for every resource
-  #
-  # config.assignable_roles = {
-  #   :superadmin => [:superadmin, :admin, :member], # Superadmins may assign any resource any role
-  #   :admin => [:admin, :member],                   # Admins may only assign the :admin or :member role
-  #   :member => []                                  # Members may not assign any roles
-  # }
+  
   config.assignable_roles = {
     # User roles
-    superadmin: [:superadmin, :admin, :client],
-    admin: [:admin, :client],
+    admin: [:admin, :staff, :client],
+    staff: [:staff, :client],
+    client: [],
     reserved: [],
 
     # Mate roles

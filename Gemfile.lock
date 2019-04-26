@@ -1,3 +1,19 @@
+PATH
+  remote: ../effective_logging
+  specs:
+    effective_logging (3.0.1)
+      coffee-rails
+      devise
+      effective_datatables
+      effective_resources
+      rails (>= 4.0.0)
+
+PATH
+  remote: ../effective_resources
+  specs:
+    effective_resources (1.2.11)
+      rails (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -130,7 +146,7 @@ GEM
       jquery-rails
       rails (>= 4.0.0)
       sass
-    effective_ckeditor (1.9.2)
+    effective_ckeditor (1.9.3)
       rails (>= 3.2.0)
       sass
     effective_datatables (4.5.1)
@@ -142,12 +158,6 @@ GEM
     effective_developer (0.4.3)
       effective_resources
       rails (>= 3.2.0)
-    effective_logging (3.0.0)
-      coffee-rails
-      devise
-      effective_datatables
-      effective_resources
-      rails (>= 4.0.0)
     effective_orders (4.1.2)
       coffee-rails
       devise
@@ -156,7 +166,7 @@ GEM
       effective_resources
       rails (>= 4.0.0)
       sass
-    effective_pages (2.0.1)
+    effective_pages (2.0.2)
       effective_datatables (>= 4.0.0)
       effective_regions
       effective_resources
@@ -174,8 +184,6 @@ GEM
     effective_regions (1.8.2)
       effective_ckeditor
       rails (>= 3.2.0)
-    effective_resources (1.2.11)
-      rails (>= 4.0.0)
     effective_roles (1.5.1)
       rails (>= 3.2.0)
     effective_style_guide (2.0.4)
@@ -203,15 +211,9 @@ GEM
       thor (~> 0.19.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    hamlit (2.9.3)
+    haml (5.0.4)
       temple (>= 0.8.0)
-      thor
       tilt
-    hamlit-rails (0.2.3)
-      actionpack (>= 4.0.1)
-      activesupport (>= 4.0.1)
-      hamlit (>= 1.2.0)
-      railties (>= 4.0.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     inline_svg (1.4.0)
@@ -388,17 +390,17 @@ DEPENDENCIES
   effective_ckeditor
   effective_datatables
   effective_developer
-  effective_logging
+  effective_logging!
   effective_orders
   effective_pages
   effective_posts
-  effective_resources
+  effective_resources!
   effective_roles
   effective_style_guide
   effective_test_bot
   exception_notification
   foreman
-  hamlit-rails
+  haml
   jquery-rails
   passenger
   pg

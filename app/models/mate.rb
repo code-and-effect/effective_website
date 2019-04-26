@@ -1,6 +1,6 @@
 class Mate < ApplicationRecord
   acts_as_role_restricted  # effective_roles
-  log_changes              # log_changes
+  log_changes to: :client  # log_changes
 
   attribute :email
 

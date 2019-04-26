@@ -6,12 +6,18 @@
 
   #navContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      = nav_link_to 'Style Guide', effective_style_guide.style_guide_path
-      = nav_link_to 'About', '/about'
-      = nav_link_to 'Contact', '/contact'
-
       - if can?(:index, Effective::Post)
         = nav_link_to 'Blog', effective_posts.posts_path
+        
+      - if can?(:index, Effective::Page)
+        - Effective::Page.all.each do |page|
+          = nav_link_to(page, effective_pages.page_path(page)) if can?(:show, page)
+
+      - if can?(:index, Client) && current_user.clients.present?
+        = nav_link_to 'Manage Users', clients_path
+
+      - if can?(:index, Effective::StyleGuide)
+        = nav_link_to 'Style Guide', effective_style_guide.style_guide_path
 
     %ul.navbar-nav
       - if current_user.present?

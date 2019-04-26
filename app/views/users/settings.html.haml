@@ -1,6 +1,10 @@
 %h1= @page_title
 
 = effective_form_with(model: @user, url: user_settings_path) do |f|
-  = render 'users/fields', f: f
+  .row
+    .col-sm-6
+      = render 'users/fields', f: f
+    .col-sm-6
+      = render 'users/mates', user: f.object
 
   = f.submit 'Update Settings'

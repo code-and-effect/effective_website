@@ -8,15 +8,24 @@ class Ability
 
     # Account / Shared abilities
     can [:edit, :update], User, id: user.id
-    can(:show, Effective::Page) { |page| page.roles_permit?(user) }
-    can :index, Effective::Post
+
+    # Effective Gems
+    can [:index, :show], Effective::Post
     can [:index, :show], Effective::StyleGuide
+
+    can :index, Effective::Page
+    can(:show, Effective::Page) { |page| page.roles_permit?(user) }
 
     if user.is?(:client)
       client_abilities(user)
     end
 
-    if user.is?(:admin) || user.is?(:superadmin)
+    if user.is?(:staff)
+      staff_abilities(user)
+    end
+
+    if user.is?(:admin)
+      staff_abilities(user)
       admin_abilities(user)
     end
   end
@@ -42,13 +51,13 @@ class Ability
     can(:reinvite, Mate) { |mate| user.client_ids(:owner, :member).include?(mate.client_id) && !mate.invitation_accepted? }
   end
 
-  def admin_abilities(user)
+  def staff_abilities(user)
     can :access, :admin
 
     # Effective Gems
+    can [:new, :create, :edit, :update, :destroy], Effective::Page
     can :manage, Effective::CkAsset
     can :manage, Effective::Log
-    can :manage, Effective::Page
     can :manage, Effective::Post
     can :manage, Effective::Region
 
@@ -75,8 +84,12 @@ class Ability
     # Users
     can(crud, User)
     acts_as_archived(User)
-    can(:impersonate, User) { |user| !user.is?(:superadmin) && !user.is?(:admin) }
+    can(:impersonate, User) { |user| user.is?(:client) }
     can(:reinvite, User) { |user| !user.invitation_accepted? || user.invitation_sent_at.blank? }
+  end
+
+  def admin_abilities(user)
+    can(:impersonate, User) { |user| user.is?(:client) || user.is?(:staff) }
   end
 
 end

@@ -1,0 +1,15 @@
+%h1
+  = simple_effective_region page, :title do
+    = page.title
+
+.row
+  .col-sm-6
+    = effective_region page, :left do
+      %p this is left content
+
+  .col-sm-6
+    = effective_region page, :right do
+      %p this is right content
+
+= effective_region page, :content do
+  %p this is default content for the page titled #{page.title}

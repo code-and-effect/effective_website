@@ -11,12 +11,12 @@ class MatesDatatable < Effective::Datatable
       col 'user.email'
     end
 
+    col :roles, search: { collection: Mate::ROLES }
+
     col :created_at, as: :date, label: 'Joined'
 
     col :invitation_accepted?, label: 'Invite Accepted?', as: :boolean
     col :invitation_sent_at, as: :date
-
-    col :roles, search: { collection: Mate::ROLES }
 
     if attributes[:actions] == false
       # Nothing

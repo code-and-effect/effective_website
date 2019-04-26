@@ -9,6 +9,6 @@
     .col-6
       = render 'users/sign_up_fields', f: f
     .col-6
-      = effective_roles_summary(f.object)
+      = render 'users/mates', user: f.object
 
   = f.submit 'Accept Invitation'

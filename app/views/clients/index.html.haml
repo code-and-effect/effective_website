@@ -1,10 +1,11 @@
 %h1= @page_title
 
-%p Your account belongs to multiple clients!
+- if @clients.length > 1
+  %p Your account belongs to multiple clients!
 
-%p You can invite and manage users separately for each of them.
+  %p You can invite and manage users separately for each of them.
 
-%p Please select one to continue:
+  %p Please select one to continue:
 
 %ul
   - @clients.each do |client|

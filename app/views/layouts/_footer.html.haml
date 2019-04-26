@@ -3,6 +3,11 @@
     .col-3
       = effective_region :footer_left do
         %h4 Links
+        %ul
+          %li= link_to 'Blog', effective_posts.posts_path
+          %li= link_to 'About', '/about'
+          %li= link_to 'Contact', '/contact'
+          %li= link_to 'Style Guide', '/styleguide'
 
     .col-6
       = effective_region :footer_center do
@@ -31,4 +36,5 @@
     .col.text-center
       = effective_region :footer_bottom do
         %p Terms of Use, Privicy Policy, etc.
+
       %p Copyright &copy; #{Time.zone.now.year} Code and Effect

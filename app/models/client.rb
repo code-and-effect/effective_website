@@ -3,8 +3,8 @@ class Client < ApplicationRecord
   acts_as_archived                         # effective_resources
   log_changes                              # effective_logging
 
-  has_many :mates, -> { order(:id) }, dependent: :destroy, inverse_of: :client, counter_cache: :mates_count
-  has_many :users, -> { User.sorted }, through: :mates
+  has_many :mates, -> { order(:roles_mask) }, dependent: :destroy, inverse_of: :client, counter_cache: :mates_count
+  has_many :users, through: :mates
   accepts_nested_attributes_for :mates
 
   effective_resource do

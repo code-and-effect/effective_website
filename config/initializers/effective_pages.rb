@@ -36,6 +36,9 @@ EffectivePages.setup do |config|
   config.silence_missing_page_title_warnings = false
   config.silence_missing_meta_description_warnings = false
 
+  # Display the effective roles 'choose roles' input when an admin creates a new post
+  config.use_effective_roles = true
+
   # Authorization Method
   #
   # This method is called by all controller actions with the appropriate action and resource

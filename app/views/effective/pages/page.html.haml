@@ -1,3 +1,6 @@
-= effective_region page, :body do
-  %h1= @page_title
-  %p This is default content page content.
+%h1
+  = simple_effective_region page, :title do
+    = page.title
+
+= effective_region page, :content do
+  %p this is default content for the page titled #{page.title}
