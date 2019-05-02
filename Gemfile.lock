@@ -123,7 +123,7 @@ GEM
       carmen-rails
       coffee-rails
       rails (>= 3.2.0)
-    effective_bootstrap (0.5.3)
+    effective_bootstrap (0.5.4)
       bootstrap (>= 4.0.0)
       coffee-rails
       inline_svg
@@ -133,7 +133,7 @@ GEM
     effective_ckeditor (1.9.3)
       rails (>= 3.2.0)
       sass
-    effective_datatables (4.5.2)
+    effective_datatables (4.5.3)
       coffee-rails
       effective_bootstrap
       effective_resources
@@ -156,13 +156,13 @@ GEM
       effective_resources
       rails (>= 4.0.0)
       sass
-    effective_pages (2.0.2)
+    effective_pages (2.0.3)
       effective_datatables (>= 4.0.0)
       effective_regions
       effective_resources
       effective_roles
       rails (>= 3.2.0)
-    effective_posts (1.0.5)
+    effective_posts (1.0.6)
       effective_bootstrap
       effective_ckeditor
       effective_datatables (>= 4.0.0)
