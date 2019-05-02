@@ -20,5 +20,5 @@
     #admin-wrap
       %div{class: params[:action] == 'index' ? 'container-fluid' : 'container' }
         = render partial: 'layouts/alert'
-        = yield
+        #main= yield
 

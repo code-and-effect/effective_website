@@ -4,6 +4,7 @@
 
   - if client.persisted?
     = tab 'Users' do
+      = render 'mates/roles'
       = render_datatable(MatesDatatable.new(client_id: client.id, namespace: :admin), inline: true)
 
     = tab 'Logs' do

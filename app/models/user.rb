@@ -65,7 +65,7 @@ class User < ApplicationRecord
 
   scope :admins, -> { unarchived.with_role(:admin) }
   scope :staff, -> { unarchived.with_role(:staff) }
-  scope :clients, -> { unarchived.with_role(:clients) }
+  scope :clients, -> { unarchived.with_role(:client) }
 
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 

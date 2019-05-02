@@ -28,7 +28,7 @@
             .col-3#sidebar= yield :sidebar
             .col-9#main= yield
         - else
-          = yield
+          #main= yield
 
     #footer-wrap
       = render partial: 'layouts/footer'

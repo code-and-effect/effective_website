@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def user_tag(user, name: false)
+  def user_tag(user, name: true)
     user ||= User.new
 
     avatar = if user.avatar_attached? && user.avatar.attached? && (url = url_for(user.avatar) rescue false)
