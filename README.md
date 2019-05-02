@@ -21,6 +21,13 @@ Login as `admin@codeandeffect.com` with any password.
 
 - Good luck!
 
+## Live Demo
+
+Click here for a [Live Demo](https://effective-website-demo.herokuapp.com/).
+
+Login as `admin@codeandeffect.com` with password `be_effective`.
+
+
 ## CORS Configuration
 
 ```
