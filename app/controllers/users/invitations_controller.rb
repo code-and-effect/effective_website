@@ -11,20 +11,6 @@ class Users::InvitationsController < Devise::InvitationsController
     raise CanCan::AccessDenied
   end
 
-  def reinvite
-    @user = User.find(params[:id])
-
-    authorize! :reinvite, @user
-
-    if @user.reinvite!
-      flash[:success] = "Successfully resent invitation to #{@user.email}"
-    else
-      flash[:danger] = "Unable to invite: #{@user.errors.full_messages.to_sentence}."
-    end
-
-    redirect_back(fallback_location: root_path)
-  end
-
   protected
 
   def configure_accept_invitation_params

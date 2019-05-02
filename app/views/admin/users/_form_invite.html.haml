@@ -11,5 +11,5 @@
         value: f.object.invitation_accepted_at.try(:strftime, '%F %H:%M') || 'Not accepted'
 
 %p
-  = link_to 'Resend invitation', reinvite_user_invitation_path(f.object), class: 'btn btn-secondary', 
+  = link_to 'Resend invitation', reinvite_admin_user_path(f.object), class: 'btn btn-secondary', 
     data: { method: :post, confirm: "Resend invitation to #{f.object.email}?" }

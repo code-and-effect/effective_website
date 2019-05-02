@@ -39,15 +39,7 @@ class Admin::UsersDatatable < Effective::Datatable
       (user.current_sign_in_at.presence || user.last_sign_in_at).try(:strftime, '%F %H:%M')
     end
 
-    actions_col do |user|
-      if can?(:reinvite, user)
-        dropdown_link_to('Reinvite', reinvite_user_invitation_path(user), title: "Reinvite #{user}", data: { method: :post, confirm: "Reinvite #{user}?"})
-      end
-
-      if can?(:impersonate, user)
-        dropdown_link_to('Impersonate', impersonate_user_path(user), title: "Impersonate #{user}", data: { method: :post, confirm: "Impersonate #{user}?"})
-      end
-    end
+    actions_col
   end
 
   collection do
