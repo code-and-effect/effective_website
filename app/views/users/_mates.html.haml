@@ -2,6 +2,6 @@
 
 %ul
   - user.mates.each do |mate|
-    %li #{link_to(user.mate.client, '#')} as a <strong>#{user.mate.roles.first}</strong>.
+    %li #{link_to(mate.client, '#')} as a <strong>#{mate.roles.first}</strong>.
 
 = render 'mates/roles'
