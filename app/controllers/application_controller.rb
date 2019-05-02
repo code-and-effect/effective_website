@@ -35,10 +35,6 @@ class ApplicationController < ActionController::Base
     assign_test_bot_access_denied_exception(exception) if defined?(EffectiveTestBot) && Rails.env.test?
   end
 
-  def after_sign_in_path_for(user)
-    session[:user_return_to] || (user.is?(:admin) ? admin_root_path : root_path)
-  end
-
   private
 
   def restrict_admin_routes
@@ -47,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def set_devise_page_title
     @page_title =
-      case "#{params[:controller]}_#{params[:action]}".sub('devise/', '').gsub('users/', '')
+      case "#{params[:controller]}_#{params[:action]}".sub('devise/', '').sub('users/', '')
       when 'sessions_new' then 'Sign In'
       when 'sessions_create' then 'Sign In'
       when 'passwords_new' then 'Forgot Your Password?'

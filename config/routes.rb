@@ -12,20 +12,20 @@ Rails.application.routes.draw do
   end
 
   match '/impersonate', to: 'users/impersonations#destroy', via: [:delete], as: :impersonate
-  match '/settings', to: 'users/settings#edit', as: :user_settings, via: [:get]
+  match '/settings', to: 'users/settings#edit', via: [:get], as: :user_settings
   match '/settings', to: 'users/settings#update', via: [:patch, :put]
 
   match 'test/exception', to: 'test#exception', via: :get
   match 'test/email', to: 'test#email', via: :get
 
   namespace :admin do
+    resources :clients, except: [:show], concerns: :acts_as_archived
+
     resources :mates, only: [:new, :create, :destroy] do
       post :reinvite, on: :member
       post :promote, on: :member
       post :demote, on: :member
     end
-
-    resources :clients, except: [:show], concerns: :acts_as_archived
 
     resources :users, except: [:show], concerns: :acts_as_archived do
       post :reinvite, on: :member

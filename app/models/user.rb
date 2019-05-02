@@ -59,7 +59,7 @@ class User < ApplicationRecord
     timestamps
   end
 
-  scope :deep, -> { includes(:clients) }
+  scope :deep, -> { with_attached_files.includes(:clients) }
   scope :sorted, -> { order(:name) }
   scope :datatables_filter, -> { sorted.select(:name, :id) }
 

@@ -5,7 +5,7 @@ class Users::SettingsController < ApplicationController
 
   # Get to here by visiting /settings
   def edit
-    @user = User.with_attached_files.find(current_user.id)
+    @user = User.all.deep.find(current_user.id)
     authorize! :edit, @user
 
     render 'users/settings'
@@ -17,7 +17,7 @@ class Users::SettingsController < ApplicationController
 
     delete_blank_password_params
 
-    if @user.update_attributes(permitted_params)
+    if @user.update(permitted_params)
       bypass_sign_in(@user)
 
       flash[:success] = 'Successfully updated settings.'

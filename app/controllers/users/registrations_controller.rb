@@ -3,9 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     super do
-      unless resource.persisted?
-        flash.now[:danger] = resource.errors.full_messages.to_sentence
-      end
+      flash.now[:danger] = resource.errors.full_messages.to_sentence if resource.new_record?
     end
   end
 

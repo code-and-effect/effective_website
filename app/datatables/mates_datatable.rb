@@ -22,7 +22,7 @@ class MatesDatatable < Effective::Datatable
       # Nothing
     elsif attributes[:user_id].blank? && can?(:impersonate, User)
       actions_col do |mate|
-        dropdown_link_to('Impersonate', impersonate_user_path(mate.user), title: "Impersonate #{mate.user}", data: { method: :post, confirm: "Impersonate #{mate.user}?"})
+        dropdown_link_to('Impersonate', impersonate_admin_user_path(mate.user), title: "Impersonate #{mate.user}", data: { method: :post, confirm: "Impersonate #{mate.user}?"})
       end
     else
       actions_col

@@ -39,7 +39,7 @@ class Admin::UsersDatatable < Effective::Datatable
       (user.current_sign_in_at.presence || user.last_sign_in_at).try(:strftime, '%F %H:%M')
     end
 
-    actions_col
+    actions_col(impersonate: { remote: false })
   end
 
   collection do
