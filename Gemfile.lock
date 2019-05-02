@@ -1,3 +1,10 @@
+PATH
+  remote: ../effective_developer
+  specs:
+    effective_developer (0.4.3)
+      effective_resources
+      rails (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -139,9 +146,6 @@ GEM
       effective_resources
       rails (>= 3.2.0)
       sass
-    effective_developer (0.4.3)
-      effective_resources
-      rails (>= 3.2.0)
     effective_logging (3.0.1)
       coffee-rails
       devise
@@ -381,7 +385,7 @@ DEPENDENCIES
   effective_bootstrap
   effective_ckeditor
   effective_datatables
-  effective_developer
+  effective_developer!
   effective_logging
   effective_orders
   effective_pages
