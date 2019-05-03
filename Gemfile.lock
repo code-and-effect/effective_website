@@ -174,7 +174,7 @@ GEM
     effective_regions (1.8.2)
       effective_ckeditor
       rails (>= 3.2.0)
-    effective_resources (1.2.12)
+    effective_resources (1.2.14)
       rails (>= 4.0.0)
     effective_roles (1.5.1)
       rails (>= 3.2.0)
