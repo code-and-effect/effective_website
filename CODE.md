@@ -30,3 +30,39 @@ class Autopsy < ApplicationRecord
   end
 
 end
+
+
+def index
+  @page_title = 'Clients'
+  authorize! :index, Client
+
+  @datatable = ClientsDatatable.new()
+end
+
+def edit
+  @client = Client.find(params[:id])
+
+  @page_title = "Edit #{@client}"
+  authorize! :edit, @client 
+end
+
+def update
+  @client = Client.find(params[:id])
+
+  @page_title = "Edit #{@client}"
+  authorize! :update, @client 
+
+  if @client.update(client_params)
+    flash[:success] = 'Successfully updated client'
+    redirect_to admin_client_path(@client)
+  else
+    flash.now[:error] = "Unable to save client: #{@client.errors.full_messages.to_sentence}."
+    render :edit
+  end
+end
+
+private
+
+def client_params
+  params.require(:client).permit(:name, :age)
+end
