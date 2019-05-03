@@ -1,4 +1,49 @@
-# Effective Talk
+
+
+
+
+
+
+
+Matt Riemer
+Code & Effect
+https://github.com/code-and-effect/effective_website
+
+Building Effective Websites
+YEGRB Edmonton
+https://yegrb.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 http://mattriemer.ca
 https://codeandeffect.com/
@@ -22,10 +67,29 @@ https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
 https://github.com/code-and-effect/effective_resources
 
 https://en.wikipedia.org/wiki/Semantic_satiation
-rails generate
 https://guides.rubyonrails.org/v3.2/getting_started.html#getting-up-and-running-quickly-with-scaffolding
-
 https://github.com/code-and-effect/effective_developer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Slides
 
