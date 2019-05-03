@@ -1,5 +1,30 @@
 # Effective Talk
 
+http://mattriemer.ca
+https://codeandeffect.com/
+https://github.com/code-and-effect
+https://github.com/code-and-effect/effective_website
+
+https://github.com/code-and-effect/effective_bootstrap
+https://guides.rubyonrails.org/action_view_overview.html#view-paths
+
+http://localhost:3000
+
+https://github.com/code-and-effect/effective_posts
+https://github.com/code-and-effect/effective_pages
+https://github.com/code-and-effect/effective_style_guide
+https://github.com/code-and-effect/effective_datatables
+https://github.com/code-and-effect/effective_logging
+
+https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
+
+https://github.com/code-and-effect/effective_resources
+
+https://en.wikipedia.org/wiki/Semantic_satiation
+https://guides.rubyonrails.org/v3.2/getting_started.html#getting-up-and-running-quickly-with-scaffolding
+
+https://github.com/code-and-effect/effective_developer
+
 ## Slides
 
 Oh shazbot, I forgot my slides. Wait, here they are.  *slides*
@@ -11,7 +36,6 @@ https://github.com/code-and-effect/effective_website
 Building Effective Websites
 YEGRB Edmonton
 https://yegrb.com
-
 
 ## Introduction
 
@@ -37,16 +61,17 @@ That's exactly the style of sites that play to rails' strengths. And the kind I 
 
 The effective gems make it super easy to build these kind of CRUD apps.
 
-So today, we have about 30 minutes to get through the following 5 goals:
 
-1.) A tour of my starter website app.
+So today, we have about 30 minutes to get through the following 3 goals:
+
+1.) A tour of my starter website app and introduce you to my software stack
 2.) A deep dive into code and how I evaluate a rails app I'm seeing for the first time.
 3.) Learn my personal process behind building rails sites. We're going to build out an entire non-trivial feature.
 
 and, of course, to entertain and delight your senses:
 
-4.) I will provide you with at least 10 time saving tips that have nothing to do with the effective_* stack.
-5.) And there will be skill testing questions throughout
+1.) I will provide you with at least 10 time saving tips that have nothing to do with the effective_* stack.
+2.) And there will be skill testing questions throughout
 
 ## My Stack
 
@@ -246,8 +271,10 @@ So now let's go and add an action.
 
 rails generate migration add_approved_to_autopsies approved:boolean
 
+approved :boolean
+
 def approve!
-  raise 'already approved' if approved?s
+  raise 'already approved' if approved?
   update!(approved: true)
 end
 
@@ -257,6 +284,7 @@ can(:approve, Autopsy) { }
 
 resource_scope -> { current_user.autopsies }
 
+TIME SAVER #11: Develop and use a high level CRUD DSL :)
 
 ## Conclusion
 
