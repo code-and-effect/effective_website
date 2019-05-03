@@ -19,7 +19,7 @@ http://mattriemer.ca
 
 My name is Matt Riemer, I'm a full time ruby on rails developer and open sourcerer.
 
-I'm the co-founder and CTO of Code & Effect, the most effective web consultancy here in Edmonton.
+I'm the co-founder and CTO of Code & Effect
 
 https://codeandeffect.com/
 
@@ -29,20 +29,18 @@ We do this in a lot of ways, and open source is one of those.
 
 https://github.com/code-and-effect
 
-Over the last 10 years, we've built and now maintain a whole bunch of client apps.
+So we've built a ton of client apps over the last 10 years.
 
-So we try to embrace the Rails Way. Write as little code as possible. Be simple rather than clever. Explicit over implicit.
+Most of those apps are database CRUD apps.
 
-Core to the rails way is CRUD and REST, and that's really the kind of apps I build.
+That's exactly the style of sites that play to rails' strengths. And the kind I love building.
 
-A lot of database CRUD.
-
-The effective gems make it super easy to build these kind of apps. And I want to show off what they can do :)
+The effective gems make it super easy to build these kind of CRUD apps.
 
 So today, we have about 30 minutes to get through the following 5 goals:
 
-1.) A tour of my starter website app and effective gem stack.
-2.) A deep dive into code and how to evaluate a rails app you're seeing for the first time.
+1.) A tour of my starter website app.
+2.) A deep dive into code and how I evaluate a rails app I'm seeing for the first time.
 3.) Learn my personal process behind building rails sites. We're going to build out an entire non-trivial feature.
 
 and, of course, to entertain and delight your senses:
@@ -62,14 +60,15 @@ Firefox4Life
 
 It takes too darn long to make a fresh rails website. Nevermind an effective one.
 
-TIME SAVER #1: Maintain your own stater template site.
-
 https://github.com/code-and-effect/effective_website
+
+TIME SAVER #1: Maintain your own stater template site.
 
 This is the same process I use when evaluating any new rails app.
 
 - Gemfile
-POP QUIZ #1:  Can anyone give me a 1 sentence quick description for all 12 of these gems?
+
+POP QUIZ: Can anyone give me a 1 sentence quick description for all 12 of these gems?
 
 - application.js
 - application.scss
@@ -91,6 +90,29 @@ Show data model.
   - collaborator
 
 
+Skip over Controllers and Datatables
+
+Views
+- Haml
+- Layouts
+
+TIME SAVER #2: A good layout.
+
+- Navbars
+
+https://github.com/code-and-effect/effective_bootstrap
+
+Other views
+
+POP QUIZ: What files do you NOT see in these directories.
+
+Application Templates
+
+https://guides.rubyonrails.org/action_view_overview.html#view-paths
+
+TIME SAVER #3: Application templates
+
+
 ## Explore the App
 
 https://localhost:3000
@@ -105,8 +127,6 @@ Function over fashion.
 
 Run through the app. Log in as admin@codeandeffect.com / any password
 
-TIME SAVER #2: Development mode any password
-
 - Home page. These are editable regions, I'll show that off later
 
 - Blog
@@ -116,15 +136,26 @@ https://github.com/code-and-effect/effective_posts
 https://github.com/code-and-effect/effective_pages
 
 - Style Guide
+https://github.com/code-and-effect/effective_style_guide
+
+
+TIME SAVER #4: Development mode any password
 
 - Admin Users
 https://github.com/code-and-effect/effective_datatables
 
 - Admin Clients
-- Pages
-- Posts
+
+- Impersonate
+
+TIME SAVER #5: Impersonate user functionality. Let your admins admin the site.
+
 - Logs
+https://github.com/code-and-effect/effective_logging
+
 - Orders
+https://github.com/code-and-effect/effective_orders
+
 
 ## Exploring the App Code - Round 2
 
@@ -134,7 +165,8 @@ POP QUIZ: When receiving a web request, what is the first file that rails runs?
   - talk about resources
 
 - Tests controller
-TIME SAVER: Have a secret endpoint that you can can test your app
+
+TIME SAVER #6: Have a secret endpoint that you can can test your app
 
 POP QUIZ: What are the 7 restful routes? or the 7 CRUD actions
 
@@ -148,28 +180,6 @@ https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
 Controller
   - Admin::Clients#controller
 
-https://github.com/code-and-effect/effective_resources
-
-
-Views
--  Layouts
-
-TIME SAVER: A good layout
-
-
-Btw those `tabs do` and other helpers come from effective bootstrap gem.
-
-https://github.com/code-and-effect/effective_bootstrap
-
-
-Other views
-
-POP QUIZ: What files do you NOT see in these directories
-
-Application Templates
-
-TIME SAVER #3: Application templates
-
 ## Effective Resources
 
 A big part of my process is trying not to write code.
@@ -180,7 +190,7 @@ https://github.com/code-and-effect/effective_resources
 
 It uses routes.rb, ability.rb and current_user and the controller to just do the right thing.
 
-TIME SAVER #3: Don't write code at all
+TIME SAVER #7: Don't write code at all
 
 ## So let's go and build something
 
@@ -192,37 +202,7 @@ who then perceives the speech as repeated meaningless sounds.
 
 https://en.wikipedia.org/wiki/Semantic_satiation
 
-class Autopsy < ApplicationRecord
-  belongs_to :created_by, class_name: 'User'
-
-  CAUSES = ['Organ failure', 'Heart Attack', 'Brain Tumor']
-
-  effective_resource do
-    name          :string
-    age           :integer
-    date          :datetime
-
-    cause         :string
-    description   :text
-
-    timestamps
-  end
-
-  scope :deep, -> { includes(:created_by) }
-  scope :sorted, -> { order(:created_at) }
-
-  validates :name, presence: true
-  validates :age, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :date, presence: true
-
-  validates :cause, presence: true, inclusion: { in: CAUSES }
-  validates :description, presence: true
-
-  def to_s
-    name || 'New Autopsy'
-  end
-
-end
+- Create autopsy.rb
 
 Then I type this, and I'm done!
 
@@ -230,29 +210,39 @@ rails generate effective:scaffold autopsy
 
 To the app!
 
+https://localhost:3000
+
 ## Scaffolds
 
-TIME SAVER #3: Scaffolds
+TIME SAVER #8: Use scaffolds. They save you from typing out so much boilerplate.
 
-rails generate scaffold
+rails generate
 
 https://guides.rubyonrails.org/v3.2/getting_started.html#getting-up-and-running-quickly-with-scaffolding
 
 ## Effective Developer
 
-TIME SAVER #4: Customize and create your own scaffolds
+TIME SAVER #9: Customize and create your own scaffolds
 
 https://github.com/code-and-effect/effective_developer
 
 Go over what the scaffold did.
 
-## More scaffolding
+## Admin scaffolding
 
 Scaffold Admin area too
 
-TIME SAVER #4: Partials partials partials
+rails generate effective:scaffold_controller admin/autopsy crud-show
+
+Go over what the scaffold built
+
+- Notice the partials
+
+TIME SAVER #10: Partials partials partials
 
 ## Add Approve and Decline scaffolding
+
+So now let's go and add an action.
 
 rails generate migration add_approved_to_autopsies approved:boolean
 
@@ -260,6 +250,36 @@ def approve!
   raise 'already approved' if approved?s
   update!(approved: true)
 end
+
+submit :approve, 'Approve it, yo!'
+
+can(:approve, Autopsy) { }
+
+resource_scope -> { current_user.autopsies }
+
+
+## Conclusion
+
+Okay, I think I'm out of time.
+
+There's so much more we could talk about.
+
+So in Conclusion, rails is awesome. 
+
+If you're going to be building CRUD apps, effective gems are awesome.
+
+Think about your own tech stack, what common patterns you see in the projects you work on. 
+
+Extract and polish those patterns.
+
+Don't repeat yourself.
+
+Be effective.
+
+
+
+
+
 
 
 
