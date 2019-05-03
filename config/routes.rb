@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   acts_as_archived
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', invitations: 'users/invitations' }
+  match '/impersonate', to: 'users/impersonations#destroy', via: [:delete], as: :impersonate
 
   if Rails.env.production?
     require 'sidekiq/web'
@@ -11,12 +12,20 @@ Rails.application.routes.draw do
     end
   end
 
-  match '/impersonate', to: 'users/impersonations#destroy', via: [:delete], as: :impersonate
+  match 'test/exception', to: 'test#exception', via: :get
+  match 'test/email', to: 'test#email', via: :get
+
+  # Front end
   match '/settings', to: 'users/settings#edit', via: [:get], as: :user_settings
   match '/settings', to: 'users/settings#update', via: [:patch, :put]
 
-  match 'test/exception', to: 'test#exception', via: :get
-  match 'test/email', to: 'test#email', via: :get
+  resources :clients
+
+  resources :mates, only: [:new, :create, :destroy] do
+    post :reinvite, on: :member
+    post :promote, on: :member
+    post :demote, on: :member
+  end
 
   namespace :admin do
     resources :clients, except: [:show], concerns: :acts_as_archived
@@ -33,15 +42,6 @@ Rails.application.routes.draw do
     end
 
     root to: 'users#index'
-  end
-
-  # Front end
-  resources :clients
-
-  resources :mates, only: [:new, :create, :destroy] do
-    post :reinvite, on: :member
-    post :promote, on: :member
-    post :demote, on: :member
   end
 
   # if you want EffectivePages to render the home / root page

@@ -7,7 +7,7 @@ class Admin::UsersController < Admin::ApplicationController
     authorize! :impersonate, @user
 
     # Impersonate
-    session[:impersonation_user_id] ||= current_user.id
+    session[:impersonation_user_id] = current_user.id
     expire_data_after_sign_in!
     warden.session_serializer.store(@user, Devise::Mapping.find_scope!(@user))
 
