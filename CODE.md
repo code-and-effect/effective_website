@@ -1,37 +1,3 @@
-class Autopsy < ApplicationRecord
-  belongs_to :created_by, class_name: 'User'
-
-  CAUSES = ['Heart attack', 'Organ failure', 'Ruby-eosis iridis', 'Teenagers']
-
-  effective_resource do
-    name          :string
-    
-    age           :integer
-    date          :datetime
-
-    cause         :string
-    description   :text
-
-    timestamps
-  end
-
-  scope :deep, -> { includes(:created_by) }
-  scope :sorted, -> { order(:name) }
-
-  validates :name, presence: true
-  validates :age, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :date, presence: true
-
-  validates :cause, presence: true, inclusion: { in: CAUSES }
-  validates :description, presence: true
-
-  def to_s
-    name || 'New Autopsy'
-  end
-
-end
-
-
 def index
   @page_title = 'Clients'
   authorize! :index, Client
@@ -68,6 +34,55 @@ def client_params
 end
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+class Autopsy < ApplicationRecord
+  belongs_to :created_by, class_name: 'User'
+
+  CAUSES = ['Heart attack', 'Organ failure', 'Ruby-eosis iridis', 'Teenagers']
+
+  effective_resource do
+    name          :string
+    
+    age           :integer
+    date          :datetime
+
+    cause         :string
+    description   :text
+
+    timestamps
+  end
+
+  scope :deep, -> { includes(:created_by) }
+  scope :sorted, -> { order(:name) }
+
+  validates :name, presence: true
+  validates :age, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :date, presence: true
+
+  validates :cause, presence: true, inclusion: { in: CAUSES }
+  validates :description, presence: true
+
+  def to_s
+    name || 'New Autopsy'
+  end
+
+end
+
+
+
+
+
 rails generate migration add_approved_to_autopsies approved:boolean
 
 approved :boolean
@@ -77,8 +92,21 @@ def approve!
   update!(approved: true)
 end
 
+can [:new, :create], Autopsy
+can :manage, Autopsy, user_id: user.id
+
+can(crud, Autopsy)
+can(:approve, Autopsy) { |autopsy| autopsy.approved? == false }
+
+
 submit :approve, 'Approve it, yo!'
 
 can(:approve, Autopsy) { }
 
 resource_scope -> { current_user.autopsies }
+
+
+
+- if inline_datatable?
+  = f.hidden_field :created_by_id
+  = f.static_field :created_by, label: 'User'

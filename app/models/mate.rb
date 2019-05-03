@@ -7,8 +7,7 @@ class Mate < ApplicationRecord
   belongs_to :client, counter_cache: true, autosave: true
   belongs_to :user
 
-  # This is just here to help the mates collection inputs
-  # This must be a subset of effective_roles roles. Doesn't interact with roles_masks here.
+  # This must be a subset of effective_roles roles.
   ROLES = [:owner, :member, :collaborator]
 
   effective_resource do

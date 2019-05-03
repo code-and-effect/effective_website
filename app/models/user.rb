@@ -1,13 +1,16 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable # :confirmable
 
-  has_one_attached :avatar  # active_storage
-  has_many_attached :files
-
   acts_as_addressable :billing, :shipping  # effective_addresses
   acts_as_archived                         # effective_resources
   acts_as_role_restricted                  # effective_roles
   log_changes                              # effective_logging
+
+  # This must be a subset of effective_roles roles.
+  ROLES = [:admin, :staff, :client]
+
+  has_one_attached :avatar  # active_storage
+  has_many_attached :files
 
   # My clients
   has_many :mates, -> { order(:id) }, dependent: :destroy, inverse_of: :user
@@ -17,10 +20,6 @@ class User < ApplicationRecord
   # If we want to implement client mate roles:
   # has_many :member_mates, -> { with_role(:member) }, class_name: 'Mate', inverse_of: :user
   # has_many :member_clients, through: :member_mates, class_name: 'Client', source: :client
-
-  # This is just here to help the mates collection inputs
-  # This must be a subset of effective_roles roles. Doesn't interact with roles_masks here.
-  ROLES = [:admin, :staff, :client]
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
     [:email, :password, :password_confirmation, :name]
