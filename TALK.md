@@ -1,10 +1,6 @@
 
 
 
-
-
-
-
 Matt Riemer
 Code & Effect
 https://github.com/code-and-effect/effective_website
@@ -15,6 +11,16 @@ https://yegrb.com
 
 
 
+3 Goals:
+
+1.) A tour of my starter template site and introduce you to the effective_* gems
+
+2.) A deep dive into code.  How I evaluate a rails app that I'm seeing for the first time.
+
+3.) Learn my personal process behin building rails websites.
+
+
+We're going to build a non-trivial feature!
 
 
 
