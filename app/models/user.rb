@@ -59,8 +59,10 @@ class User < ApplicationRecord
   end
 
   scope :deep, -> { with_attached_files.includes(:clients) }
+  scope :shallow, -> { select(:id, :email, :name) }
+
   scope :sorted, -> { order(:name) }
-  scope :datatables_filter, -> { sorted.select(:name, :id) }
+  scope :datatables_filter, -> { sorted.shallow }
 
   scope :admins, -> { unarchived.with_role(:admin) }
   scope :staff, -> { unarchived.with_role(:staff) }
@@ -69,7 +71,7 @@ class User < ApplicationRecord
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 
   # Prepopulate the name based on email
-  before_validation(if: -> { email.present? && name.blank? }) do
+  before_save(if: -> { email.present? && name.blank? }) do
     self.name = email.split('@').first
   end
 
