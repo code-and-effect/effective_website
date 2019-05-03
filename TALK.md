@@ -14,6 +14,7 @@ https://github.com/code-and-effect/effective_posts
 https://github.com/code-and-effect/effective_pages
 https://github.com/code-and-effect/effective_style_guide
 https://github.com/code-and-effect/effective_datatables
+https://github.com/code-and-effect/effective_orders
 https://github.com/code-and-effect/effective_logging
 
 https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
@@ -21,6 +22,7 @@ https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
 https://github.com/code-and-effect/effective_resources
 
 https://en.wikipedia.org/wiki/Semantic_satiation
+rails generate
 https://guides.rubyonrails.org/v3.2/getting_started.html#getting-up-and-running-quickly-with-scaffolding
 
 https://github.com/code-and-effect/effective_developer
@@ -59,12 +61,15 @@ Most of those apps are database CRUD apps.
 
 That's exactly the style of sites that play to rails' strengths. And the kind I love building.
 
-The effective gems make it super easy to build these kind of CRUD apps.
+So when I say "Building Effective Websites" I mean building websites the Code & Effect way. Ontop of this tech stack.
 
+The effective gems make it super easy to build these kind of apps.
+
+## Goals
 
 So today, we have about 30 minutes to get through the following 3 goals:
 
-1.) A tour of my starter website app and introduce you to my software stack
+1.) A tour of my starter website app and introduce you to my software stack.
 2.) A deep dive into code and how I evaluate a rails app I'm seeing for the first time.
 3.) Learn my personal process behind building rails sites. We're going to build out an entire non-trivial feature.
 
@@ -78,16 +83,20 @@ and, of course, to entertain and delight your senses:
 So I am kind of an oldschool developer.
 
 Sublime Text
-Try to use rails console
+Git
+stree
+Try to use rails console for git
 Firefox4Life
 
-## Exploring the App Code - Round 1
+## Starter Website
 
 It takes too darn long to make a fresh rails website. Nevermind an effective one.
 
 https://github.com/code-and-effect/effective_website
 
 TIME SAVER #1: Maintain your own stater template site.
+
+## Exploring the App Code - Round 1
 
 This is the same process I use when evaluating any new rails app.
 
@@ -114,8 +123,7 @@ Show data model.
   - member
   - collaborator
 
-
-Skip over Controllers and Datatables
+Skip over Controllers and Datatables for now.
 
 Views
 - Haml
@@ -124,10 +132,9 @@ Views
 TIME SAVER #2: A good layout.
 
 - Navbars
+- Other views
 
 https://github.com/code-and-effect/effective_bootstrap
-
-Other views
 
 POP QUIZ: What files do you NOT see in these directories.
 
@@ -146,7 +153,7 @@ So, this is a fresh install of effective_website as per github with no other cus
 
 This is what I start with to begin a new client project.
 
-You can see I am not a designer. It's Twitter Bootstrap 4 but pretty unstyled.
+You can see I am not a designer. It's Twitter Bootstrap 4 default unstyled.
 
 Function over fashion.
 
@@ -172,22 +179,20 @@ https://github.com/code-and-effect/effective_datatables
 - Admin Clients
 
 - Impersonate
-
 TIME SAVER #5: Impersonate user functionality. Let your admins admin the site.
-
-- Logs
-https://github.com/code-and-effect/effective_logging
 
 - Orders
 https://github.com/code-and-effect/effective_orders
 
+- Logs
+https://github.com/code-and-effect/effective_logging
 
 ## Exploring the App Code - Round 2
 
 POP QUIZ: When receiving a web request, what is the first file that rails runs?
 
 - routes.rb
-  - talk about resources
+  - talk about resources.
 
 - Tests controller
 
@@ -205,6 +210,8 @@ https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions
 Controller
   - Admin::Clients#controller
 
+- This looks weird, this is probably what you're expecting.
+
 ## Effective Resources
 
 A big part of my process is trying not to write code.
@@ -214,6 +221,8 @@ The best code is no code at all. So to that end, I wrote
 https://github.com/code-and-effect/effective_resources
 
 It uses routes.rb, ability.rb and current_user and the controller to just do the right thing.
+
+It uses this `submit` DSL to put in the right form params[:commit] and call the appropriate action on the resource
 
 TIME SAVER #7: Don't write code at all
 
@@ -263,7 +272,7 @@ Go over what the scaffold built
 
 - Notice the partials
 
-TIME SAVER #10: Partials partials partials
+TIME SAVER #10: Intelligent use of partials. The _ resource and _ form partials
 
 ## Add Approve and Decline scaffolding
 
@@ -295,6 +304,8 @@ There's so much more we could talk about.
 So in Conclusion, rails is awesome. 
 
 If you're going to be building CRUD apps, effective gems are awesome.
+
+But everyone is different.
 
 Think about your own tech stack, what common patterns you see in the projects you work on. 
 

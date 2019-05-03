@@ -66,3 +66,19 @@ private
 def client_params
   params.require(:client).permit(:name, :age)
 end
+
+
+rails generate migration add_approved_to_autopsies approved:boolean
+
+approved :boolean
+
+def approve!
+  raise 'already approved' if approved?
+  update!(approved: true)
+end
+
+submit :approve, 'Approve it, yo!'
+
+can(:approve, Autopsy) { }
+
+resource_scope -> { current_user.autopsies }
