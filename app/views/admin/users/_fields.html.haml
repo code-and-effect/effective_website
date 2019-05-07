@@ -1,0 +1,15 @@
+= f.text_field :name
+= f.email_field :email, hint: ('still active until your new email address has been confirmed' if f.object.unconfirmed_email.present? )
+
+- if f.object.unconfirmed_email.present?
+  = f.static_field :unconfirmed_email,
+    hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
+
+= f.file_field :avatar
+= f.file_field :files
+
+%h3 Billing Address
+= effective_address_fields(f, :billing_address)
+
+%h3 Shipping Address
+= effective_address_fields(f, :shipping_address)

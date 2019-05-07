@@ -85,6 +85,7 @@ class Ability
     can(crud, User)
     acts_as_archived(User)
     can(:impersonate, User) { |user| user.is?(:client) }
+    can(:invite, User) { |user| user.new_record? }
     can(:reinvite, User) { |user| !user.invitation_accepted? || user.invitation_sent_at.blank? }
   end
 

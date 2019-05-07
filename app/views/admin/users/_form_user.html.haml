@@ -1,7 +1,7 @@
 = effective_form_with model: [namespace, user] do |f|
   .row
     .col-sm-6
-      = render 'users/fields', f: f
+      = render 'admin/users/fields', f: f
     .col-sm-6
       - if f.object != current_user
         = f.radios :roles, EffectiveRoles.roles_collection(f.object, current_user)

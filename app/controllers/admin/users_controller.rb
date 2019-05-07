@@ -1,6 +1,11 @@
 class Admin::UsersController < Admin::ApplicationController
   include Effective::CrudController
 
+  submit :save, false, only: :new
+  
+  submit :invite, 'Save and Invite', only: :new, class: 'btn btn-primary', 
+    success: -> { "Successfully created #{resource} and sent #{resource.email} an invitation" }
+
   def impersonate
     @user = User.find(params[:id])
 
