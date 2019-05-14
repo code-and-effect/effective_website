@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.0'
 
-gem 'rails'
+gem 'rails', '6.0.0.rc1'
 gem 'bootsnap', require: false
 gem 'pg'
 
@@ -33,6 +33,7 @@ gem 'effective_style_guide'
 
 group :development, :test do
   gem 'dotenv-rails'
+  gem 'listen'
   gem 'pry-byebug'
   gem 'puma'
   gem 'sqlite3'
