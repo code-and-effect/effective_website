@@ -161,7 +161,7 @@ GEM
       effective_datatables
       effective_resources
       rails (>= 4.0.0)
-    effective_orders (4.1.3)
+    effective_orders (4.1.4)
       coffee-rails
       devise
       effective_bootstrap
