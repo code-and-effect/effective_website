@@ -1,7 +1,9 @@
 class Admin::UsersController < Admin::ApplicationController
   include Effective::CrudController
 
-  submit :save, false, only: :new
+  submit :save, 'Save', only: :edit
+  submit :save, 'Continue', only: :edit
+  submit :save, 'Add New', only: :edit
   
   submit :invite, 'Save and Invite', only: :new, class: 'btn btn-primary', 
     success: -> { "Successfully created #{resource} and sent #{resource.email} an invitation" }
