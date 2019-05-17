@@ -1,3 +1,23 @@
+PATH
+  remote: ../effective_developer
+  specs:
+    effective_developer (0.4.6)
+      effective_resources
+      rails (>= 3.2.0)
+
+PATH
+  remote: ../effective_test_bot
+  specs:
+    effective_test_bot (1.0.8)
+      capybara (>= 2.15)
+      effective_resources
+      faker
+      minitest-fail-fast
+      minitest-reporters
+      rails (>= 5.1)
+      selenium-webdriver
+      webdrivers
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -59,22 +79,20 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     autoprefixer-rails (9.5.1.1)
       execjs
     aws-eventstream (1.0.3)
-    aws-partitions (1.161.0)
-    aws-sdk-core (3.51.0)
+    aws-partitions (1.162.0)
+    aws-sdk-core (3.52.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.18.0)
-      aws-sdk-core (~> 3, >= 3.48.2)
+    aws-sdk-kms (1.20.0)
+      aws-sdk-core (~> 3, >= 3.52.1)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.36.1)
-      aws-sdk-core (~> 3, >= 3.48.2)
+    aws-sdk-s3 (1.39.0)
+      aws-sdk-core (~> 3, >= 3.52.1)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.1.0)
@@ -89,13 +107,14 @@ GEM
     builder (3.2.3)
     byebug (11.0.1)
     cancancan (3.0.1)
-    capybara (3.19.1)
+    capybara (3.20.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
+      uglifier
       xpath (~> 3.2)
     carmen (1.0.2)
       activesupport (>= 3.0.0)
@@ -104,9 +123,6 @@ GEM
       rails
     childprocess (1.0.1)
       rake (< 13.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     cocoon (1.2.12)
     coderay (1.1.2)
     coffee-rails (5.0.0)
@@ -136,7 +152,7 @@ GEM
       carmen-rails
       coffee-rails
       rails (>= 3.2.0)
-    effective_bootstrap (0.5.7)
+    effective_bootstrap (0.5.9)
       bootstrap (>= 4.0.0)
       coffee-rails
       inline_svg
@@ -146,15 +162,12 @@ GEM
     effective_ckeditor (1.9.3)
       rails (>= 3.2.0)
       sass
-    effective_datatables (4.5.5)
+    effective_datatables (4.5.7)
       coffee-rails
       effective_bootstrap
       effective_resources
       rails (>= 3.2.0)
       sass
-    effective_developer (0.4.4)
-      effective_resources
-      rails (>= 3.2.0)
     effective_logging (3.0.1)
       coffee-rails
       devise
@@ -186,23 +199,13 @@ GEM
     effective_regions (1.8.2)
       effective_ckeditor
       rails (>= 3.2.0)
-    effective_resources (1.2.14)
+    effective_resources (1.2.16)
       rails (>= 4.0.0)
     effective_roles (1.5.1)
       rails (>= 3.2.0)
     effective_style_guide (2.0.4)
       faker
       rails (>= 4.1.0)
-    effective_test_bot (1.0.8)
-      capybara (>= 2.15, < 4.0)
-      chromedriver-helper
-      effective_resources
-      faker
-      minitest-fail-fast
-      minitest-reporters
-      rails (>= 5.1)
-      rmagick
-      selenium-webdriver
     erubi (1.8.0)
     exception_notification (4.3.0)
       actionmailer (>= 4.0, < 6)
@@ -211,11 +214,12 @@ GEM
     faker (1.9.3)
       i18n (>= 0.7)
     ffi (1.10.0)
-    foreman (0.85.0)
-      thor (~> 0.19.1)
+    foreman (0.64.0)
+      dotenv (~> 0.7.0)
+      thor (>= 0.13.6)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haml (5.0.4)
+    haml (5.1.0)
       temple (>= 0.8.0)
       tilt
     i18n (1.6.0)
@@ -223,7 +227,6 @@ GEM
     inline_svg (1.4.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    io-like (0.3.0)
     jmespath (1.4.0)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
@@ -312,11 +315,10 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redis (4.1.1)
-    regexp_parser (1.4.0)
+    regexp_parser (1.5.0)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
-    rmagick (3.1.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
@@ -350,7 +352,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.1)
-    sucker_punch (2.1.1)
+    sucker_punch (2.1.2)
       concurrent-ruby (~> 1.0)
     temple (0.8.1)
     thor (0.20.3)
@@ -365,6 +367,10 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.8)
       rack (>= 2.0.6)
+    webdrivers (3.9.3)
+      nokogiri (~> 1.6)
+      rubyzip (~> 1.0)
+      selenium-webdriver (~> 3.0)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -380,6 +386,7 @@ DEPENDENCIES
   bootsnap
   bootstrap
   cancancan
+  capybara
   cocoon
   coffee-rails
   devise
@@ -389,7 +396,7 @@ DEPENDENCIES
   effective_bootstrap
   effective_ckeditor
   effective_datatables
-  effective_developer
+  effective_developer!
   effective_logging
   effective_orders
   effective_pages
@@ -397,7 +404,7 @@ DEPENDENCIES
   effective_resources
   effective_roles
   effective_style_guide
-  effective_test_bot
+  effective_test_bot!
   exception_notification
   foreman
   haml
@@ -411,14 +418,16 @@ DEPENDENCIES
   rails (= 6.0.0.rc1)
   rails_12factor
   sassc-rails
+  selenium-webdriver
   sidekiq
   sqlite3
   sucker_punch
   turbolinks
   uglifier
+  webdrivers
 
 RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.6
+   1.17.3

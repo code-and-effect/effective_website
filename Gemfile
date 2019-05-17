@@ -22,7 +22,7 @@ gem 'effective_addresses'
 gem 'effective_bootstrap'
 gem 'effective_ckeditor'
 gem 'effective_datatables'
-gem 'effective_developer'
+gem 'effective_developer', path: '~/Sites/effective_developer'
 gem 'effective_logging'
 gem 'effective_orders'
 gem 'effective_pages'
@@ -40,7 +40,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'effective_test_bot'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+  gem 'effective_test_bot', path: '~/Sites/effective_test_bot'
 end
 
 group :production, :staging do
