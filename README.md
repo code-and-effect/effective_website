@@ -26,6 +26,16 @@ Login as `admin@codeandeffect.com` with any password.
 - Search the entire project for 'example' and fill in your site specifics.
 - Good luck!
 
+Run tests with
+
+```ruby
+rails test
+rails test:system
+
+rails test:bot:environment
+rails test:bot:system
+```
+
 ## Create/Configure an S3 Bucket
 
 You will need an AWS IAM user with sufficient priviledges and a properly configured S3 bucket to use with effective_assets
