@@ -22,12 +22,12 @@ gem 'effective_addresses'
 gem 'effective_bootstrap'
 gem 'effective_ckeditor'
 gem 'effective_datatables'
-gem 'effective_developer', path: '~/Sites/effective_developer'
+gem 'effective_developer'
 gem 'effective_logging'
 gem 'effective_orders'
 gem 'effective_pages'
 gem 'effective_posts'
-gem 'effective_resources', path: '~/Sites/effective_resources'
+gem 'effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
 
@@ -43,7 +43,8 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'effective_test_bot', path: '~/Sites/effective_test_bot'
+  gem 'effective_test_bot'
+  # gem 'rmagick'
 end
 
 group :production, :staging do
