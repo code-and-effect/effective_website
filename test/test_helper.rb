@@ -1,28 +1,35 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
-
 require 'rails/test_help'
-require 'minitest/spec'
-require 'minitest/reporters'
+
 require 'minitest/fail_fast' if EffectiveTestBot.fail_fast?
+require 'minitest/reporters'
+require 'minitest/spec'
 
 class ActiveSupport::TestCase
-  fixtures :all               # Loads all fixtures in test/fixtures/*.yml
-  extend Minitest::Spec::DSL  # For the let syntax
+  # Run tests in parallel with specified workers
+  parallelize(workers: :number_of_processors) if respond_to?(:parallelize)
+
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  fixtures :all
+
+  seeds :all
+
+  extend Minitest::Spec::DSL # For the let syntax
 end
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 Rails.backtrace_cleaner.remove_silencers!
 Rails.backtrace_cleaner.add_silencer { |line| line =~ /minitest/ }
-#Rails.backtrace_cleaner.add_silencer { |line| line =~ /effective_test_bot/ }
-
-# rails test:bot:seed
+Rails.backtrace_cleaner.add_silencer { |line| line =~ /parallelization/ }
 
 # rails test
 # rails test:system
 # rails test:bot:environment
 # rails test:bot
+# rails test:bot:fails
+# rails test:bot:fail
 
 # rails test:system TOUR=true
 # rails test:bot TEST=posts#index
