@@ -8,7 +8,7 @@ Ruby 2.5.0. Rails 6.0.rc1
 
 Click here for a [Live Demo](https://effective-website-demo.herokuapp.com/).
 
-Login as `admin@codeandeffect.com` with password `be_effective`.
+Login as `admin@codeandeffect.com` with password `example`.
 
 ## Getting Started
 

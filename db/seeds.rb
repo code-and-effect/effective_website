@@ -4,10 +4,10 @@
 puts '== Creating users ======================'
 
 # The webmaster and/or super priviledged staff member. Can do anything.
-admin = User.create!(email: 'admin@codeandeffect.com', name: 'Admin User', roles: :admin, password: 'be_effective')
+admin = User.create!(email: 'admin@codeandeffect.com', name: 'Admin User', roles: :admin, password: 'example')
 
 # Can access /admin and administer the site.
-staff = User.create!(email: 'staff@codeandeffect.com', name: 'Staff User', roles: :staff, password: 'be_effective')
+staff = User.create!(email: 'staff@codeandeffect.com', name: 'Staff User', roles: :staff, password: 'example')
 
 # Can access /clients and belong to client groups.
 3.times do
