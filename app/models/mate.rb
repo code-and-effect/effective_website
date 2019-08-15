@@ -19,6 +19,8 @@ class Mate < ApplicationRecord
     timestamps
   end
 
+  scope :deep, -> { includes(:client, :user) }
+
   before_validation(if: -> { roles.blank? }) { self.roles = [:member] }
 
   validates :client, presence: true
