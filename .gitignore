@@ -7,6 +7,7 @@
 # Ignore bundler config.
 /.env
 /.bundle
+.vscode
 
 # Any database dump files
 *.dump
