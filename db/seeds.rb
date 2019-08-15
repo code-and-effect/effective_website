@@ -9,6 +9,7 @@ admin = User.create!(email: 'admin@codeandeffect.com', name: 'Admin User', roles
 # Can access /admin and administer the site.
 staff = User.create!(email: 'staff@codeandeffect.com', name: 'Staff User', roles: :staff, password: 'example')
 
+puts '== Creating clients ===================='
 # Can access /clients and belong to client groups.
 3.times do
   client = Client.new(name: Faker::Company.name)
@@ -20,6 +21,8 @@ staff = User.create!(email: 'staff@codeandeffect.com', name: 'Staff User', roles
 
   client.save!
 end
+
+puts '== Creating pages ======================'
 
 # Some Pages
 Effective::Page.new(
@@ -43,6 +46,8 @@ Effective::Page.new(
   template: 'page',
   roles: [:client]  # Only clients can see this page.
 ).save!
+
+puts '== Creating posts ====================='
 
 # Some Posts
 post = Effective::Post.new(

@@ -5,9 +5,10 @@ class CreateEffectivePosts < ActiveRecord::Migration[4.2]
 
       t.string :title
       t.text :excerpt
-      
+
       t.string :description
-      
+      t.string :slug
+
       t.string :category
 
       t.boolean :draft, :default => false

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.0'
 
-gem 'rails', '6.0.0.rc1'
+gem 'rails', '6.0.0.rc2'
 gem 'bootsnap', require: false
 gem 'pg'
 
@@ -31,10 +31,15 @@ gem 'effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
 
+group :development do
+  gem 'ruby-debug-ide' # Visual Studio IDE Debugger gems
+  gem 'debase'
+end
+
 group :development, :test do
-  gem 'dotenv-rails', '= 2.7.2'
+  gem 'dotenv-rails'
   gem 'listen'
-  gem 'pry-byebug'
+  gem 'pry-byebug'  # binding.pry
   gem 'puma'
   gem 'sqlite3'
 end
@@ -44,7 +49,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
   gem 'effective_test_bot'
-  # gem 'rmagick'
+  # gem 'rmagick' # required for animated gifs from effective_test_bot
 end
 
 group :production, :staging do
@@ -53,10 +58,6 @@ group :production, :staging do
   gem 'rails_12factor'
   gem 'rack-timeout'
   gem 'uglifier'
-end
-
-group :develop, :staging, :test do
-  gem 'sucker_punch'
 end
 
 group :production do

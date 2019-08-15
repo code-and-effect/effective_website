@@ -42,7 +42,7 @@ class Mate < ApplicationRecord
   end
 
   after_commit(on: :create) do
-    @invited_user ? user.invite! : ApplicationMailer.user_invited_to_client(user.id, client.id).deliver_later
+    @invited_user ? user.invite! : ApplicationMailer.user_invited_to_client(user.id, client.id).deliver
   end
 
   def to_s
