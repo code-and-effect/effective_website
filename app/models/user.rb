@@ -70,10 +70,7 @@ class User < ApplicationRecord
 
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 
-  # Prepopulate the name based on email
-  before_save(if: -> { email.present? && name.blank? }) do
-    self.name = email.split('@').first
-  end
+
 
   validates :name, presence: true
   validates :roles, presence: true
@@ -82,7 +79,20 @@ class User < ApplicationRecord
     self.errors.add(:avatar, 'must be an image') unless avatar.image?
   end
 
+  # Prepopulate the name based on email
+  before_save(if: -> { email.present? && name.blank? }) do
+    self.name = email.split('@').first
+  end
+
   before_save { self.avatar_attached = avatar.attached? }
+
+  # Devise invitable ignores model validations, so we manually check for duplicate email addresses.
+  before_save(if: -> { new_record? && invitation_sent_at.present? }) do
+    if self.class.where(email: email).exists?
+      self.errors.add(:email, 'has already been taken')
+      throw(:abort)
+    end
+  end
 
   def to_s
     name.presence || email
