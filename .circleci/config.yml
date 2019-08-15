@@ -1,0 +1,87 @@
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    parallelism: 1 # run three instances of this job in parallel
+    docker: # run the steps with Docker
+    # Find your ruby image: https://hub.docker.com/r/circleci/ruby/tags
+      - image: circleci/ruby:2.6.3-node-browsers-legacy # ...with this image as the primary container; this is where all `steps` will run
+        environment: # environment variables for primary container
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine # database image
+        environment: # environment variables for database
+          POSTGRES_USER: postgres
+          POSTGRES_DB: effective_website_test
+          POSTGRES_PASSWORD: ""
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+
+
+      - run:
+          name: Set up config
+          command: |
+            cp .env.example .env
+            cp config/database.yml.postgres config/database.yml
+
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+      # Restore bundle cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      - restore_cache:
+          keys:
+            - tusk
+
+      - run: # Install Ruby dependencies
+          name: Bundle Install
+          command: bundle install --path vendor/bundle
+
+      # Store bundle cache for Ruby dependencies
+      - save_cache:
+          key: tusk
+          paths:
+            - vendor/bundle
+
+      # Maybe needed for Rails 6?
+      # - restore_cache:
+      #     keys:
+      #       - rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #       - rails-demo-yarn-
+
+      # - run:
+      #     name: Yarn Install
+      #     command: yarn install --cache-folder ~/.cache/yarn
+
+      # # Store yarn / webpacker cache
+      # - save_cache:
+      #     key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - ~/.cache/yarn
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Run Unit Tests
+          command: bundle exec rails test
+
+      - run:
+          name: Run System Tests
+          command: bundle exec rails test:system
+
+      # - run:
+      #     name: Run Sorbet
+      #     command: bundle exec srb
+
+      # Save test results for timing analysis
+      # - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      #     path: test_results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
