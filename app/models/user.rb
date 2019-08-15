@@ -70,8 +70,6 @@ class User < ApplicationRecord
 
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 
-
-
   validates :name, presence: true
   validates :roles, presence: true
 

@@ -15,9 +15,8 @@
   - else
     = f.email_field :email, label: 'Invite email'
 
-  - if namespace == :admin || current_user.client_ids(:owner).include?(f.object.client_id || 0)
-    = f.radios :roles, Mate::ROLES, label: false, selected: (f.object.roles.presence || :member)
-  - else
-    = f.radios :roles, Mate::ROLES - [:owner], label: false, selected: (f.object.roles.presence || :member)
+  - if namespace == :admin || current_user.client_ids.include?(f.object.client_id || 0)
+    = f.radios :roles, EffectiveRoles.roles_collection(f.object, current_user, only: Mate::ROLES),
+      label: false, selected: (f.object.roles.presence || :member)
 
   = effective_submit(f)

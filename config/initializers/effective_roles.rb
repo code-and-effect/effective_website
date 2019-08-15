@@ -27,11 +27,11 @@ EffectiveRoles.setup do |config|
   # =======================
   # When current_user is passed into a form helper function (see README.md)
   # this setting determines which roles that current_user may assign
-  
+
   config.assignable_roles = {
     # User roles
-    admin: [:admin, :staff, :client, :member, :collaborator],
-    staff: [:staff, :client, :member, :collaborator],
+    admin: [:admin, :staff, :client, :owner, :member, :collaborator],
+    staff: [:staff, :client, :owner, :member, :collaborator],
     client: [],
 
     # Mate roles
