@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       end
 
       format.js do
-        Rails.logger.info "cannot :#{exception.action}, #{exception.subject.class.name}"
+        Rails.logger.info "cannot :#{exception.action}, #{exception.subject.kind_of?(Class) ? exception.subject : exception.subject.class.name}"
         render text: "Access Denied: #{exception.message}", status: 403
       end
 
