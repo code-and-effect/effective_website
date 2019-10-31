@@ -15,7 +15,7 @@ gem 'devise_invitable'
 gem 'foreman', '= 0.63.0'
 gem 'haml'
 gem 'jquery-rails'
-gem 'sassc-rails'
+gem 'sass-rails', '~> 5'
 gem 'turbolinks'
 
 gem 'effective_addresses'
