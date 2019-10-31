@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
 
-gem 'rails', '6.0.0.rc2'
+gem 'rails'
 gem 'bootsnap', require: false
 gem 'pg'
 
@@ -21,6 +21,7 @@ gem 'turbolinks'
 gem 'effective_addresses'
 gem 'effective_bootstrap'
 gem 'effective_ckeditor'
+gem 'effective_regions'
 gem 'effective_datatables'
 gem 'effective_developer'
 gem 'effective_logging'
@@ -30,11 +31,6 @@ gem 'effective_posts'
 gem 'effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
-
-group :development do
-  gem 'ruby-debug-ide' # Visual Studio IDE Debugger gems
-  gem 'debase'
-end
 
 group :development, :test do
   gem 'dotenv-rails'

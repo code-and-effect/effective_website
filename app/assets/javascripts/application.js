@@ -13,5 +13,7 @@
 //= require effective_datatables
 //= require effective_orders
 
+//= require effective_ckeditor
+
 //= require_tree ./vendor
 //= require_tree ./base
