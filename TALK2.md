@@ -1,3 +1,8 @@
+make a post model
+create the migration
+
+
+
 Ruby stuff
 
 Dynamic rake task creation via looking at files. Effective_developer csv
