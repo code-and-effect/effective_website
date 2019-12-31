@@ -149,7 +149,7 @@ GEM
     effective_developer (0.4.8)
       effective_resources
       rails (>= 3.2.0)
-    effective_logging (3.0.2)
+    effective_logging (3.0.4)
       coffee-rails
       devise
       effective_datatables
@@ -169,7 +169,7 @@ GEM
       effective_resources
       effective_roles
       rails (>= 3.2.0)
-    effective_posts (1.1.8)
+    effective_posts (1.1.9)
       effective_bootstrap
       effective_ckeditor
       effective_datatables (>= 4.0.0)
