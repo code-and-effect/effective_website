@@ -34,12 +34,12 @@ class Admin::UsersDatatable < Effective::Datatable
     col :invitation_sent_at, as: :date
 
     col :sign_in_count, visible: false
-    
+
     col :last_sign_in_at, visible: false do |user|
       (user.current_sign_in_at.presence || user.last_sign_in_at).try(:strftime, '%F %H:%M')
     end
 
-    actions_col(impersonate: { remote: false })
+    actions_col
   end
 
   collection do

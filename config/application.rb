@@ -13,7 +13,6 @@ module ExampleWebsite
     # -- all .rb files in that directory are automatically loaded.
 
     config.load_defaults '6.0'
-    Rails.autoloaders.log!
 
     # Precompile additional assets.
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
