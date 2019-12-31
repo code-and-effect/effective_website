@@ -15,13 +15,17 @@ if Rails.env.test?
     #   'posts', 'events#index'
     # ]
 
+    config.except = ['test_exception_path']
+
     # Silence skipped routes
     config.silence_skipped_routes = false
 
     # Set the current user on a per test basis. You must have at least 1 user seeded.
     # test is a String as per the except, only and TEST= test names
     # proc = { |test| user = User.first; puts "#{test} #{user}"; user }
-    config.user = proc { |test| User.first }
+    config.user = proc { |test|
+      test.start_with?('admin') ? User.first : Client.last.mates.with_role(:owner).first.user
+    }
 
     # Exits immediately if there is a test failure
     config.fail_fast = false

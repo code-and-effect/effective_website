@@ -22,7 +22,7 @@ class Client < ApplicationRecord
   scope :deep, -> { includes(:addresses, :users) }
   scope :datatables_filter, -> { sorted.select(:name, :id) }
 
-  scope :for_user, lambda { |user| Client.where(id: user.client_ids) }
+  scope :for_user, lambda { |user| Client.unscoped.where(id: user.client_ids) }
 
   validates :name, presence: true, uniqueness: true
 

@@ -32,7 +32,7 @@ EffectiveRoles.setup do |config|
     # User roles
     admin: [:admin, :staff, :client, :owner, :member, :collaborator],
     staff: [:staff, :client, :owner, :member, :collaborator],
-    client: [],
+    client: [:member, :collaborator],
 
     # Mate roles
     owner: [:member, :collaborator],

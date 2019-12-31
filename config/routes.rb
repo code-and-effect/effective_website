@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   match '/settings', to: 'users/settings#edit', via: [:get], as: :user_settings
   match '/settings', to: 'users/settings#update', via: [:patch, :put]
 
-  resources :clients
+  resources :clients, except: [:new, :create]
 
   resources :mates, only: [:new, :create, :destroy] do
     post :reinvite, on: :member
