@@ -3,6 +3,10 @@
     .card
       .card-body
         %h5.card-title= @page_title
+
+        - unless Rails.env.production?
+          %p Login as: <strong>admin@codeandeffect.com</strong> with any password.
+
         = effective_form_with(model: resource, url: session_path(resource_name)) do |f|
           = f.email_field :email, required: true, autofocus: true
           = f.password_field :password, required: true

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.6.3'
 
 gem 'rails'
-gem 'bootsnap', require: false
+gem 'bootsnap'
 gem 'pg'
 
 gem 'aws-sdk-s3', require: false
@@ -12,7 +12,7 @@ gem 'cocoon'
 gem 'coffee-rails'
 gem 'devise'
 gem 'devise_invitable'
-gem 'foreman', '= 0.63.0'
+gem 'foreman'
 gem 'haml'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5'
