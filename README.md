@@ -2,7 +2,7 @@
 
 This is a rails starter website that uses most of the effective_* gems.
 
-Ruby 2.6.3. Rails 6.0.rc2
+Ruby 2.6.3, Rails 6.0.2
 
 ## Live Demo
 
