@@ -1,11 +1,21 @@
+Building Rails Engines
+
 Matt Riemer
 Code & Effect
+Tadum.app
+
+https://mattriemer.ca/
+https://codeandeffect.com/
+https://tadum.app/
+
 https://github.com/code-and-effect/effective_website
 
 
-https://guides.rubyonrails.org/engines.html
+# Today
 
-Today we are going to talk about rails engines.
+We are going to rip through building a rails engine.
+
+
 
 # What the heck is a rails engine?
 
@@ -13,40 +23,91 @@ A rails engine is a miniature application that you can host within your rails ap
 
 It's a mini rails app, inside your rails app.
 
+
+
 # Why would I use one?
 
-So if you want to use the same functionality in more than one app, this is the best way
-to bring all your code with you.
+If you run a whole bunch of rails sites, you quickly realize you're reinventing the wheel, writing the same screens over and over.
 
-# Let's jump into building
+If you want to write that code just once, and reuse it anywhere, rails engines are the best way to do that.
 
-So I want to build a 1-page rails engine that considers all the models in the parent rails app.
 
-IT's going to run validate on all of the records, and display TRUE|FALSE if the record is valid
 
-I want to show off a engine controller
+# The rails engine go-to guide
 
-A rails ActiveRecord concern
+A well written official guide is available.
 
-And just a bit more
+https://guides.rubyonrails.org/engines.html
 
-# Code
+You can totally follow this and build a blog inside a rails engine and learn all the best practices.
+
+But, I'm going to totally ignore this and today we will build our own thing.
+
+
+
+
+# Let's go already
+
+So I want to build something non-trivial, that shows off the power of rails engines, in like 10 or 15 minutes.
+
+We are going to build a 1-page rails engine that can be used to validate all the records of any rails app.
+
+We're gonna build:
+
+- A rails engine
+- A controller with just one action
+- Some custom stylesheets
+- A rails ActiveRecord concern
+- Maybe just a bit more
+
+
+
+# Effective Website
+
+So this is my rails starter website. I use this as a starting point whenever I build a new app.
+
+* Show effective website *
+
+
+
+# Create a new rails engine
 
 > rails plugin new validator --mountable
+
+* Add validator/ directory to VSCode *
+
 
 Let's check out the structure.
 
 It looks pretty close to a rails app.
 
-It doesn't do anything yet.
 
-So let's just add a route, and a page, so we have something to look at.
+# Gemspec
+
+So without going into it too much, a rails engine is a gem.
+
+As with any gem, the .gemspec file describes the package, its dependencies, and all the meta info.
+
+Before we can even use it, we have to remove these TODO and FIXME commands from the
 
 
-We have to update the gemspec, and remove any TODO or FIXME
+# Bundle it
+
+In Gemfile:
+
+gem 'validator', path: '~/Sites/validator'
+
+> bundle install
+
+That's all we gotta do to add the engine to our rails app.
 
 
-Let's add a controller:
+
+# Hello Engine
+
+So, everything we code here is going to be contained inside the rails engine.
+
+Let's create a controller:
 
 app/controllers/validator/validations_controller.rb
 
@@ -54,7 +115,7 @@ module Validator
   class ValidationsController < ApplicationController
     protect_from_forgery with: :exception
 
-    skip_authorization_check
+    layout 'application'
 
     def index
     end
@@ -62,88 +123,106 @@ module Validator
   end
 end
 
-And a route:
+
+And a route in config/routes.rb:
 
 Validator::Engine.routes.draw do
   scope module: 'validator' do
-    match '/validator', to: 'validations#index', via: :get, as: 'validator'
+    match '/validations', to: 'validations#index', via: :get
   end
 end
 
-And a view:
 
-validator/validations/index.html.haml
+And create a view:
 
-%h1 Hey there
+Create validator/validations/index.html.erb:
 
-#validations
-  %p You found the validator
+<h1>Hello Engine</h1>
 
-Okay, so believe me, this rails engine is gonna kind of do something now.
+<div id="validations">
+  <p>This view is being served from the validator engine</p>
+</div>
 
-Let's hook it up to our main rails app
+And one gotcha, we need to give this engine a name, so rails knows whats up with it:
+
+lib/validator/engine.rb:
+
+engine_name 'validator'
 
 
-# Install the engine
+# Mount the engine in our rails app
 
-gem 'validator', path: '~/Sites/validator'
+config/routes.rb:
 
-bundle install
+mount Validator::Engine => '/', :as => 'validator'
 
-Mount the engine in our routes.
+You could also mount it to another directory
 
-mount Validator::Engine => '/', :as => 'validator
+This will show up in rake routes now
 
-* You could also mount it into another directory
 
-We can now see it in rake routes
+Add it to our navbar:
 
-bundle exec rails server
+app/views/layouts/_navbar.html.haml:
+
+= nav_link_to 'Validator Index', validator.validations_path
+
+
+# Let's see it in action
+
+> bundle exec rails server
 
 visit
 
-http://localhost:3000/validator
+http://localhost:3000/validations
+
+Sure enough, we have a working page here.
 
 
-Sure enough, we have a page here.
+# Let's add a quick stylesheet
 
-Looks ugly of course, let's add a stylesheet
+So the page looks ugly, and we're not really going to improve on that.
 
-app/assets/stylesheets/validator.css
+But we can add a stylesheet for a designer to come save us.
+
+Let's create app/assets/stylesheets/validator.css
 
 #validations { background: lightgray; }
-
 
 And add it to our app stylesheet
 
 @import 'validator';
 
 
-Okay, this looks pretty ugly, maybe we want to be able to add some css classes to this view
+# Let's add a module variable
 
-Let's create a config variable to do that.
+Okay, this page looks pretty ugly.
+
+Really, I just want to be able to use bootstrap, or tailwind, or whatever I have.
+
+I need a way for the parent app to tell my engine view which html classes to use.
+
+Let's create a module/engine top level variable to do that.
 
 In validator.rb:
 
 mattr_accessor :html_classes
 
-  def self.setup
-    yield self
-  end
+def self.setup
+  yield self
+end
 
-
-Make a config file:
+Make a default config file:
 
 config/validator.rb
 
 Validator.setup do |config|
-  config.html_classes = 'card card-body'
+  config.html_classes = ''
 end
 
-So I like to put a default file in my config/ directory
+So my pattern is to put the default file in this here config/ directory.
 
-
-And let's make a task to install this into the parent app
+And then a rails generator to install that into the parent app's config/initializers/ directory
 
 lib/generators/validator/install_generator.rb
 
@@ -164,18 +243,32 @@ module Validator
   end
 end
 
-rails generate validator:install
+> rails generate validator:install
 
-We now have this config/validator.rb file that gets run whenever our app starts
+Generates the initializer file which gets run whenever our app starts.
+
+Let's check it out, and add some default classes.
+
+In config/initializers/validator.rb
+
+config.html_classes = 'card card-body'
+
+> bundle exec rails server
+
+And back in our rails engine, let's reference this module variable:
+
+index.html.erb
+
+<h1>Hello Engine</h1>
+
+<div id="validations" class="<%= Validator.html_classes %>">
+  <p>This view is being served from the validator engine</p>
+</div>
+
+So now our parent app can tell our engine to render the div with its own classes
 
 
-So now let's use this config variable we just made
-
-index.html.haml
-
-#validations{class: Validator.html_classes}
-
-
+# Okay now let's build something that does stuff
 
 Okay, cool, so now we're going to create an ActiveRecord concern
 That we can add to any model, just to keep track of it
