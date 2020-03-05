@@ -1,3 +1,7 @@
+
+
+
+
 Building Rails Engines
 
 Matt Riemer
@@ -11,18 +15,36 @@ https://tadum.app/
 https://github.com/code-and-effect/effective_website
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Today
 
-We are going to rip through building a rails engine.
+We are going to explore building a rails engine.
 
 
 
 # What the heck is a rails engine?
 
-A rails engine is a miniature application that you can host within your rails app.
+A rails engine is a miniature application that you can host within your main rails app.
 
 It's a mini rails app, inside your rails app.
 
+Examples: devise, spree, refinery
 
 
 # Why would I use one?
@@ -31,7 +53,9 @@ If you run a whole bunch of rails sites, you quickly realize you're reinventing 
 
 If you want to write that code just once, and reuse it anywhere, rails engines are the best way to do that.
 
-Don't reapeat yourself
+Don't repeat yourself.
+
+Don't repeat yourself.
 
 
 # The rails engine go-to guide
@@ -40,20 +64,20 @@ A well written official guide is available.
 
 https://guides.rubyonrails.org/engines.html
 
-You can totally follow this and build a blog inside a rails engine and learn all the best practices.
+You can totally follow this and build a rails engine blog and learn all the best practices.
 
-But, I'm going to totally ignore this and today we will build our own thing.
+But, I'm going to totally ignore those, and today we will build our own thing.
 
 
 
 
 # Let's go already
 
-So I want to build something non-trivial, that shows off the power of rails engines, in like 10 or 15 minutes.
+So I want to build a small but non-trivial rails engine in like 10 or 15 minutes.
 
-We are going to build a 1-page rails engine that displays the valid? status of all persisted resources.
+We are going to build a 1-page rails engine that displays the valid? status of all persisted resources in the database.
 
-We're gonna build:
+We will create:
 
 - A rails engine
 - A controller with just one action
@@ -65,14 +89,14 @@ We're gonna build:
 
 # Effective Website
 
-So this is my rails starter website. I use this as a starting point whenever I build a new app.
-
 http://localhost:3000
+
+So this is my rails starter website. I use this as a starting point whenever I build a new app.
 
 
 # Create a new rails engine
 
-> rails plugin new validator --mountable
+> rails plugin new validator --full
 
 *Add validator/ directory to VSCode*
 
@@ -189,7 +213,7 @@ But we can add a stylesheet for a designer to come save us.
 
 Let's create app/assets/stylesheets/validator.css
 
-#validations { background: lightgray; }
+#validations { background: #eee; }
 
 And add it to our app stylesheet
 
@@ -200,7 +224,7 @@ And add it to our app stylesheet
 
 Okay, this page looks pretty ugly.
 
-Really, I just want to be able to use bootstrap, or tailwind, or whatever I have.
+Really, I just want to be able to use bootstrap, or tailwind, or something like that.
 
 I need a way for the parent app to tell my engine view which html classes to use.
 
@@ -326,8 +350,6 @@ In client.rb:
 acts_as_validation_source
 
 
-
-
 Update the view:
 
 <h1>Hello Engine</h1>
@@ -339,6 +361,7 @@ Update the view:
     <table class="table">
       <thead>
         <tr>
+          <th>Aye Dee</th>
           <th>Name</th>
           <th>is_valid?</th>
           <th></th>
@@ -348,6 +371,7 @@ Update the view:
       <tbody>
         <% klass.all.find_each do |resource| %>
           <tr>
+            <td><%= resource.id %></td>
             <td><%= resource %></td>
             <td><%= resource.is_valid? %></td>
             <td><%= resource.errors.full_messages.presence %></td>
