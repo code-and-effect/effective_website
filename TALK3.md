@@ -401,3 +401,24 @@ In user.rb:
 validate do
   self.errors.add(:base, 'no threes allowed') if id % 3 == 0
 end
+
+
+# In Summary
+
+We've just finished a whirlwind tour of building a rails engine.
+
+We built:
+
+- A rails engine
+- A controller with just one action
+- A route and view
+- A custom stylesheet
+- An ActiveRecord concern
+
+Now we're ready to publish this gem to rubygems.com for the world to use!
+
+Thanks for your time.
+
+Gimme applause.
+
+What questions do you have for me?
