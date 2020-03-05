@@ -107,7 +107,6 @@ So this is my rails starter website. I use this as a starting point whenever I b
 
 *Add validator/ directory to VSCode*
 
-
 Let's check out the structure.
 
 It looks pretty close to a rails app.
@@ -206,7 +205,7 @@ visit
 
 http://localhost:3000/validations
 
-Sure enough, we have a working page here.
+I sure hope we have a working page here!
 
 
 # Let's add a quick stylesheet
@@ -344,7 +343,7 @@ initializer 'validator.active_record' do |app|
   end
 end
 
-And restart our server
+And restart our server one last time
 
 > bundle exec rails server
 
@@ -358,6 +357,8 @@ acts_as_validation_source
 In client.rb:
 
 acts_as_validation_source
+
+On rails console, we can now call User.first.is_valid?
 
 
 Update the view:
@@ -399,7 +400,8 @@ Now what happens with an invalid model?
 In user.rb:
 
 validate do
-  self.errors.add(:base, 'no threes allowed') if id % 3 == 0
+  errors.add(:base, 'no fizz allowed') if id % 3 == 0
+  errors.add(:base, 'no buzz allowed') if id % 5 == 0
 end
 
 
