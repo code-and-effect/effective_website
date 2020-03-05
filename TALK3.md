@@ -31,6 +31,7 @@ If you run a whole bunch of rails sites, you quickly realize you're reinventing 
 
 If you want to write that code just once, and reuse it anywhere, rails engines are the best way to do that.
 
+Don't reapeat yourself
 
 
 # The rails engine go-to guide
@@ -50,31 +51,30 @@ But, I'm going to totally ignore this and today we will build our own thing.
 
 So I want to build something non-trivial, that shows off the power of rails engines, in like 10 or 15 minutes.
 
-We are going to build a 1-page rails engine that can be used to validate all the records of any rails app.
+We are going to build a 1-page rails engine that displays the valid? status of all persisted resources.
 
 We're gonna build:
 
 - A rails engine
 - A controller with just one action
-- Some custom stylesheets
+- A route and view
+- A custom stylesheets
 - A rails ActiveRecord concern
-- Maybe just a bit more
-
+- That's a lot already
 
 
 # Effective Website
 
 So this is my rails starter website. I use this as a starting point whenever I build a new app.
 
-* Show effective website *
-
+http://localhost:3000
 
 
 # Create a new rails engine
 
 > rails plugin new validator --mountable
 
-* Add validator/ directory to VSCode *
+*Add validator/ directory to VSCode*
 
 
 Let's check out the structure.
@@ -148,6 +148,8 @@ And one gotcha, we need to give this engine a name, so rails knows whats up with
 lib/validator/engine.rb:
 
 engine_name 'validator'
+
+Remove that IsolateNamespace line
 
 
 # Mount the engine in our rails app
@@ -270,9 +272,11 @@ So now our parent app can tell our engine to render the div with its own classes
 
 # Okay now let's build something that does stuff
 
-Okay, cool, so now we're going to create an ActiveRecord concern
-That we can add to any model, just to keep track of it
+Okay cool, so now we are going to add some common functionality to our models
 
+We're going to do this through an ActiveRecord concern.
+
+This is a piece of code that can be added onto any model.
 
 app/models/concerns/acts_as_validation_source.rb
 
@@ -295,10 +299,9 @@ module ActsAsValidationSource
 
 end
 
-
 And we need to register this concern with ActiveRecord
 
-engine.rb
+Add to engine.rb:
 
 # Include acts_as_addressable concern and allow any ActiveRecord object to call it
 initializer 'validator.active_record' do |app|
@@ -307,22 +310,60 @@ initializer 'validator.active_record' do |app|
   end
 end
 
-  -# Make sure all the classes are loaded (development mode fix)
-  - Rails.application.eager_load!
+And restart our server
 
-  - ActsAsValidationSource.descendants.each do |klass|
-    %h2= klass.name.pluralize
+> bundle exec rails server
 
-    %table.table
-      %thead
-        %tr
-          %th Name
-          %th is_valid?
-          %th
 
-      %tbody
-        - klass.all.find_each do |resource|
-          %tr
-            %td= resource.to_s
-            %td= resource.is_valid?
-            %td= resource.errors.full_messages
+Then we can add the common functionality onto any ActiveRecord model
+
+In user.rb:
+
+acts_as_validation_source
+
+In client.rb:
+
+acts_as_validation_source
+
+
+
+
+Update the view:
+
+<h1>Hello Engine</h1>
+
+<div id="validations" class="<%= Validator.html_classes %>">
+  <% ActsAsValidationSource.descendants.each do |klass| %>
+    <h2><%= klass.name.pluralize %></h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>is_valid?</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% klass.all.find_each do |resource| %>
+          <tr>
+            <td><%= resource %></td>
+            <td><%= resource.is_valid? %></td>
+            <td><%= resource.errors.full_messages.presence %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% end %>
+</div>
+
+
+Now what happens with an invalid model?
+
+In user.rb:
+
+validate do
+  self.errors.add(:base, 'no threes allowed') if id % 3 == 0
+end
