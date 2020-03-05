@@ -12,7 +12,7 @@ https://mattriemer.ca/
 https://codeandeffect.com/
 https://tadum.app/
 
-https://github.com/code-and-effect/effective_website
+
 
 
 
@@ -40,11 +40,16 @@ We are going to explore building a rails engine.
 
 # What the heck is a rails engine?
 
-A rails engine is a miniature application that you can host within your main rails app.
+A rails engine is a gem that runs within your main rails app.
+
+Inside that gem can be models, controllers, views, database migrations, anything.
 
 It's a mini rails app, inside your rails app.
 
-Examples: devise, spree, refinery
+A Rails application is actually just a "supercharged" engine,
+with the Rails::Application class inheriting a lot of its behavior from Rails::Engine
+
+Examples: devise, spree, refinery CMS
 
 
 # Why would I use one?
@@ -75,15 +80,17 @@ But, I'm going to totally ignore those, and today we will build our own thing.
 
 So I want to build a small but non-trivial rails engine in like 10 or 15 minutes.
 
-We are going to build a 1-page rails engine that displays the valid? status of all persisted resources in the database.
+We are going to build a 1-page rails engine that displays the valid? status of any persisted models in the database.
+
+This could help us identify any invalid records in the database.
 
 We will create:
 
 - A rails engine
 - A controller with just one action
 - A route and view
-- A custom stylesheets
-- A rails ActiveRecord concern
+- A custom stylesheet
+- An ActiveRecord concern
 - That's a lot already
 
 
@@ -173,9 +180,6 @@ lib/validator/engine.rb:
 
 engine_name 'validator'
 
-Remove that IsolateNamespace line
-
-
 # Mount the engine in our rails app
 
 config/routes.rb:
@@ -207,9 +211,9 @@ Sure enough, we have a working page here.
 
 # Let's add a quick stylesheet
 
-So the page looks ugly, and we're not really going to improve on that.
+So the page looks ugly, and we're not going to improve on that.
 
-But we can add a stylesheet for a designer to come save us.
+But we can add a stylesheet for a designer to come save us later.
 
 Let's create app/assets/stylesheets/validator.css
 
@@ -248,6 +252,8 @@ end
 
 So my pattern is to put the default file in this here config/ directory.
 
+# Let's make a rails generator
+
 And then a rails generator to install that into the parent app's config/initializers/ directory
 
 lib/generators/validator/install_generator.rb
@@ -269,6 +275,8 @@ module Validator
   end
 end
 
+# And install that into our main rails app
+
 > rails generate validator:install
 
 Generates the initializer file which gets run whenever our app starts.
@@ -280,6 +288,8 @@ In config/initializers/validator.rb
 config.html_classes = 'card card-body'
 
 > bundle exec rails server
+
+# Use this new config variable in our view
 
 And back in our rails engine, let's reference this module variable:
 
@@ -294,7 +304,7 @@ index.html.erb
 So now our parent app can tell our engine to render the div with its own classes
 
 
-# Okay now let's build something that does stuff
+# Okay now let's build the validation part
 
 Okay cool, so now we are going to add some common functionality to our models
 
@@ -327,7 +337,7 @@ And we need to register this concern with ActiveRecord
 
 Add to engine.rb:
 
-# Include acts_as_addressable concern and allow any ActiveRecord object to call it
+# Include acts_as_addressable concern and allow any ActiveRecord model to call it
 initializer 'validator.active_record' do |app|
   ActiveSupport.on_load :active_record do
     ActiveRecord::Base.extend(ActsAsValidationSource::ActiveRecord)
