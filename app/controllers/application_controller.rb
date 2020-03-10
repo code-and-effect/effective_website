@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   # CanCanCan & /admin authorization
   check_authorization
-  skip_authorization_check #if: :devise_controller?
+  skip_authorization_check if: :devise_controller?
   before_action :restrict_admin_routes, if: -> { request.path.start_with?('/admin'.freeze) }
 
   # Logging, and trash
