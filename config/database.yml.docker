@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  host: db
+  database: effective_website
+  username: postgres
+  password: password1234
+
+test:
+  adapter: postgresql
+  host: db
+  database: effective_website_test
+  username: postgres
+  password: password1234
