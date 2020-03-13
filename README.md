@@ -36,6 +36,23 @@ rails test:bot:environment
 rails test:bot:system
 ```
 
+## Docker
+
+You can also use Docker to install and run this site:
+
+```
+cp config/database.yml.docker config/database.yml
+docker-compose build
+
+# One time
+docker-compose run web bash
+rake db:create db:migrate db:seed
+exit
+
+# And then, each time
+docker-compose run web
+```
+
 ## Create/Configure an S3 Bucket
 
 You will need an AWS IAM user with sufficient priviledges and a properly configured S3 bucket to use with effective_assets
