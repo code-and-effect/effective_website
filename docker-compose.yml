@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+      - bundle-volume:/usr/local/bundle
+    ports:
+      - "3000:3000"
+      #- "1234:1234" # RubyMine
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password1234
+
+volumes:
+  bundle-volume:
+  db-volume:
