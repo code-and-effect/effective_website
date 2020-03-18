@@ -1,6 +1,6 @@
 # http://localhost:3000/rails/mailers
 
-class Devise::MailerPreview < ActionMailer::Preview
+class DeviseMailerPreview < ActionMailer::Preview
   def self.devise?(devise_module)
     (@devise_modules ||= User.new().devise_modules).include?(devise_module)
   end

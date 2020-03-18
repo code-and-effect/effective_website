@@ -84,13 +84,8 @@ class EffectiveOrdersMailerPreview < ActionMailer::Preview
 
   def preview_user
     User.new(email: 'buyer@website.com').tap do |user|
-      user.name = 'Valued Customer' if user.respond_to?(:name=)
-      user.full_name = 'Valued Customer' if user.respond_to?(:full_name=)
-
-      if user.respond_to?(:first_name=) && user.respond_to?(:last_name=)
-        user.first_name = 'Valued'
-        user.last_name = 'Customer'
-      end
+      user.first_name = 'Valued'
+      user.last_name = 'Customer'
 
       user.billing_address = build_address if user.respond_to?(:billing_address=)
     end
