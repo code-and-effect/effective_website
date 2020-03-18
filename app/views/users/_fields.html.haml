@@ -1,4 +1,5 @@
-= f.text_field :name
+= f.text_field :first_name
+= f.text_field :last_name
 = f.email_field :email, hint: ('still active until your new email address has been confirmed' if f.object.unconfirmed_email.present? )
 
 - if f.object.unconfirmed_email.present?

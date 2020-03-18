@@ -22,7 +22,7 @@ class User < ApplicationRecord
   # has_many :member_clients, through: :member_mates, class_name: 'Client', source: :client
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
-    [:email, :password, :password_confirmation, :name]
+    [:email, :password, :password_confirmation, :first_name, :last_name]
   end
 
   effective_resource do
@@ -47,7 +47,8 @@ class User < ApplicationRecord
     invitations_count       :integer
 
     email                   :string
-    name                    :string
+    first_name              :string
+    last_name               :string
     avatar_attached         :boolean
 
     roles_mask              :integer, permitted: false
@@ -59,9 +60,9 @@ class User < ApplicationRecord
   end
 
   scope :deep, -> { with_attached_files.includes(:clients) }
-  scope :shallow, -> { select(:id, :email, :name) }
+  scope :shallow, -> { select(:id, :email, :first_name, :last_name) }
 
-  scope :sorted, -> { order(:name) }
+  scope :sorted, -> { order(:first_name) }
   scope :datatables_filter, -> { sorted.shallow }
 
   scope :admins, -> { unarchived.with_role(:admin) }
@@ -70,16 +71,12 @@ class User < ApplicationRecord
 
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 
-  validates :name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :roles, presence: true
 
   validate(if: -> { avatar.attached? }) do
     self.errors.add(:avatar, 'must be an image') unless avatar.image?
-  end
-
-  # Prepopulate the name based on email
-  before_save(if: -> { email.present? && name.blank? }) do
-    self.name = email.split('@').first
   end
 
   before_save { self.avatar_attached = avatar.attached? }
@@ -97,6 +94,10 @@ class User < ApplicationRecord
 
   def to_s
     name.presence || email
+  end
+
+  def name
+    [first_name, last_name].compact.join(' ')
   end
 
   def reinvite!

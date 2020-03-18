@@ -4,10 +4,10 @@
 puts '== Creating users ======================'
 
 # The webmaster and/or super priviledged staff member. Can do anything.
-admin = User.create!(email: 'admin@codeandeffect.com', name: 'Admin User', roles: :admin, password: 'example')
+admin = User.create!(email: 'admin@codeandeffect.com', first_name: 'Admin', last_name: 'User', roles: :admin, password: 'example')
 
 # Can access /admin and administer the site.
-staff = User.create!(email: 'staff@codeandeffect.com', name: 'Staff User', roles: :staff, password: 'example')
+staff = User.create!(email: 'staff@codeandeffect.com', first_name: 'Staff', last_name: 'User', roles: :staff, password: 'example')
 
 puts '== Creating clients ===================='
 # Can access /clients and belong to client groups.
@@ -15,7 +15,14 @@ puts '== Creating clients ===================='
   client = Client.new(name: Faker::Company.name)
 
   [:owner, :member, :collaborator].each do |role|
-    user = User.create!(email: "#{role}@#{client.name.parameterize}.com", name: Faker::Name.name, roles: :client, password: 'be_effective')
+    user = User.create!(
+      email: "#{role}@#{client.name.parameterize}.com",
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      roles: :client,
+      password: 'be_effective'
+    )
+
     client.mates.build(user: user, roles: role)
   end
 
@@ -59,4 +66,5 @@ post = Effective::Post.new(
   published_at: Time.zone.now
 ).save!
 
+puts '== All Done, have a great day =========='
 puts 'Visit http://localhost:3000 and Sign In as: admin@codeandeffect.com with any password'

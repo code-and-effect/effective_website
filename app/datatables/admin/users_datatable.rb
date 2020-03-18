@@ -16,7 +16,8 @@ class Admin::UsersDatatable < Effective::Datatable
     col :created_at, label: 'Created', visible: false
 
     col :email
-    col :name
+    col :first_name
+    col :last_name
     col :roles, search: User::ROLES
 
     col :clients do |user|
