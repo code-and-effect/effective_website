@@ -10,8 +10,10 @@ class CreateEffectiveOrders < ActiveRecord::Migration[4.2]
       t.text      :note_internal
 
       t.string    :billing_name
-      t.text      :payment
+      t.string    :email
+      t.string    :cc
 
+      t.text      :payment
       t.string    :payment_provider
       t.string    :payment_card
 
@@ -72,6 +74,7 @@ class CreateEffectiveOrders < ActiveRecord::Migration[4.2]
       t.integer   :user_id
 
       t.string    :stripe_customer_id
+      t.string    :payment_method_id
       t.string    :active_card
       t.string    :status
 

@@ -1,4 +1,4 @@
-FROM ruby:2.6.3
+FROM ruby:2.7.1
 
 # Install 3rd party dependencies.
 RUN apt update && apt -y install nodejs
