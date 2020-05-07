@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_20_034056) do
+ActiveRecord::Schema.define(version: 2019_04_20_034057) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034056) do
   create_table "customers", force: :cascade do |t|
     t.integer "user_id"
     t.string "stripe_customer_id"
+    t.string "payment_method_id"
     t.string "active_card"
     t.string "status"
     t.integer "subscriptions_count", default: 0
@@ -171,6 +172,8 @@ ActiveRecord::Schema.define(version: 2019_04_20_034056) do
     t.text "note_to_buyer"
     t.text "note_internal"
     t.string "billing_name"
+    t.string "email"
+    t.string "cc"
     t.text "payment"
     t.string "payment_provider"
     t.string "payment_card"
