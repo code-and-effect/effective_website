@@ -5,12 +5,17 @@ import 'stylesheets/application'
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 
-// Rails Javascripts
-require("@rails/ujs").start()
+// Rails UJS
+import Rails from '@rails/ujs'
+window.Rails = Rails
+Rails.start()
+
+// Rails
 require("@rails/activestorage").start()
+require("turbolinks").start()
 
 // jQuery
-// We assign window.jQuery so that the asset pipeline (effective_gems) can use it
+// We assign window.jQuery so that the asset pipeline can use it
 import jQuery from 'jquery'
 window.jQuery = window.$ = jQuery;
 

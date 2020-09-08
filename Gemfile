@@ -7,12 +7,12 @@ gem 'pg'
 
 gem 'cancancan'
 gem 'cocoon'
-gem 'coffee-rails'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
 gem 'haml'
 gem 'sass-rails'
+gem 'turbolinks'
 gem 'webpacker'
 
 # gem 'aws-sdk-s3', require: false

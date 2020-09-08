@@ -111,7 +111,7 @@ GEM
       carmen
       coffee-rails
       rails (>= 3.2.0)
-    effective_bootstrap (0.8.2)
+    effective_bootstrap (0.8.3)
       bootstrap (>= 4.0.0)
       coffee-rails
       inline_svg
@@ -121,7 +121,7 @@ GEM
     effective_ckeditor (1.11.0)
       rails (>= 3.2.0)
       sass
-    effective_datatables (4.8.6)
+    effective_datatables (4.8.7)
       coffee-rails
       effective_bootstrap
       effective_resources
@@ -325,6 +325,9 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -355,7 +358,6 @@ DEPENDENCIES
   cancancan
   capybara
   cocoon
-  coffee-rails
   devise
   devise_invitable
   dotenv-rails
@@ -388,6 +390,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   sqlite3
+  turbolinks
   uglifier
   webdrivers
   webpacker
