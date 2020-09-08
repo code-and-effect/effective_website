@@ -60,6 +60,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # For rails zeitwerk:check
+  config.eager_load_paths += [File.join(Rails.root + 'test/mailers/previews')]
+
   # Email
   config.action_mailer.default_url_options = { host: 'http://localhost', port: 3000 }
   config.action_mailer.asset_host = 'http://localhost:3000'

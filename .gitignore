@@ -34,6 +34,10 @@ public/assets/*
 # effective_test_bot tours
 test/tours/*.gif
 
+# ActiveStorage
+/storage/*
+
+# Webpack
 /public/packs
 /public/packs-test
 /node_modules

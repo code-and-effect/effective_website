@@ -1,5 +1,5 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  = link_to(image_tag('logo.png', alt: 'Logo'), '/', class: 'navbar-brand')
+  = link_to(image_pack_tag('logo.png', alt: 'Logo'), '/', class: 'navbar-brand')
 
   %button.navbar-toggler{type: 'button', data: {toggle: 'collapse', target: '#navContent', 'aria-controls': 'navContent', 'aria-label': 'Toggle navigation'}}
     %span.navbar-toggler-icon
@@ -8,7 +8,7 @@
     %ul.navbar-nav.mr-auto
       - if can?(:index, Effective::Post)
         = nav_link_to 'Blog', effective_posts.posts_path
-        
+
       - if can?(:index, Effective::Page)
         - Effective::Page.all.each do |page|
           = nav_link_to(page, effective_pages.page_path(page)) if can?(:show, page)
@@ -32,4 +32,3 @@
           = nav_link_to 'Sign Out', destroy_user_session_path, method: :delete
       - else
         = nav_link_to 'Sign In', new_user_session_path
-

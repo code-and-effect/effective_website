@@ -2,7 +2,7 @@
 
 This is a rails starter website that uses most of the effective_* gems.
 
-Ruby 2.6.3, Rails 6.0.3
+Ruby 2.7.1 Rails 6.0.3
 
 ## Live Demo
 
@@ -51,6 +51,17 @@ exit
 
 # And then, each time
 docker-compose run web
+```
+
+## Heroku
+
+When deploying to heroku, we need to use two build packs.
+
+To configure heroku, run the following (one time only):
+
+```
+heroku buildpacks:add --index 1 heroku/nodejs
+heroku buildpacks:add --index 2 heroku/ruby
 ```
 
 ## Create/Configure an S3 Bucket
@@ -148,4 +159,3 @@ rails test:bot TEST=admin/clients#index
 4. Push to the branch (`git push origin my-new-feature`)
 5. Bonus points for test coverage
 6. Create new Pull Request
-
