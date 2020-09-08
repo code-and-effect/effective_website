@@ -3,6 +3,11 @@ require 'test_helper'
 class UsersTest < ActiveSupport::TestCase
   let(:user) { User.new }
 
+  test 'build_user factory' do
+    assert build_user().valid?
+    assert build_user_with_address().valid?
+  end
+
   test 'archived users are inactive for authentication' do
     user = User.new()
     assert user.active_for_authentication?
