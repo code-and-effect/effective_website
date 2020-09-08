@@ -28,5 +28,8 @@ config/database.yml
 # Ignore Byebug command history file.
 .byebug_history
 
+# Precompiled Assets
+public/assets/*
+
 # effective_test_bot tours
 test/tours/*.gif

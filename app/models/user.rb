@@ -84,11 +84,13 @@ class User < ApplicationRecord
   # Devise invitable ignores model validations, so we manually check for duplicate email addresses.
   before_save(if: -> { new_record? && invitation_sent_at.present? }) do
     if email.blank?
-      self.errors.add(:email, "can't be blank"); throw(:abort)
+      self.errors.add(:email, "can't be blank")
+      raise("email can't be blank")
     end
 
-    if self.class.where(email: email).exists?
-      self.errors.add(:email, 'has already been taken'); throw(:abort)
+    if self.class.where(email: email.downcase.strip).exists?
+      self.errors.add(:email, 'has already been taken')
+      raise("email has already been taken")
     end
   end
 
