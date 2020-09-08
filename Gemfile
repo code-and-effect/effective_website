@@ -17,6 +17,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'turbolinks'
+gem 'webpacker'
 
 gem 'effective_addresses'
 gem 'effective_bootstrap'

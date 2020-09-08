@@ -33,3 +33,10 @@ public/assets/*
 
 # effective_test_bot tours
 test/tours/*.gif
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
