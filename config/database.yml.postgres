@@ -1,9 +1,9 @@
 development:
   adapter: postgresql
   host: localhost
-  database: effective_website
+  database: example
 
 test:
   adapter: postgresql
   host: localhost
-  database: effective_website_test
+  database: example_test
