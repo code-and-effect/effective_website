@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(version: 2019_04_20_034057) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "parent_id"
+    t.string "parent_type"
     t.string "state"
     t.datetime "purchased_at"
     t.text "note"
