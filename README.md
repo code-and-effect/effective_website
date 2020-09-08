@@ -14,9 +14,13 @@ Login as `admin@codeandeffect.com` with password `example`.
 
 ```ruby
 git clone git@github.com:code-and-effect/effective_website.git
+
 cd effective_website
 cp .env.example .env  # Fixes SECRET_KEY_BASE errors
-bundle
+
+bundle install
+yarn install
+
 rails db:create db:migrate db:seed
 rails server
 ```
