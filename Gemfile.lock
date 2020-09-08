@@ -61,22 +61,6 @@ GEM
     ansi (1.5.0)
     autoprefixer-rails (9.8.6.3)
       execjs
-    aws-eventstream (1.1.0)
-    aws-partitions (1.365.0)
-    aws-sdk-core (3.105.0)
-      aws-eventstream (~> 1, >= 1.0.2)
-      aws-partitions (~> 1, >= 1.239.0)
-      aws-sigv4 (~> 1.1)
-      jmespath (~> 1.0)
-    aws-sdk-kms (1.37.0)
-      aws-sdk-core (~> 3, >= 3.99.0)
-      aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.79.1)
-      aws-sdk-core (~> 3, >= 3.104.3)
-      aws-sdk-kms (~> 1)
-      aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.2.2)
-      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -213,7 +197,6 @@ GEM
     inline_svg (1.7.1)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    jmespath (1.4.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -342,9 +325,6 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -371,9 +351,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk-s3
   bootsnap
-  bootstrap
   cancancan
   capybara
   cocoon
@@ -398,7 +376,6 @@ DEPENDENCIES
   exception_notification
   foreman
   haml
-  jquery-rails
   listen
   passenger
   pg
@@ -411,7 +388,6 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   sqlite3
-  turbolinks
   uglifier
   webdrivers
   webpacker

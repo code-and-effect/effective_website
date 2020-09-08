@@ -5,8 +5,6 @@ gem 'rails'
 gem 'bootsnap'
 gem 'pg'
 
-gem 'aws-sdk-s3', require: false
-gem 'bootstrap'
 gem 'cancancan'
 gem 'cocoon'
 gem 'coffee-rails'
@@ -14,10 +12,10 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
 gem 'haml'
-gem 'jquery-rails'
 gem 'sass-rails'
-gem 'turbolinks'
 gem 'webpacker'
+
+# gem 'aws-sdk-s3', require: false
 
 gem 'effective_addresses'
 gem 'effective_bootstrap'

@@ -18,6 +18,9 @@ window.jQuery = window.$ = jQuery;
 import 'popper.js'
 import 'bootstrap'
 
+// Cocoon
+require("@nathanvda/cocoon")
+
 // ActionCable
 // import 'channels'
 
