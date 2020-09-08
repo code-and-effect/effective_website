@@ -8,8 +8,6 @@ class User < ApplicationRecord
 
   # This must be a subset of effective_roles roles.
   ROLES = [:admin, :staff, :client]
-
-  has_one_attached :avatar  # active_storage
   has_many_attached :files
 
   # My clients
@@ -49,7 +47,6 @@ class User < ApplicationRecord
     email                   :string
     first_name              :string
     last_name               :string
-    avatar_attached         :boolean
 
     roles_mask              :integer, permitted: false
     roles                   permitted: true
@@ -74,12 +71,6 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :roles, presence: true
-
-  validate(if: -> { avatar.attached? }) do
-    self.errors.add(:avatar, 'must be an image') unless avatar.image?
-  end
-
-  before_save { self.avatar_attached = avatar.attached? }
 
   # Devise invitable ignores model validations, so we manually check for duplicate email addresses.
   before_save(if: -> { new_record? && invitation_sent_at.present? }) do

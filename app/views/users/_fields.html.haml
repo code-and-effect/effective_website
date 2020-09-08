@@ -6,10 +6,10 @@
   = f.static_field :unconfirmed_email,
     hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
 
-= f.password_field :password, required: false, autocomplate: 'off'
-= f.password_field :password_confirmation, required: false, autocomplete: 'off', hint: 'leave blank to keep existing password'
+= f.password_field :password, required: false, autocomplate: 'new-password', label: 'New Password'
+= f.password_field :password_confirmation, required: false, autocomplete: 'new-password', label: 'New Password Confirmation', hint: 'leave blank to keep existing password'
 
-= f.file_field :avatar
+%h3 Files
 = f.file_field :files
 
 %h3 Billing Address

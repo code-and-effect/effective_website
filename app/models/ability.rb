@@ -16,6 +16,10 @@ class Ability
     can :index, Effective::Page
     can(:show, Effective::Page) { |page| page.roles_permit?(user) }
 
+    if user.present?
+      can :show, :dashboard
+    end
+
     if user.is?(:client)
       client_abilities(user)
     end
