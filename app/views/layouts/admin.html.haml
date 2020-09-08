@@ -6,11 +6,17 @@
     %meta{name: 'robots', content: 'index, follow'}
 
     = csrf_meta_tags
+    = csp_meta_tag
+    /= action_cable_meta_tag
 
-    = stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application'
+    = stylesheet_pack_tag 'application'
+
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
 
     = effective_pages_header_tags
+    = effective_posts_header_tags
     = effective_regions_include_tags
 
   %body{class: effective_pages_body_classes}
@@ -21,4 +27,3 @@
       %div{class: params[:action] == 'index' ? 'container-fluid' : 'container' }
         = render partial: 'layouts/alert'
         #main= yield
-
