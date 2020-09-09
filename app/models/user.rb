@@ -134,9 +134,11 @@ class User < ApplicationRecord
     # Make a password
     user.password = Devise.friendly_token[0, 20] if user.encrypted_password.blank?
 
+    # Devise Invitable
     invitation_token ? user.accept_invitation! : user.save!
 
-    user.confirm
+    # Devise Confirmable
+    user.confirm if user.respond_to?(:confirm)
 
     user
   end
