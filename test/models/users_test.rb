@@ -38,5 +38,4 @@ class UsersTest < ActiveSupport::TestCase
     assert_equal "email has already been taken", exception.message
     assert_equal "has already been taken", user.errors[:email].first
   end
-
 end

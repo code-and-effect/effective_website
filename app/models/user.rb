@@ -99,6 +99,11 @@ class User < ApplicationRecord
     end
   end
 
+  # Clear the provider if an oauth signed in user resets password
+  before_save(if: -> { persisted? && encrypted_password_changed? }) do
+    assign_attributes(provider: nil, access_token: nil, refresh_token: nil, token_expires_at: nil)
+  end
+
   def self.from_omniauth(auth, params)
     invitation_token = (params.presence || {})['invitation_token']
 
@@ -109,7 +114,7 @@ class User < ApplicationRecord
     user = if invitation_token
       User.find_by_invitation_token(invitation_token, false) || raise(ActiveRecord::RecordNotFound)
     else
-      User.where(uid: auth.uid, provider: auth.provider).or(User.where(email: email)).first || User.new
+      User.where(uid: auth.uid).or(User.where(email: email)).first || User.new
     end
 
     user.assign_attributes(
@@ -143,7 +148,7 @@ class User < ApplicationRecord
   end
 
   def to_s
-    name.presence || full_name.presence || email
+    full_name.presence || name.presence || email
   end
 
   def full_name

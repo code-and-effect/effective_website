@@ -12,12 +12,22 @@ class Admin::UsersDatatable < Effective::Datatable
     order :updated_at, :desc
 
     col :id, visible: false
+    col :uid, visible: false
     col :updated_at, label: 'Updated', visible: false
     col :created_at, label: 'Created', visible: false
 
-    col :email
-    col :first_name
-    col :last_name
+    col(:to_s, label: 'User', sql_column: true, partial: 'admin/users/col')
+      .search do |collection, term|
+        collection.where(id: effective_resource.search_any(term))
+      end.sort do |collection, direction|
+        collection.order(name: direction, first_name: direction)
+      end
+
+    col :email, visible: false
+    col :name, visible: false
+    col :first_name, visible: false
+    col :last_name, visible: false
+
     col :roles, search: User::ROLES
 
     col :clients do |user|
@@ -29,6 +39,10 @@ class Admin::UsersDatatable < Effective::Datatable
 
         content_tag(:div, (title + ' ' + badge), class: 'col-resource-item')
       end.join
+    end
+
+    col :provider, label: 'Sign in with', search: sign_in_with_collection() do |user|
+      user.provider || 'email'
     end
 
     col :invitation_accepted?, label: 'Invite Accepted?', as: :boolean
@@ -45,6 +59,10 @@ class Admin::UsersDatatable < Effective::Datatable
 
   collection do
     User.deep.all
+  end
+
+  def sign_in_with_collection
+    [['email', 'nil']] + (Devise.omniauth_providers rescue []).map { |provider| [provider, provider] }
   end
 
 end

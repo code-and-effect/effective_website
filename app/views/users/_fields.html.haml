@@ -1,13 +1,21 @@
+- if f.object.provider.present?
+  = f.static_field :provider, label: 'Signed in with'
+  = f.static_field :email
+- else
+  = f.email_field :email, hint: ('still active until your new email address has been confirmed' if f.object.unconfirmed_email.present? )
+
+  - if f.object.unconfirmed_email.present?
+    = f.static_field :unconfirmed_email,
+      hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
+
+  = f.password_field :password, required: false, autocomplate: 'new-password', label: 'New Password'
+  = f.password_field :password_confirmation, required: false, autocomplete: 'new-password', label: 'New Password Confirmation', hint: 'leave blank to keep existing password'
+
 = f.text_field :first_name
 = f.text_field :last_name
-= f.email_field :email, hint: ('still active until your new email address has been confirmed' if f.object.unconfirmed_email.present? )
 
-- if f.object.unconfirmed_email.present?
-  = f.static_field :unconfirmed_email,
-    hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
-
-= f.password_field :password, required: false, autocomplate: 'new-password', label: 'New Password'
-= f.password_field :password_confirmation, required: false, autocomplete: 'new-password', label: 'New Password Confirmation', hint: 'leave blank to keep existing password'
+= f.static_field :avatar, hint: "Visit #{link_to('gravatar.com', 'https://gravatar.com', target: '_blank')} to change your avatar." do
+  = user_tag(f.object)
 
 %h3 Files
 = f.file_field :files

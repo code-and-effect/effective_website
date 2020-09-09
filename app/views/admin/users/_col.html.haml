@@ -1,0 +1,7 @@
+- user = (resource.kind_of?(User) ? resource : resource.user)
+
+= user_tag(user)
+
+- if user.email.present?
+  %br
+  %small= mail_to user.email

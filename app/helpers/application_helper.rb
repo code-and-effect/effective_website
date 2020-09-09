@@ -6,7 +6,7 @@ module ApplicationHelper
 
   def gravatar_url(user)
     hash = Digest::MD5.hexdigest(user.email)
-    "https://secure.gravatar.com/avatar/#{hash}.png?d=blank"
+    "https://secure.gravatar.com/avatar/#{hash}.png"
   end
 
   def user_tag(user)
