@@ -2,7 +2,7 @@ require 'application_system_test_case'
 
 class AdminInviteUserTest < ApplicationSystemTestCase
   let(:admin) { User.where(email: 'admin@codeandeffect.com').first! }
-  let(:email) { "newuser@example.com" }
+  let(:email) { "newuser@somewhere.com" }
 
   test 'can create and invite a new user' do
     # Admin creates a new user
