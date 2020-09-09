@@ -71,7 +71,7 @@ class User < ApplicationRecord
   end
 
   scope :deep, -> { with_attached_files.includes(:clients) }
-  scope :shallow, -> { select(:id, :email, :first_name, :last_name) }
+  scope :shallow, -> { select(:id, :email, :name, :first_name, :last_name) }
 
   scope :sorted, -> { order(:first_name) }
   scope :datatables_filter, -> { sorted.shallow }
