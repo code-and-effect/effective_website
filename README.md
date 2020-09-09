@@ -153,7 +153,7 @@ https://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 
 - Add `gem 'omniauth-facebook'` to Gemfile and bundle.
 
-- Visit developers.facebook.com
+- Visit https://developers.facebook.com
 
 - Login and click My Apps
 
@@ -185,7 +185,7 @@ FACEBOOK_SECRET=
 
 - Add `gem 'omniauth-google-oauth2'` to Gemfile and bundle.
 
-- Visit console.developers.google.com
+- Visit https://console.developers.google.com
 
 - Click 'New Project' and give it a name
 - Open 'APIs' 'Library' section and make sure Google+ API is enabled
@@ -212,9 +212,11 @@ GOOGLE_SECRET=
 
 ### Microsoft oAuth2
 
-- Visit https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview
-- Find Azure Active Directory
+- Add `gem 'omniauth-microsoft_graph'` to Gemfile and bundle.
 
+- Visit https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview
+
+- Find Azure Active Directory
 - Click 'App registrations' from left menu
 
 - Click 'New Registration'
