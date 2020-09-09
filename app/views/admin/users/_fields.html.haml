@@ -6,13 +6,14 @@
   = f.static_field :unconfirmed_email,
     hint: "Must be confirmed before you can sign in with this email.<br>Please check this email account for a confirmation link.<br>#{link_to 'resend confirmation instructions', confirmation_path(:user, user: { email: f.object.email }), 'data-method': :post}"
 
-- if f.object.provider.present?
-  %p Signed in with: #{f.object.provider}
-- else
-  %p Signed in with: email and password
+- if f.object.persisted?
+  - if f.object.provider.present?
+    %p Signed in with: #{f.object.provider}
+  - else
+    %p Signed in with: email and password
 
-= f.static_field :avatar do
-  = user_tag(f.object)
+  = f.static_field :avatar do
+    = user_tag(f.object)
 
 %h3 Files
 = f.file_field :files
