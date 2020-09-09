@@ -68,9 +68,13 @@ heroku buildpacks:add --index 1 heroku/nodejs
 heroku buildpacks:add --index 2 heroku/ruby
 ```
 
-## Create/Configure an S3 Bucket
+## Amazon S3
 
-You will need an AWS IAM user with sufficient priviledges and a properly configured S3 bucket to use with effective_assets
+If you want to use Amazon S3 for ActiveStorage
+
+Uncomment `amazon` in `config/storage.yml` and add ENV variables.
+
+Change `config.active_storage.service` to `:amazon` in one or more `config/environments/` files.
 
 ### Log into AWS Console
 
@@ -138,6 +142,9 @@ The Bucket is now set up and ready to accept uploads, but we still need a user t
 Copy these values into your `.env` file.
 
 This user is now set up and ready to access the S3 Bucket previously created.
+
+## Omniauth
+
 
 ## License
 
