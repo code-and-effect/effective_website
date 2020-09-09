@@ -118,5 +118,5 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
 
   # ActiveStorage
-  config.active_storage.service = :amazon
+  config.active_storage.service = :local
 end

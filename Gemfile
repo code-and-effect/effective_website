@@ -8,6 +8,9 @@ gem 'pg'
 gem 'sass-rails'
 gem 'webpacker'
 
+# ActiveStorage Gems
+# gem 'aws-sdk-s3', require: false
+
 # Community Gems
 gem 'cancancan'
 gem 'cocoon'
@@ -23,9 +26,6 @@ gem 'omniauth-oauth2'
 # gem 'omniauth-github'
 # gem 'omniauth-facebook'
 # gem 'omniauth-google-oauth2'
-
-# Optional Gems
-# gem 'aws-sdk-s3', require: false
 
 # Effective Gems
 gem 'effective_addresses'
