@@ -145,7 +145,7 @@ This user is now set up and ready to access the S3 Bucket previously created.
 
 ## Omniauth
 
-We support omniauth oauth2 authentication via Google, Facebook, Microsoft, Twitter and other omniauth providers.
+We support omniauth oauth2 authentication via Google, Facebook, Microsoft and other omniauth providers.
 
 https://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
 
@@ -168,6 +168,11 @@ https://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
   - Site URL: https://example.herokuapp.com
 
 - Copy the App ID and App secret into the `.env` file and/or set server production ENV variables
+
+- Click 'Facebook Login' and 'Settings'
+  - Client OAuth Login: Yes
+  - Web OAuth Login: Yes
+  - Valid OAuth Redirect URIs: https://example.herokuapp.com/users/auth/facebook/callback
 
 - Click the 'In development / Live' radio button from the top. Switch to Live.
 
