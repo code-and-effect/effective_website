@@ -228,8 +228,8 @@ GOOGLE_SECRET=
   - Copy the Client secret into the `.env` file and/or set server production ENV variables
 
 ```
-AZURE_APP_ID=
-AZURE_SECRET=
+MICROSOFT_APP_ID=
+MICROSOFT_SECRET=
 ```
 
 ## License

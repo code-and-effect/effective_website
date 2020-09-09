@@ -316,8 +316,8 @@ Devise.setup do |config|
     }
   end
 
-  if ENV['AZURE_APP_ID'].present? && defined?(OmniAuth::Strategies::MicrosoftGraph)
-    config.omniauth :microsoft_graph, ENV.fetch('AZURE_APP_ID'), ENV.fetch('AZURE_SECRET'), {
+  if ENV['MICROSOFT_ID'].present? && defined?(OmniAuth::Strategies::MicrosoftGraph)
+    config.omniauth :microsoft_graph, ENV.fetch('MICROSOFT_ID'), ENV.fetch('MICROSOFT_SECRET'), {
       scope: 'openid profile email offline_access user.read'
     }
   end

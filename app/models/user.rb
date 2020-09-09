@@ -105,7 +105,6 @@ class User < ApplicationRecord
     email = (auth.info.email.presence || "#{auth.uid}@#{auth.provider}.none").downcase
     image = auth.info.image
     name = auth.info.name || auth.dig(:extra, :raw_info, :login)
-    info = auth.dig(:extra, :raw_info).to_h.symbolize_keys
 
     user = if invitation_token
       User.find_by_invitation_token(invitation_token, false) || raise(ActiveRecord::RecordNotFound)
@@ -119,8 +118,8 @@ class User < ApplicationRecord
       email: email,
       avatar_url: image,
       name: name,
-      first_name: auth.info.first_name.presence || name.split(' ').first,
-      last_name: auth.info.last_name || name.split(' ').last
+      first_name: (auth.info.first_name.presence || name.split(' ').first.presence || 'First'),
+      last_name: (auth.info.last_name.presence || name.split(' ').last.presence || 'Last')
     )
 
     if auth.respond_to?(:credentials)
