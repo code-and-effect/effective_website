@@ -316,6 +316,12 @@ Devise.setup do |config|
     }
   end
 
+  if ENV['AZURE_APP_ID'].present? && defined?(OmniAuth::Strategies::MicrosoftGraph)
+    config.omniauth :microsoft_graph, ENV.fetch('AZURE_APP_ID'), ENV.fetch('AZURE_SECRET'), {
+      scope: 'openid profile email offline_access user.read'
+    }
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

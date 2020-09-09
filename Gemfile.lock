@@ -249,6 +249,9 @@ GEM
       jwt (>= 2.0)
       omniauth (>= 1.1.1)
       omniauth-oauth2 (>= 1.6)
+    omniauth-microsoft_graph (0.3.3)
+      omniauth (~> 1.1, >= 1.1.1)
+      omniauth-oauth2 (~> 1.6)
     omniauth-oauth2 (1.7.0)
       oauth2 (~> 1.4)
       omniauth (~> 1.9)
@@ -406,6 +409,7 @@ DEPENDENCIES
   listen
   omniauth-facebook
   omniauth-google-oauth2
+  omniauth-microsoft_graph
   omniauth-oauth2
   passenger
   pg

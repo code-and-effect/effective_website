@@ -24,8 +24,8 @@ gem 'turbolinks'
 gem 'omniauth-oauth2'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'omniauth-microsoft_graph'
 # gem 'omniauth-github'
-# gem 'omniauth-microsoft_graph'
 # gem 'omniauth-twitter'
 
 # Effective Gems

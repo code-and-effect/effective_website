@@ -210,6 +210,28 @@ GOOGLE_CLIENT_ID=
 GOOGLE_SECRET=
 ```
 
+### Microsoft oAuth2
+
+- Visit https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview
+- Find Azure Active Directory
+
+- Click 'App registrations' from left menu
+
+- Click 'New Registration'
+  - Supported account types: Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)
+  - Redirect URI: Web https://example.herokuapp.com/users/auth/microsoft_graph/callback
+
+  - Copy the Application (client) ID into the `.env` file and/or set server production ENV variables
+
+- Click 'Certificates & Secrets'
+  - Click 'New client secret'
+  - Copy the Client secret into the `.env` file and/or set server production ENV variables
+
+```
+AZURE_APP_ID=
+AZURE_SECRET=
+```
+
 ## License
 
 MIT License. Copyright [Code and Effect Inc.](https://www.codeandeffect.com/)
