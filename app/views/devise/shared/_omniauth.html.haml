@@ -1,0 +1,36 @@
+- providers = resource_class.omniauth_providers
+- resource_action ||= 'Sign Up'
+
+- if providers.include?(:facebook)
+  .text-center.mb-2
+    = link_to user_facebook_omniauth_authorize_path, class: 'btn btn-social btn-facebook', rel: 'nofollow' do
+      = icon('facebook')
+      #{resource_action} with Facebook
+
+- if providers.include?(:github)
+  .text-center.mb-2
+    = link_to user_github_omniauth_authorize_path, class: 'btn btn-social btn-github', rel: 'nofollow' do
+      = icon('github')
+      #{resource_action} with Github
+
+- if providers.include?(:google_oauth2)
+  .text-center.mb-2
+    = link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-social btn-google', rel: 'nofollow' do
+      = icon('google')
+      #{resource_action} with Google
+
+- if providers.include?(:microsoft_graph)
+  .text-center.mb-2
+    = link_to user_microsoft_graph_omniauth_authorize_path, class: 'btn btn-social btn-microsoft', rel: 'nofollow' do
+      = icon('microsoft')
+      #{resource_action} with Microsoft
+
+- if providers.include?(:twitter)
+  .text-center.mb-2
+    = link_to user_twitter_omniauth_authorize_path, class: 'btn btn-social btn-twitter', rel: 'nofollow' do
+      = icon('twitter')
+      #{resource_action} with Twitter
+
+- if providers.present?
+  .text-center.mb-2
+    %em - or -

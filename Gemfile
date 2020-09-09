@@ -22,10 +22,11 @@ gem 'turbolinks'
 
 # Omniauth Gems
 gem 'omniauth-oauth2'
-# gem 'omniauth-microsoft_graph'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 # gem 'omniauth-github'
-# gem 'omniauth-facebook'
-# gem 'omniauth-google-oauth2'
+# gem 'omniauth-microsoft_graph'
+# gem 'omniauth-twitter'
 
 # Effective Gems
 gem 'effective_addresses'

@@ -2,18 +2,26 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_authorization_check # CanCanCan
 
   def facebook
-    process
+    process_omniauth
+  end
+
+  def github
+    process_omniauth
   end
 
   def google_oauth2
-    process
+    process_omniauth
   end
 
   def microsoft_graph
-    process
+    process_omniauth
   end
 
-  def process
+  def twitter
+    process_omniauth
+  end
+
+  def process_omniauth
     @user = User.from_omniauth(request.env['omniauth.auth'], request.env['omniauth.params'])
 
     if @user.persisted?

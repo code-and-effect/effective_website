@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
-    :invitable, :omniauthable, omniauth_providers: []
+    :invitable, :omniauthable
 
   acts_as_addressable :billing, :shipping  # effective_addresses
   acts_as_archived                         # effective_resources
   acts_as_role_restricted                  # effective_roles
-  log_changes                              # effective_logging
+  log_changes except: [:access_token, :refresh_token, :token_expires_at] # effective_logging
 
   # This must be a subset of effective_roles roles.
   ROLES = [:admin, :staff, :client]

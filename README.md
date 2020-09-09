@@ -133,7 +133,7 @@ The Bucket is now set up and ready to accept uploads, but we still need a user t
 - Click Next: Permissions
 - Click Create group
 - Give it a name like 's3-full-access'
-- Sroll down and select 'AmazonS3FullAccess'
+- Scroll down and select 'AmazonS3FullAccess'
 - Click Create group
 - Click Next: Review
 - Click Create user
@@ -145,6 +145,65 @@ This user is now set up and ready to access the S3 Bucket previously created.
 
 ## Omniauth
 
+We support omniauth oauth2 authentication via Google, Facebook, Microsoft, Twitter and other omniauth providers.
+
+https://www.sitepoint.com/rails-authentication-oauth-2-0-omniauth/
+
+### Facebook oAuth2
+
+- Add `gem 'omniauth-facebook'` to Gemfile and bundle.
+
+- Visit developers.facebook.com
+
+- Login and click My Apps
+
+- Click 'Create App'
+  - Manage Business Integrations
+  - App Purpose Yourself or your own business
+
+- Click 'Settings' and 'Basic'
+  - App Domains: https://example.herokuapp.com
+
+- Scroll down to the bottom and click "+ Add Platform" -> Web
+  - Site URL: https://example.herokuapp.com
+
+- Copy the App ID and App secret into the `.env` file and/or set server production ENV variables
+
+- Click the 'In development / Live' radio button from the top. Switch to Live.
+
+```
+FACEBOOK_APP_ID=
+FACEBOOK_SECRET=
+```
+
+### Google oAuth2
+
+- Add `gem 'omniauth-google-oauth2'` to Gemfile and bundle.
+
+- Visit console.developers.google.com
+
+- Click 'New Project' and give it a name
+- Open 'APIs' 'Library' section and make sure Google+ API is enabled
+
+- Click 'OAuth consent screen' and create the oAuth application
+  - External
+  - Fill in Application Name
+
+- Click the 'Credentials' side bar item
+  - Click Create Credentials -> OAuth client ID
+
+  - Authorized JavaScript origins
+    - URIs: https://example.herokuapp.com
+
+  - Authorized redirect URIs:
+    - URIs: https://example.herokuapp.com/users/auth/google_oauth2/callback
+
+  - Copy the Client ID and Client secret into the `.env` file and/or set server production ENV variables
+
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_SECRET=
+```
 
 ## License
 
