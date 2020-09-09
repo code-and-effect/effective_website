@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable # :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
+    :invitable, :omniauthable, omniauth_providers: []
 
   acts_as_addressable :billing, :shipping  # effective_addresses
   acts_as_archived                         # effective_resources
@@ -44,10 +45,23 @@ class User < ApplicationRecord
     invited_by_id           :integer
     invitations_count       :integer
 
+    # Demographics
     email                   :string
     first_name              :string
     last_name               :string
 
+    # Omniauth
+    uid                     :string
+    provider                :string
+
+    name                    :string
+    avatar_url              :string
+
+    access_token            :string
+    refresh_token           :string
+    token_expires_at        :datetime
+
+    # Internal
     roles_mask              :integer, permitted: false
     roles                   permitted: true
 
@@ -85,11 +99,53 @@ class User < ApplicationRecord
     end
   end
 
-  def to_s
-    name.presence || email
+  def self.from_omniauth(auth, params)
+    invitation_token = (params.presence || {})['invitation_token']
+
+    email = (auth.info.email.presence || "#{auth.uid}@#{auth.provider}.none").downcase
+    image = auth.info.image
+    name = auth.info.name || auth.dig(:extra, :raw_info, :login)
+    info = auth.dig(:extra, :raw_info).to_h.symbolize_keys
+
+    user = if invitation_token
+      User.find_by_invitation_token(invitation_token, false) || raise(ActiveRecord::RecordNotFound)
+    else
+      User.where(uid: auth.uid, provider: auth.provider).or(User.where(email: email)).first || User.new
+    end
+
+    user.assign_attributes(
+      uid: auth.uid,
+      provider: auth.provider,
+      email: email,
+      avatar_url: image,
+      name: name,
+      first_name: auth.info.first_name.presence || name.split(' ').first,
+      last_name: auth.info.last_name || name.split(' ').last
+    )
+
+    if auth.respond_to?(:credentials)
+      user.assign_attributes(
+        access_token: auth.credentials.token,
+        refresh_token: auth.credentials.refresh_token,
+        token_expires_at: Time.zone.at(auth.credentials.expires_at), # We are given integer datetime e.g. '1549394077'
+      )
+    end
+
+    # Make a password
+    user.password = Devise.friendly_token[0, 20] if user.encrypted_password.blank?
+
+    invitation_token ? user.accept_invitation! : user.save!
+
+    user.confirm
+
+    user
   end
 
-  def name
+  def to_s
+    name.presence || full_name.presence || email
+  end
+
+  def full_name
     [first_name, last_name].compact.join(' ')
   end
 

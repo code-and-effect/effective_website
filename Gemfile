@@ -1,22 +1,33 @@
 source 'https://rubygems.org'
 ruby '2.7.1'
 
+# Rails Gems
 gem 'rails'
 gem 'bootsnap'
 gem 'pg'
+gem 'sass-rails'
+gem 'webpacker'
 
+# Community Gems
 gem 'cancancan'
 gem 'cocoon'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
 gem 'haml'
-gem 'sass-rails'
 gem 'turbolinks'
-gem 'webpacker'
 
+# Omniauth Gems
+gem 'omniauth-oauth2'
+# gem 'omniauth-microsoft_graph'
+# gem 'omniauth-github'
+# gem 'omniauth-facebook'
+# gem 'omniauth-google-oauth2'
+
+# Optional Gems
 # gem 'aws-sdk-s3', require: false
 
+# Effective Gems
 gem 'effective_addresses'
 gem 'effective_bootstrap'
 gem 'effective_ckeditor'

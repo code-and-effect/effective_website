@@ -278,8 +278,14 @@ ActiveRecord::Schema.define(version: 2019_04_20_034057) do
     t.string "email", default: "", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "uid"
+    t.string "provider"
+    t.string "name"
+    t.string "avatar_url"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "token_expires_at"
     t.integer "roles_mask"
-    t.boolean "avatar_attached"
     t.boolean "archived", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
