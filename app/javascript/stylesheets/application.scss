@@ -1,7 +1,4 @@
-// Bootstrap overrides can go here:
-// $body-bg: aliceblue;
-// $body-color: #111;
-
+@import "bootstrap/variables";
 @import "~bootstrap/scss/bootstrap.scss";
 
 @import "base/alert";
