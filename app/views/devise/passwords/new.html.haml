@@ -3,9 +3,19 @@
     .card
       .card-body
         %h5.card-title= @page_title
-        = effective_form_with(model: resource, url: password_path(resource_name)) do |f|
+        = effective_form_with(model: resource, url: password_path(resource_name), method: :post) do |f|
           = f.errors
           = f.email_field :email, required: true, autofocus: true, Label: 'Email address of your account'
+
+          - if f.object.errors[:confirm_new_password].present?
+            %p Your previous sign in was with #{f.object.provider} and not a password.
+
+            %p Instead of resetting your password, you most likely want to sign in through #{f.object.provider} again:
+
+            = render 'devise/shared/omniauth', resource_action: 'Sign In'
+
+            = f.check_box :confirm_new_password, required: true,
+              label: "Yes, disable sign in with #{f.object.provider}, and send me reset password instructions to sign in with a password instead"
 
           = f.submit 'Send me reset password instructions'
 

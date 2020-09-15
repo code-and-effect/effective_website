@@ -175,6 +175,21 @@ class User < ApplicationRecord
     devise_mailer.send(notification, self, *args).deliver_later # Send devise & devise_invitable emails via active job
   end
 
+  # https://github.com/heartcombo/devise/blob/master/lib/devise/models/recoverable.rb#L134
+  def self.send_reset_password_instructions(attributes = {})
+    recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+    return recoverable unless recoverable.persisted?
+
+    # Add custom errors and require a confirmation if previous sign in was provider
+    if recoverable.provider.present? && attributes[:confirm_new_password].blank?
+      recoverable.errors.add(:email, "previous sign in was with #{recoverable.provider}")
+      recoverable.errors.add(:confirm_new_password, 'please confirm to proceed')
+    end
+
+    recoverable.send_reset_password_instructions if recoverable.errors.blank?
+    recoverable
+  end
+
   # user.client_ids
   # user.client_ids(:owner)
   # user.client_ids(:member)
