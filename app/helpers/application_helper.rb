@@ -1,13 +1,21 @@
 module ApplicationHelper
-  def user_tag(user, name: true)
-    user ||= User.new
 
-    avatar_tag = if user.avatar_attached? && user.avatar.attached? && (url = url_for(user.avatar) rescue false)
-      content_tag(:span, class: 'user-avatar', title: user.to_s) { image_tag(url, alt: user.to_s) }
-    end
-
-    name_tag = content_tag(:span, user.to_s, class: 'user-name')
-
-    [(avatar_tag if avatar_tag.present?), (name_tag if avatar_tag.blank? || name)].compact.join(' ').html_safe
+  def impersonating?
+    session[:impersonation_user_id].present?
   end
+
+  def gravatar_url(user)
+    hash = Digest::MD5.hexdigest(user.email)
+    "https://secure.gravatar.com/avatar/#{hash}.png"
+  end
+
+  def user_tag(user)
+    user ||= User.new()
+
+    gravatar = image_tag(gravatar_url(user), alt: user.to_s, class: 'user-avatar')
+    contents = content_tag(:span, user.to_s, class: 'user-name')
+
+    (gravatar + contents)
+  end
+
 end

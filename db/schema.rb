@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_20_034056) do
+ActiveRecord::Schema.define(version: 2019_04_20_034057) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_034056) do
   create_table "customers", force: :cascade do |t|
     t.integer "user_id"
     t.string "stripe_customer_id"
+    t.string "payment_method_id"
     t.string "active_card"
     t.string "status"
     t.integer "subscriptions_count", default: 0
@@ -165,12 +166,16 @@ ActiveRecord::Schema.define(version: 2019_04_20_034056) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "parent_id"
+    t.string "parent_type"
     t.string "state"
     t.datetime "purchased_at"
     t.text "note"
     t.text "note_to_buyer"
     t.text "note_internal"
     t.string "billing_name"
+    t.string "email"
+    t.string "cc"
     t.text "payment"
     t.string "payment_provider"
     t.string "payment_card"
@@ -271,9 +276,16 @@ ActiveRecord::Schema.define(version: 2019_04_20_034056) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "email", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "uid"
+    t.string "provider"
     t.string "name"
+    t.string "avatar_url"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "token_expires_at"
     t.integer "roles_mask"
-    t.boolean "avatar_attached"
     t.boolean "archived", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

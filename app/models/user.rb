@@ -1,15 +1,14 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :invitable # :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
+    :invitable, :omniauthable
 
   acts_as_addressable :billing, :shipping  # effective_addresses
   acts_as_archived                         # effective_resources
   acts_as_role_restricted                  # effective_roles
-  log_changes                              # effective_logging
+  log_changes except: [:access_token, :refresh_token, :token_expires_at] # effective_logging
 
   # This must be a subset of effective_roles roles.
   ROLES = [:admin, :staff, :client]
-
-  has_one_attached :avatar  # active_storage
   has_many_attached :files
 
   # My clients
@@ -22,7 +21,7 @@ class User < ApplicationRecord
   # has_many :member_clients, through: :member_mates, class_name: 'Client', source: :client
 
   def self.permitted_sign_up_params # Should contain all fields as per views/users/_sign_up_fields
-    [:email, :password, :password_confirmation, :name]
+    [:email, :password, :password_confirmation, :first_name, :last_name]
   end
 
   effective_resource do
@@ -46,10 +45,23 @@ class User < ApplicationRecord
     invited_by_id           :integer
     invitations_count       :integer
 
+    # Demographics
     email                   :string
-    name                    :string
-    avatar_attached         :boolean
+    first_name              :string
+    last_name               :string
 
+    # Omniauth
+    uid                     :string
+    provider                :string
+
+    name                    :string
+    avatar_url              :string
+
+    access_token            :string
+    refresh_token           :string
+    token_expires_at        :datetime
+
+    # Internal
     roles_mask              :integer, permitted: false
     roles                   permitted: true
 
@@ -59,9 +71,9 @@ class User < ApplicationRecord
   end
 
   scope :deep, -> { with_attached_files.includes(:clients) }
-  scope :shallow, -> { select(:id, :email, :name) }
+  scope :shallow, -> { select(:id, :email, :name, :first_name, :last_name) }
 
-  scope :sorted, -> { order(:name) }
+  scope :sorted, -> { order(:first_name) }
   scope :datatables_filter, -> { sorted.shallow }
 
   scope :admins, -> { unarchived.with_role(:admin) }
@@ -70,33 +82,77 @@ class User < ApplicationRecord
 
   before_validation(if: -> { roles.blank? }) { self.roles = [:client] }
 
-  validates :name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :roles, presence: true
-
-  validate(if: -> { avatar.attached? }) do
-    self.errors.add(:avatar, 'must be an image') unless avatar.image?
-  end
-
-  # Prepopulate the name based on email
-  before_save(if: -> { email.present? && name.blank? }) do
-    self.name = email.split('@').first
-  end
-
-  before_save { self.avatar_attached = avatar.attached? }
 
   # Devise invitable ignores model validations, so we manually check for duplicate email addresses.
   before_save(if: -> { new_record? && invitation_sent_at.present? }) do
     if email.blank?
-      self.errors.add(:email, "can't be blank"); throw(:abort)
+      self.errors.add(:email, "can't be blank")
+      raise("email can't be blank")
     end
 
-    if self.class.where(email: email).exists?
-      self.errors.add(:email, 'has already been taken'); throw(:abort)
+    if self.class.where(email: email.downcase.strip).exists?
+      self.errors.add(:email, 'has already been taken')
+      raise("email has already been taken")
     end
   end
 
+  # Clear the provider if an oauth signed in user resets password
+  before_save(if: -> { persisted? && encrypted_password_changed? }) do
+    assign_attributes(provider: nil, access_token: nil, refresh_token: nil, token_expires_at: nil)
+  end
+
+  def self.from_omniauth(auth, params)
+    invitation_token = (params.presence || {})['invitation_token']
+
+    email = (auth.info.email.presence || "#{auth.uid}@#{auth.provider}.none").downcase
+    image = auth.info.image
+    name = auth.info.name || auth.dig(:extra, :raw_info, :login)
+
+    user = if invitation_token
+      User.find_by_invitation_token(invitation_token, false) || raise(ActiveRecord::RecordNotFound)
+    else
+      User.where(uid: auth.uid).or(User.where(email: email)).first || User.new
+    end
+
+    user.assign_attributes(
+      uid: auth.uid,
+      provider: auth.provider,
+      email: email,
+      avatar_url: image,
+      name: name,
+      first_name: (auth.info.first_name.presence || name.split(' ').first.presence || 'First'),
+      last_name: (auth.info.last_name.presence || name.split(' ').last.presence || 'Last')
+    )
+
+    if auth.respond_to?(:credentials)
+      user.assign_attributes(
+        access_token: auth.credentials.token,
+        refresh_token: auth.credentials.refresh_token,
+        token_expires_at: Time.zone.at(auth.credentials.expires_at), # We are given integer datetime e.g. '1549394077'
+      )
+    end
+
+    # Make a password
+    user.password = Devise.friendly_token[0, 20] if user.encrypted_password.blank?
+
+    # Devise Invitable
+    invitation_token ? user.accept_invitation! : user.save!
+
+    # Devise Confirmable
+    user.confirm if user.respond_to?(:confirm)
+
+    user
+  end
+
   def to_s
-    name.presence || email
+    full_name.presence || name.presence || email
+  end
+
+  def full_name
+    [first_name, last_name].compact.join(' ')
   end
 
   def reinvite!
@@ -117,6 +173,21 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later # Send devise & devise_invitable emails via active job
+  end
+
+  # https://github.com/heartcombo/devise/blob/master/lib/devise/models/recoverable.rb#L134
+  def self.send_reset_password_instructions(attributes = {})
+    recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+    return recoverable unless recoverable.persisted?
+
+    # Add custom errors and require a confirmation if previous sign in was provider
+    if recoverable.provider.present? && attributes[:confirm_new_password].blank?
+      recoverable.errors.add(:email, "previous sign in was with #{recoverable.provider}")
+      recoverable.errors.add(:confirm_new_password, 'please confirm to proceed')
+    end
+
+    recoverable.send_reset_password_instructions if recoverable.errors.blank?
+    recoverable
   end
 
   # user.client_ids

@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   acts_as_archived
 
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', invitations: 'users/invitations' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations',
+    passwords: 'users/passwords',
+    invitations: 'users/invitations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+
   match '/impersonate', to: 'users/impersonations#destroy', via: [:delete], as: :impersonate
 
   if Rails.env.production?

@@ -11,7 +11,7 @@ if Rails.env.production?
     config.add_notifier :email, {
       :email_prefix         => '[EW] ',
       :sender_address       => %{"EW" <website@example.com>},
-      :exception_recipients => %w{errors@agilestyle.com}
+      :exception_recipients => %w{errors@codeandeffect.com}
     }
 
   end

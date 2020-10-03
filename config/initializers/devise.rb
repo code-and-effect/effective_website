@@ -301,6 +301,27 @@ Devise.setup do |config|
   # config.omniauth :facebook, ENV.fetch('FACEBOOK_APP_ID'), ENV.fetch('FACEBOOK_SECRET'), scope: 'email'
   # config.omniauth :google_oauth2, ENV.fetch('GOOGLE_CLIENT_ID'), ENV.fetch('GOOGLE_SECRET'), scope: 'email'
 
+  if ENV['GOOGLE_CLIENT_ID'].present? && defined?(OmniAuth::Strategies::GoogleOauth2)
+    config.omniauth :google_oauth2, ENV.fetch('GOOGLE_CLIENT_ID'), ENV.fetch('GOOGLE_SECRET'), {
+      access_type: 'offline',
+      prompt: 'consent',
+      select_account: true,
+      scope: 'userinfo.email,userinfo.profile'
+    }
+  end
+
+  if ENV['FACEBOOK_APP_ID'].present? && defined?(OmniAuth::Strategies::Facebook)
+    config.omniauth :facebook, ENV.fetch('FACEBOOK_APP_ID'), ENV.fetch('FACEBOOK_SECRET'), {
+      scope: 'email'
+    }
+  end
+
+  if ENV['MICROSOFT_ID'].present? && defined?(OmniAuth::Strategies::MicrosoftGraph)
+    config.omniauth :microsoft_graph, ENV.fetch('MICROSOFT_ID'), ENV.fetch('MICROSOFT_SECRET'), {
+      scope: 'openid profile email offline_access user.read'
+    }
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

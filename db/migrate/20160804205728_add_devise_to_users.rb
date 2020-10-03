@@ -17,10 +17,22 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.0]
 
       # User fields
       t.string    :email, null: false, default: ''
-      t.string    :name
+      t.string    :first_name
+      t.string    :last_name
 
+      # Omniauth
+      t.string    :uid
+      t.string    :provider
+
+      t.string    :name
+      t.string    :avatar_url
+
+      t.string    :access_token
+      t.string    :refresh_token
+      t.datetime  :token_expires_at
+
+      # Internal fields
       t.integer   :roles_mask
-      t.boolean   :avatar_attached
       t.boolean   :archived, default: false
 
       t.timestamps

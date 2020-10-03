@@ -1,5 +1,5 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  = link_to(image_tag('logo-admin.png', alt: 'Admin Logo'), '/', class: 'navbar-brand')
+  = link_to(image_pack_tag('logo-admin.png', alt: 'Admin Logo'), '/admin', class: 'navbar-brand')
 
   %button.navbar-toggler{type: 'button', data: {toggle: 'collapse', target: '#navContent', 'aria-controls': 'navContent', 'aria-label': 'Toggle navigation'}}
     %span.navbar-toggler-icon
@@ -25,6 +25,8 @@
         = nav_link_to 'Logs', effective_logging.admin_logs_path
 
     %ul.navbar-nav
+      %li.nav-item= link_to 'View Site', root_path, class: 'nav-link'
+
       = nav_dropdown(user_tag(current_user), right: true) do
         = nav_link_to 'Settings', user_settings_path
         = nav_divider

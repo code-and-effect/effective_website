@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
   skip_authorization_check if: :devise_controller?
   before_action :restrict_admin_routes, if: -> { request.path.start_with?('/admin'.freeze) }
 
-  # Logging, and trash
+  # EffectiveLogging gem
+  around_action :set_effective_logging_current_user
   # log_page_views
-  before_action :set_effective_logging_current_user
 
   rescue_from CanCan::AccessDenied, Effective::AccessDenied do |exception|
     respond_to do |format|

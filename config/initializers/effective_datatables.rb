@@ -31,12 +31,11 @@ EffectiveDatatables.setup do |config|
   # Log search/sort information to the console
   config.debug = true
 
-  # If a user has previously visited this page and is returning, use the cookie to restore last session
-  # Irregardless of this setting, effective_datatables still uses a cookie to function
+  # Use a cookie to save and restore state from previous page visits.
   config.save_state = true
 
   # Configure the _effective_dt cookie.
-  config.cookie_max_size = 2000       # String size. Final byte size is about 1.5 times bigger, after rails signs it
+  config.cookie_max_size = 1500       # String size. Final byte size is about 1.5 times bigger, after rails signs it
   config.cookie_domain = :all         # Should usually be :all
   config.cookie_tld_length = nil      # Leave nil to autodetect, or set to probably 2
 

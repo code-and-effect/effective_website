@@ -4,8 +4,8 @@ class Admin::UsersController < Admin::ApplicationController
   submit :save, 'Save', only: :edit
   submit :save, 'Continue', only: :edit
   submit :save, 'Add New', only: :edit
-  
-  submit :invite, 'Save and Invite', only: :new, class: 'btn btn-primary', 
+
+  submit :invite, 'Save and Invite', only: :new, class: 'btn btn-primary',
     success: -> { "Successfully created #{resource} and sent #{resource.email} an invitation" }
 
   def impersonate
@@ -19,6 +19,12 @@ class Admin::UsersController < Admin::ApplicationController
     warden.session_serializer.store(@user, Devise::Mapping.find_scope!(@user))
 
     redirect_to(root_path)
+  end
+
+  protected
+
+  def permitted_params
+    params.require(:user).permit!
   end
 
 end

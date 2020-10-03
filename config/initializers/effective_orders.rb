@@ -54,14 +54,6 @@ EffectiveOrders.setup do |config|
   # Use effective_obfuscation gem to change order.id into a seemingly random 10-digit number
   config.obfuscate_order_ids = false
 
-  # If set, the orders#new screen will render effective/orders/_order_user_fields to capture this User Info
-  # The partial can be overridden to customize the form, but the following fields are also fed into strong_paramters
-  config.collect_user_fields = []
-  #config.collect_user_fields = [:first_name, :last_name] # Must be valid fields on the User object
-
-  # Don't validate_associated :user when saving an Order
-  config.skip_user_validation = false
-
   # If set, the orders#new screen will render effective/orders/_order_note_fields to capture any Note info
   config.collect_note = false
   config.collect_note_required = false
@@ -97,11 +89,6 @@ EffectiveOrders.setup do |config|
   # Mark an order as paid without going through a processor
   # This is accessed via the admin screens only. Must have can?(:admin, :effective_orders)
   config.mark_as_paid_enabled = false
-
-  # Refunds
-  # Allow admins to create orders with a negative total
-  # Refunds don't perform any kind of refund action with the payment processor. This just changes the validations.
-  config.refunds_enabled = false
 
   # Pretend Purchase
   # Display a 'Purchase order' button on the Checkout screen allowing the user
@@ -150,6 +137,7 @@ EffectiveOrders.setup do |config|
     subject_for_order_receipt_to_buyer: '',
     subject_for_payment_request_to_buyer: '',
     subject_for_pending_order_invoice_to_buyer: '',
+    subject_for_refund_notification_to_admin: '',
 
     # Procs yield an Effective::Customer object
     subject_for_subscription_created: '',
@@ -165,7 +153,7 @@ EffectiveOrders.setup do |config|
     layout: 'effective_orders_mailer_layout',
 
     default_from: 'info@example.com',
-    admin_email: 'admin@example.com',
+    admin_email: 'admin@example.com',   # Refund notifications will also be sent here
 
     deliver_method: nil  # When nil, will use deliver_later if active_job is configured, otherwise deliver_now
   }
@@ -175,11 +163,12 @@ EffectiveOrders.setup do |config|
   #######################################
 
   # Cheque
+  # This is an deferred payment
   config.cheque = false
 
   # config.cheque = {
-  #   confirm: 'Your order will not be considered purchased until we receive your cheque. Proceed with pay by cheque?',
-  #   success_message: 'Thank you! You have indicated that this order will be purchased by cheque. Please send us a cheque and a copy of this invoice at your earliest convenience. We will mark this order purchased upon receiving payment.'
+  #   confirm: 'Proceed with pay by cheque?',
+  #   success: 'Thank you! You have indicated that this order will be purchased by cheque. Please send us a cheque and a copy of this invoice at your earliest convenience.'
   # }
 
   # Moneris
@@ -227,6 +216,26 @@ EffectiveOrders.setup do |config|
   #     app_key: "#{Rails.root}/config/paypalcerts/#{Rails.env}/app_key.pem"
   #   }
   # end
+
+  # Phone
+  # This is an deferred payment
+  config.phone = false
+
+  # config.phone = {
+  #   confirm: 'Proceed with pay by phone?',
+  #   success: 'Thank you! You have indicated that this order will be purchased by phone. Please give us a call at your earliest convenience.'
+  # }
+
+
+  # Refunds
+  # This does not issue a refund with the payment processor at all.
+  # Instead, we mark the order as purchased, create a refund object to track it, and
+  # send an email to mailer[:admin_email] with instructions to issue a refund
+  config.refund = false
+
+  # config.refund = {
+  #   success: 'Thank you! Your refund will be processed in the next few business days.'
+  # }
 
   # Stripe
   config.stripe = false

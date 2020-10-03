@@ -4,6 +4,8 @@
       .card-body
         %h5.card-title= @page_title
 
+        = render 'devise/shared/omniauth', resource_action: 'Sign In'
+
         - if Rails.env.production?
           %p Login as: <strong>admin@codeandeffect.com</strong> with password <strong>example</strong>.
         - else

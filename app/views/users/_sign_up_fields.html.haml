@@ -1,13 +1,14 @@
 = f.email_field :email, required: true, autofocus: true
-= f.text_field :name
+= f.text_field :first_name
+= f.text_field :last_name
 
 - if f.object.persisted? && !f.object.invited_to_sign_up?
-  = f.password_field :password, required: false, autocomplate: 'off', 
+  = f.password_field :password, required: false, autocomplate: 'off',
     hint: 'leave blank to keep existing password'
 
-  = f.password_field :password_confirmation, required: false, autocomplete: 'off', 
+  = f.password_field :password_confirmation, required: false, autocomplete: 'off',
     hint: 'leave blank to keep existing password'
-    
+
 - else
-  = f.password_field :password, required: true, autocomplete: 'off', 
+  = f.password_field :password, required: true, autocomplete: 'off',
     hint: '8 characters minimum and no special rules.'
