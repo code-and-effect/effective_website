@@ -6,6 +6,7 @@ services:
     volumes:
       - .:/app
       - bundle-volume:/usr/local/bundle
+      - yarn-volume:/app/node_modules
     ports:
       - "3000:3000"
       #- "1234:1234" # RubyMine
@@ -23,4 +24,5 @@ services:
 
 volumes:
   bundle-volume:
+  yarn-volume:
   db-volume:
