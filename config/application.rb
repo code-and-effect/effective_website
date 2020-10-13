@@ -18,7 +18,7 @@ module ExampleWebsite
 
     config.time_zone = 'Mountain Time (US & Canada)'
 
-    config.session_store :cookie_store, key: '_example_session'
+    config.session_store :cookie_store, key: '_example_session', expire_after: 1.year
 
     config.action_view.form_with_generates_ids = true
   end
