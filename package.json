@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@nathanvda/cocoon": "^1.2.14",
     "@rails/actiontext": "^6.1.1",
     "@rails/activestorage": "^6.0.3-2",
     "@rails/ujs": "^6.0.3-2",
