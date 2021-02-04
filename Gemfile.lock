@@ -166,14 +166,14 @@ GEM
     effective_regions (1.8.6)
       effective_ckeditor
       rails (>= 3.2.0)
-    effective_resources (1.7.3)
+    effective_resources (1.7.4)
       rails (>= 4.0.0)
     effective_roles (2.0.5)
       rails (>= 3.2.0)
     effective_style_guide (2.0.4)
       faker
       rails (>= 4.1.0)
-    effective_test_bot (1.1.34)
+    effective_test_bot (1.1.35)
       capybara (>= 2.15)
       effective_resources
       faker
