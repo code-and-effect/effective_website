@@ -13,6 +13,7 @@ class AdminInviteUserTest < ApplicationSystemTestCase
     end
 
     # devise_invitable sent an invitation email
+    sleep(6) # we delay this email by 5 seconds for reasons
     assert_email(to: email)
     invitation_token = ActionMailer::Base.deliveries.last.body.match(/invitation_token=(.+)\"/)[1]
     assert invitation_token.present?

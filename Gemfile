@@ -13,7 +13,6 @@ gem 'webpacker'
 
 # Community Gems
 gem 'cancancan'
-gem 'cocoon'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
@@ -37,9 +36,9 @@ gem 'effective_developer'
 gem 'effective_logging'
 gem 'effective_orders'
 gem 'effective_regions'
+gem 'effective_resources'
 gem 'effective_pages'
 gem 'effective_posts'
-gem 'effective_resources'
 gem 'effective_roles'
 gem 'effective_style_guide'
 

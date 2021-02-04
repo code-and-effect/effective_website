@@ -171,8 +171,10 @@ class User < ApplicationRecord
     Rails.env.development? || Rails.env.staging? || super  # Any password will work in development mode
   end
 
+  # Send devise & devise_invitable emails via active job
   def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later # Send devise & devise_invitable emails via active job
+    devise_mailer.send(notification, self, *args)
+      .deliver_later(wait: (5 if notification == :invitation_instructions))
   end
 
   # https://github.com/heartcombo/devise/blob/master/lib/devise/models/recoverable.rb#L134
