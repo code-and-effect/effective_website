@@ -13,7 +13,6 @@ gem 'webpacker'
 
 # Community Gems
 gem 'cancancan'
-gem 'cocoon'
 gem 'devise'
 gem 'devise_invitable'
 gem 'foreman'
