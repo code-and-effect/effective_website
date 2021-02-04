@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module ExampleWebsite
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -18,7 +18,7 @@ module ExampleWebsite
 
     config.time_zone = 'Mountain Time (US & Canada)'
 
-    config.session_store :cookie_store, key: '_example_session', expire_after: 1.year
+    config.session_store :cookie_store, key: '_example_session', expire_after: 31556952
 
     config.action_view.form_with_generates_ids = true
   end
