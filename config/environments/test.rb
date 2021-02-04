@@ -59,4 +59,7 @@ Rails.application.configure do
 
   # Effective Website Stuff
   config.action_mailer.default_url_options = { host: 'http://example.com' }
+
+  config.active_job.queue_adapter = :async
+
 end
